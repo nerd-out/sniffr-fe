@@ -14,8 +14,8 @@ const initialState = {
 };
 
 // this is the reducer
-const NetworkState = (state = initialState, action) => {
-    const { type } = action;
+const NetworkState = (state = initialState, action: Action) => {
+    const { type = 'SUCCESS' } = action;
     // action type formatting in regex
     const regex = /(GET|UPDATE|CREATE|DELETE)?\/?(\w+)\/?(SUCCESS|FAILURE)?/g;
     // this takes the action type string and makes sure it's formatted correctly
@@ -31,6 +31,8 @@ const NetworkState = (state = initialState, action) => {
 
     // destructure action type
     const [_, __, actionType, status] = networkAction;
+    console.log('_', _);
+    console.log('__', __);
 
     // this is what gives us our loading / error states 
     // success gives us no error / no loading 

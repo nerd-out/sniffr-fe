@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { getDogThunk } from './redux/dog/thunks';
 
 function App() {
-  const state = useState(state => state);
+  const state = useState((state: any) => state);
 
   console.log("state", state)
 
   useEffect(() => {
-    getDogThunk({ dogId: 1 })
+    getDogThunk({ payload: 1 })
   }, []);
 
   return (

@@ -1,23 +1,24 @@
 import React from 'react';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit'
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { applyMiddleware, configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
-import type { Reducer } from '@reduxjs/toolkit'
+
+import App from './App';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+
 import Dog from './redux/dog/reducer';
 import NetworkState from './redux/network/reducer';
-
 import rootReducer from './redux/reducers';
+
 // @ts-ignore
 console.log("rootReducer()", rootReducer())
 
-const store = configureStore({
+const store: EnhancedStore = configureStore({
   reducer: rootReducer,
   devTools: true,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  preloadedState: { ...Dog, ...NetworkState },
+  preloadedState: { ...Dog, ...NetworkState },  
 });
 
 const root = ReactDOM.createRoot(
