@@ -5,18 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { applyMiddleware, configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
+import type { Reducer } from '@reduxjs/toolkit'
 import Dog from './redux/dog/reducer';
 import NetworkState from './redux/network/reducer';
 
 import rootReducer from './redux/reducers';
+// @ts-ignore
+console.log("rootReducer()", rootReducer())
 
 const store = configureStore({
   reducer: rootReducer,
   devTools: true,
-  // @ts-ignore
-  preloadedState: { Dog, NetworkState },
-  // @ts-ignore
-  enhancers: [applyMiddleware]
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  preloadedState: { ...Dog, ...NetworkState },
 });
 
 const root = ReactDOM.createRoot(

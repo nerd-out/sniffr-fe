@@ -4,14 +4,12 @@ import './App.css';
 import { getDogThunk } from './redux/dog/thunks';
 
 function App() {
-  // @ts-ignore
-  // const state = useState(state => state);
+  const state = useState(state => state);
 
-  // console.log("state", state)
+  console.log("state", state)
 
   useEffect(() => {
-    // @ts-ignore
-    // getDogThunk({ dogId: 1 })
+    getDogThunk({ dogId: 1 })
   }, []);
 
   return (

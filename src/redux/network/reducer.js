@@ -6,7 +6,7 @@ const FAILURE = 'FAILURE';
 // This page allows us to skip manually adding in error/loading states to each reducer 
 // whenever you make new variables in constants.js, import the action name and update INIT_STATE with:
 // [<ACTION_TYPE_NAME>]: { isLoading: false, error: null }
-const INIT_STATE = {
+const initialState = {
     [DOG]: {
         isLoading: false,
         error: null,
@@ -14,7 +14,7 @@ const INIT_STATE = {
 };
 
 // this is the reducer
-const NetworkState = (state = INIT_STATE, action) => {
+const NetworkState = (state = initialState, action) => {
     const { type } = action;
     // action type formatting in regex
     const regex = /(GET|UPDATE|CREATE|DELETE)?\/?(\w+)\/?(SUCCESS|FAILURE)?/g;
