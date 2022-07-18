@@ -14,9 +14,11 @@ function getDogThunk({ payload }) {
         // Ensure we only catch network errors
         dispatch(getDogFailure(error.message))
         // Bail out early on failure
+        console.log("error", error)
+
         return
       }
-  
+      console.log("response", response)
       // We now have the result and there's no error. Dispatch "fulfilled".
       dispatch(getDogSuccess(response.data))
     }
