@@ -1,6 +1,5 @@
 import { CREATE_DOG_SUCCESS, DELETE_DOG_SUCCESS, GET_DOG_SUCCESS, UPDATE_DOG_SUCCESS } from "./constants";
 
-  
   const initialState = {
     name: null,
     sex: null,
