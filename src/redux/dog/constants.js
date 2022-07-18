@@ -2,3 +2,15 @@ export const DOG = 'DOG';
 export const UPDATE_DOG = 'UPDATE/DOG';
 export const UPDATE_DOG_SUCCESS = 'UPDATE/DOG/SUCCESS';
 export const UPDATE_DOG_FAILURE = 'UPDATE/DOG/FAILURE';
+
+export const GET_DOG = 'GET/DOG';
+export const GET_DOG_SUCCESS = 'GET/DOG/SUCCESS';
+export const GET_DOG_FAILURE = 'GET/DOG/FAILURE';
+
+export const CREATE_DOG = 'CREATE/DOG';
+export const CREATE_DOG_SUCCESS = 'CREATE/DOG/SUCCESS';
+export const CREATE_DOG_FAILURE = 'CREATE/DOG/FAILURE';
+
+export const DELETE_DOG = 'DELETE/DOG';
+export const DELETE_DOG_SUCCESS = 'DELETE/DOG/SUCCESS';
+export const DELETE_DOG_FAILURE = 'DELETE/DOG/FAILURE';

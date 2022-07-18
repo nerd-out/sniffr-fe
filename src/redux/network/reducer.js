@@ -65,3 +65,4 @@ const NetworkState = (state = INIT_STATE, action) => {
 };
 
 
+export default NetworkState;
