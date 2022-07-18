@@ -5,9 +5,11 @@ interface DogThunkParams {
   payload: any;
 }
 
-function getDogThunk(dogThunkParams: DogThunkParams) {
-  const { payload } = dogThunkParams;
+interface GetDogThunkParams {
+  dogId: number | string;
+}
 
+function getDogThunk(payload: GetDogThunkParams) {
   return async (dispatch: any, getState:any ) => {
     dispatch(getDog(payload.dogId))
 

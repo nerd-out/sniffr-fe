@@ -9,7 +9,7 @@ function App() {
   console.log("state", state)
 
   useEffect(() => {
-    getDogThunk({ payload: 1 })
+    getDogThunk({ dogId: 1 })
   }, []);
 
   return (

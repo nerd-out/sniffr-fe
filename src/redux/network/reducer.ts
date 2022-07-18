@@ -15,7 +15,7 @@ const initialState = {
 
 // this is the reducer
 const NetworkState = (state = initialState, action: Action) => {
-    const { type = 'SUCCESS' } = action;
+    const { type } = action;
     // action type formatting in regex
     const regex = /(GET|UPDATE|CREATE|DELETE)?\/?(\w+)\/?(SUCCESS|FAILURE)?/g;
     // this takes the action type string and makes sure it's formatted correctly
