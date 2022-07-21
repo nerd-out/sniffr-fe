@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { getDogThunk } from './redux/dog/thunks';
 
 function App() {
-  const state = useState(state => state);
-
-  console.log("state", state)
-
-  useEffect(() => {
-    getDogThunk({ dogId: 1 })
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">

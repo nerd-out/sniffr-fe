@@ -3,21 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { applyMiddleware, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
-import type { Reducer } from '@reduxjs/toolkit'
-import Dog from './redux/dog/reducer';
-import NetworkState from './redux/network/reducer';
-
-import rootReducer from './redux/reducers';
-// @ts-ignore
-console.log("rootReducer()", rootReducer())
+import { dogReducer } from './redux/dog/reducer';
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: dogReducer,
   devTools: true,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  preloadedState: { ...Dog, ...NetworkState },
+  // preloadedState: { },
 });
 
 const root = ReactDOM.createRoot(
