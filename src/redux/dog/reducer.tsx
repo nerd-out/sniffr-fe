@@ -23,6 +23,7 @@ interface Action {
 const createDog = createAction('CREATE/DOG');
 const updateDog = createAction('UPDATE/DOG');
 const getDog = createAction('GET/DOG');
+
 const initialState: DogState = {
   name: null,
   sex: 'female',
