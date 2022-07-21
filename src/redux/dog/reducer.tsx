@@ -26,15 +26,6 @@ const getDog = createAction('GET/DOG');
 const deleteDog = createAction('DELETE/DOG');
 
 const initialState: DogState = {
-  name: null,
-  sex: 'female',
-  age: null,
-  isVaccinated: false,
-  breed: null,
-  breedId: null,
-  isFixed: false,
-  bio: null,
-  pic: null,
   // temperament: null,
   // size: null,
 };
