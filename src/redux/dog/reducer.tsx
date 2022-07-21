@@ -26,8 +26,6 @@ const getDog = createAction('GET/DOG');
 const deleteDog = createAction('DELETE/DOG');
 
 const initialState: DogState = {
-  // temperament: null,
-  // size: null,
 };
 
 const dogCrud = (state: DogState, action: Action) => {
