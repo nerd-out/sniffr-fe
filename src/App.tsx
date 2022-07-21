@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         >
           View the project on GitHub
         </a>
+        <AppRoutes />
       </header>
     </div>
   );
