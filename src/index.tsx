@@ -6,11 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
 import { dogReducer } from './redux/dog/reducer';
+import { dogApi } from './redux/dog/createApi';
 
 const store = configureStore({
-  reducer: dogReducer,
+  reducer: {
+    dogReducer,
+    [dogApi.reducerPath]: dogApi.reducer,
+  },
   devTools: true,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dogApi.middleware),
   // preloadedState: { },
 });
 
