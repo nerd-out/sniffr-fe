@@ -1,8 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import AppRoutes from './routes/AppRoutes';
+import { useGetDogByIdQuery } from './redux/dog/createApi';
 
 function App() {
+  const { data } = useGetDogByIdQuery(1);
+  console.log("data", data);
+
   return (
     <div className="App">
       <header className="App-header">
