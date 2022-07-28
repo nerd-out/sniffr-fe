@@ -3,7 +3,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 const createDog = createAction('CREATE/DOG');
 const updateDog = createAction('UPDATE/DOG');
 const getDog = createAction('GET/DOG');
-const deleteDog = createAction('DELETE/DOG');
+// const deleteDog = createAction('DELETE/DOG');
 
 const initialState: DogState = {
   name: null,
@@ -19,6 +19,7 @@ const initialState: DogState = {
   // size: null,
 };
 
+// Reducer
 const dogCru = (state: DogState, action: Action) => {
   state.name = action.payload.dog_name;
   state.sex = action.payload.sex;
@@ -33,12 +34,10 @@ const dogCru = (state: DogState, action: Action) => {
   // state.size = action.payload.size;
 };
 
+// Real reducer
 export const dogReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(createDog, dogCru)
     .addCase(updateDog, dogCru)
     .addCase(getDog, dogCru)
-    .addCase(deleteDog, (state: DogState, action: Action) => {
-      initialState
-    })
 });

@@ -6,12 +6,22 @@ export const dogApi = createApi({
   reducerPath: './reducer',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL_PROD_BE }),
   endpoints: (builder) => ({
-    getDog: builder.query<DogState, number>({
+    createDog: builder.mutation<DogState, Partial<DogState>>({
+      query(body) {
+        return {
+          url: `dogs`,
+          method: 'POST',
+          body,
+        }
+      },
+    }),
+    getDogById: builder.query<DogState, number>({
       query: (id: number) => `dog/${id}`,
     }),
   }),
-})
+});
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetDogById } = dogApi
+
+export const { useGetDogByIdQuery, useCreateDogMutation } = dogApi
