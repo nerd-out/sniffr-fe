@@ -1,6 +1,5 @@
 import { Box, Button, Link, TextField } from '@mui/material';
 import logo from '../../assets/logo/logo.svg';
-import Image from 'mui-image';
 import { Link as RouterLink } from 'react-router-dom';
 
 const LoginPage: React.FC = (): React.ReactElement => {
@@ -14,14 +13,12 @@ const LoginPage: React.FC = (): React.ReactElement => {
         alignItems: 'center',
       }}
     >
-      <Box sx={{ width: '25%', maxWidth: '350px' }}>
-        <Image
+      <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
+        <Box
+          component="img"
           src={logo}
           alt="logo"
-          height="100%"
-          width="100%"
-          duration={0}
-          easing="ease-in"
+          sx={{ height: '100%', width: '100%' }}
         />
         <TextField
           label="Username"
@@ -37,10 +34,10 @@ const LoginPage: React.FC = (): React.ReactElement => {
         <Button variant="contained" fullWidth size="large" sx={{ mb: 2 }}>
           Login
         </Button>
+        <Link component={RouterLink} to="/register">
+          Don't have an account? Register here!
+        </Link>
       </Box>
-      <Link component={RouterLink} to="/register">
-        Don't have an account? Register here!
-      </Link>
     </Box>
   );
 };
