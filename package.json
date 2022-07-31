@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "serve": "serve build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "npx prettier --write ."
   },
   "eslintConfig": {
     "extends": [
