@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { dogReducer } from './redux/dog/reducer';
 import { dogApi } from './redux/dog/createApi';
@@ -14,7 +14,8 @@ const store = configureStore({
     [dogApi.reducerPath]: dogApi.reducer,
   },
   devTools: true,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dogApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(dogApi.middleware),
   // preloadedState: { },
 });
 

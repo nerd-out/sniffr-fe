@@ -3,7 +3,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
     <div>
       <h3>Register first, b</h3>
     </div>
-  )
-}
+  );
+};
 
 export default RegisterPage;
