@@ -1,6 +1,5 @@
 import logo from '../../logo.svg';
 
-
 const HomePage: React.FC = (): React.ReactElement => {
   return (
     <div className="App">
@@ -15,7 +14,6 @@ const HomePage: React.FC = (): React.ReactElement => {
         >
           View the project on GitHub
         </a>
-       
       </header>
     </div>
   );
