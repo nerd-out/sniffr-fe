@@ -39,5 +39,5 @@ export const dogReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(createDog, dogCru)
     .addCase(updateDog, dogCru)
-    .addCase(getDog, dogCru)
+    .addCase(getDog, dogCru);
 });

@@ -5,15 +5,13 @@ import { useGetDogByIdQuery } from './redux/dog/createApi';
 
 function App() {
   const { data } = useGetDogByIdQuery(1);
-  console.log("data", data);
+  console.log('data', data);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>
-        🐶 Welcome to Sniffr! 🐶
-        </h2>
+        <h2>🐶 Welcome to Sniffr! 🐶</h2>
         <a
           className="App-link"
           href="https://github.com/the-best-team-seven/sniffr-fe"
