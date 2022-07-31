@@ -1,2 +1,0 @@
-declare;
-REACT_APP_BASE_URL_PROD_BE;
