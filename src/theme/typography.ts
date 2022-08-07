@@ -19,7 +19,7 @@ const typography = {
   },
   h3: {
     fontSize: '1.2rem',
-  }
+  },
 };
 
 export default typography;

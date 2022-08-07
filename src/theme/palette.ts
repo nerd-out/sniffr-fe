@@ -1,12 +1,12 @@
-import { green, purple } from '@mui/material/colors';
+import { sniffrPrimaryColor, sniffrSecondaryColor } from './custom';
 
 const palette = {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: green[500],
-    },
-  };
+  primary: {
+    main: sniffrPrimaryColor,
+  },
+  secondary: {
+    main: sniffrSecondaryColor,
+  },
+};
 
 export default palette;

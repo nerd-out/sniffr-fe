@@ -6,17 +6,34 @@ import './index.css';
 import App from './App';
 import theme from './theme';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { dogReducer } from './redux/dog/reducer';
+import { dogApi } from './redux/dog/createApi';
+
+const store = configureStore({
+  reducer: {
+    dogReducer,
+    [dogApi.reducerPath]: dogApi.reducer,
+  },
+  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(dogApi.middleware),
+  // preloadedState: { },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
     </ThemeProvider>
-  </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
