@@ -69,7 +69,7 @@ const AboutPage: React.FC = (): React.ReactElement => {
   return (
     <Box
       sx={{
-        mt: 2,
+        m: 2,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -77,7 +77,7 @@ const AboutPage: React.FC = (): React.ReactElement => {
       }}
     >
       <Typography variant="h4">The people who brought you sniffr:</Typography>
-      <Box sx={{ width: '80%', display: 'flex', mt: 4 }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
         {badassDevs.map((dev) => {
           return (
             <Card variant="outlined" sx={{ width: '240px', m: 1 }}>
