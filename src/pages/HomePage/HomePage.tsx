@@ -1,10 +1,9 @@
-import { Box } from '@mui/material';
-import DrawerAppBar from './DrawerAppBar';
+import { Box, Typography } from '@mui/material';
 
 const HomePage: React.FC = (): React.ReactElement => {
   return (
     <Box>
-      <DrawerAppBar />
+      <Typography variant="h1">Homepage</Typography>
     </Box>
   );
 };

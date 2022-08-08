@@ -27,8 +27,8 @@ const navItems: NavItem[] = [
   { label: 'Register', link: '/register' },
 ];
 
-const DrawerAppBar = (props: any) => {
-  const { window } = props;
+const Layout = (props: any) => {
+  const { window, children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ const DrawerAppBar = (props: any) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -117,10 +117,10 @@ const DrawerAppBar = (props: any) => {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>This is where the pages go!!!!</Typography>
+        {children}
       </Box>
     </Box>
   );
 };
 
-export default DrawerAppBar;
+export default Layout;
