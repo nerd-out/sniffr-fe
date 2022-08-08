@@ -18,5 +18,6 @@ module.exports = {
     'func-style': 'off',
     'no-unused-vars': ['warn', { args: 'none' }],
     '@typescript-eslint/no-explicit-any': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
