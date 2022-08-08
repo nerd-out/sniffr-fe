@@ -105,6 +105,7 @@ const AboutPage: React.FC = (): React.ReactElement => {
                 <a
                   href={dev.linkedin}
                   target="_blank"
+                  rel="noreferrer"
                   style={{ textDecoration: 'none', color: '#000' }}
                 >
                   <Button size="small">LinkedIn</Button>
@@ -112,6 +113,7 @@ const AboutPage: React.FC = (): React.ReactElement => {
                 <a
                   href={dev.github}
                   target="_blank"
+                  rel="noreferrer"
                   style={{ textDecoration: 'none', color: '#000' }}
                 >
                   <Button size="small">Github</Button>
