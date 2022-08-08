@@ -117,7 +117,7 @@ const Layout = (props: any) => {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>{children}</Typography>
+        {children}
       </Box>
     </Box>
   );
