@@ -35,7 +35,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
           Login
         </Button>
         <Link component={RouterLink} to="/register">
-          Don't have an account? Register here!
+          Don&apos;t have an account? Register here!
         </Link>
       </Box>
     </Box>
