@@ -10,9 +10,10 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Avatar
+  Avatar,
+  Button,
 } from '@mui/material';
-import {  deepPurple } from '@mui/material/colors';
+import { deepPurple } from '@mui/material/colors';
 
 const ages = [
   {
@@ -51,25 +52,27 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
   const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAge(event.target.value);
   };
-  
+
   const handleBreedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBreed(event.target.value);
   };
 
   return (
-    <Box>
-      <Typography variant="h1" >Create Dog</Typography>
-      <br/>
-      <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>OP</Avatar>
-      <br/>
-      <Stack spacing={2}>
+    <Box sx={{width: 300 }}>
+      <Stack spacing={4}>
+        <Typography variant="h1">Create Dog</Typography>
+        <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
+          OP
+        </Avatar>
         <TextField
           label="Name"
+          name="petName"
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
         />
         <TextField
           label="Age"
+          name="petAge"
           select
           variant="outlined"
           value={age}
@@ -84,6 +87,7 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
         </TextField>
         <TextField
           label="Breed"
+          name="petBreed"
           select
           variant="outlined"
           value={breed}
@@ -97,11 +101,12 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
           ))}
         </TextField>
         <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Sex</FormLabel>
+          <FormLabel id="pet-sex-label">
+            <Typography sx={{ fontWeight: 600, fontSize: 20}} >Sex</Typography></FormLabel>
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
+            aria-labelledby="pet-sex-label"
             defaultValue="female"
-            name="radio-buttons-group"
+            name="petSex"
           >
             <FormControlLabel
               value="female"
@@ -110,55 +115,53 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
             />
             <FormControlLabel value="male" control={<Radio />} label="Male" />
           </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">Up to date on vaccinations?</FormLabel>
+          <FormLabel id="pet-vaccinations-label"  sx={{ fontWeight: 600, fontSize: 20}} >
+            Up to date on vaccinations?
+          </FormLabel>
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
+            aria-labelledby="pet-vaccinations-label"
             defaultValue={false}
-            name="radio-buttons-group"
+            name="petVaccinations"
           >
-            <FormControlLabel
-              value={true}
-              control={<Radio />}
-              label="Yes"
-            />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
             <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">Is this dog neutered/spayed?</FormLabel>
+          <FormLabel id="pet-neutered-label"  sx={{ fontWeight: 600, fontSize: 20}} >
+            Is this dog neutered/spayed?
+          </FormLabel>
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
+            aria-labelledby="pet-neutered-label"
             defaultValue={false}
-            name="radio-buttons-group"
+            name="petNeutered"
           >
-            <FormControlLabel
-              value={true}
-              control={<Radio />}
-              label="Yes"
-            />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
             <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">Size</FormLabel>
+          <FormLabel id="pet-size-label" sx={{ fontWeight: 600, fontSize: 20}}>Size</FormLabel>
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
+            aria-labelledby="pet-size-label"
             defaultValue="small"
-            name="radio-buttons-group"
+            name="petSize"
           >
+            <FormControlLabel value="small" control={<Radio />} label="Small" />
             <FormControlLabel
-              value="small"
+              value="medium"
               control={<Radio />}
-              label="Small"
+              label="Medium"
             />
-            <FormControlLabel value="medium" control={<Radio />} label="Medium" />
             <FormControlLabel value="large" control={<Radio />} label="Large" />
           </RadioGroup>
         </FormControl>
         <TextField
-          id="outlined-multiline-static"
+          id="pet-bio-field"
           label="Pet Bio"
           multiline
           rows={4}
           defaultValue="Default Value"
         />
+         <Button type="submit" variant="contained" >Submit</Button>
       </Stack>
+   
     </Box>
   );
 };
