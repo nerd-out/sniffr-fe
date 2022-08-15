@@ -1,18 +1,18 @@
 import {
+  Avatar,
   Box,
-  Typography,
+  Button,
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
   Stack,
   TextField,
-  MenuItem,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Avatar,
-  Button,
+  Typography,
 } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler,useForm } from 'react-hook-form';
 
 const ages = [
   {
@@ -56,10 +56,7 @@ interface IFormInput {
 }
 
 const CreateDogProfilePage: React.FC = (): React.ReactElement => {
-  const {
-    control,
-    handleSubmit,
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       petSex: '',
       petName: '',
@@ -71,8 +68,8 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
       petSize: '',
     },
   });
-  const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
   };
 
   return (
@@ -143,7 +140,11 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
             defaultValue=""
           />
 
-          <FormLabel id="pet-sex-label" sx={{ fontWeight: 600, fontSize: 20 }} required>
+          <FormLabel
+            id="pet-sex-label"
+            sx={{ fontWeight: 600, fontSize: 20 }}
+            required
+          >
             Sex
           </FormLabel>
           <Controller

@@ -1,15 +1,16 @@
+import './index.css';
+
+import { ThemeProvider } from '@mui/material';
+import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeProvider } from '@mui/material';
-
-import './index.css';
-import App from './App';
-import theme from './theme';
-import reportWebVitals from './reportWebVitals';
-import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { dogReducer } from './redux/dog/reducer';
+
+import App from './App';
 import { dogApi } from './redux/dog/createApi';
+import { dogReducer } from './redux/dog/reducer';
+import reportWebVitals from './reportWebVitals';
+import theme from './theme';
 
 const store = configureStore({
   reducer: {
