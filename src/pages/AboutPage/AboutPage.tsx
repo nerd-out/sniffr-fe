@@ -80,7 +80,6 @@ const AboutPage: React.FC = (): React.ReactElement => {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
         {badassDevs.map((dev) => {
           return (
-            // eslint-disable-next-line react/jsx-key
             <Card variant="outlined" sx={{ width: '240px', m: 1 }}>
               <CardContent>
                 <Typography
