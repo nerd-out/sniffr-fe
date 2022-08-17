@@ -60,7 +60,7 @@ const badassDevs: BadassDevs[] = [
     linkedin: 'https://www.linkedin.com/in/allie-robinson/',
     title: 'TypeScript Adversary',
     adjective: 'may bite',
-    line1: 'better watch your back,',
+    line1: 'watch your back,',
     line2: "this one's feisty!",
   },
 ];
