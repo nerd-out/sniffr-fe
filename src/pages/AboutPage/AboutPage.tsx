@@ -60,7 +60,7 @@ const badassDevs: BadassDevs[] = [
     linkedin: 'https://www.linkedin.com/in/allie-robinson/',
     title: 'TypeScript Adversary',
     adjective: 'may bite',
-    line1: 'better watch your back,',
+    line1: 'watch your back,',
     line2: "this one's feisty!",
   },
 ];
@@ -80,8 +80,7 @@ const AboutPage: React.FC = (): React.ReactElement => {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
         {badassDevs.map((dev) => {
           return (
-            // eslint-disable-next-line react/jsx-key
-            <Card variant="outlined" sx={{ width: '240px', m: 1 }}>
+            <Card variant="outlined" key={dev.name} sx={{ width: '240px', m: 1 }}>
               <CardContent>
                 <Typography
                   sx={{ fontSize: 14 }}
