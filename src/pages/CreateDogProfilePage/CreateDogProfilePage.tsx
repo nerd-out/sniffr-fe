@@ -240,17 +240,17 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
                 <FormControlLabel
                   value="small"
                   control={<Radio required />}
-                  label="Small"
+                  label="Small (up to 20 lbs)"
                 />
                 <FormControlLabel
                   value="medium"
                   control={<Radio required />}
-                  label="Medium"
+                  label="Medium (20 to 50 lbs)"
                 />
                 <FormControlLabel
                   value="large"
                   control={<Radio required />}
-                  label="Large"
+                  label="Large (50+ lbs)"
                 />
               </RadioGroup>
             )}
