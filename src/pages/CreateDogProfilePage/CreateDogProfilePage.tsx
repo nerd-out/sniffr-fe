@@ -84,7 +84,6 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <TextField
                 {...field}
-                className="materialUIInput"
                 label="Name"
                 required
                 variant="outlined"
