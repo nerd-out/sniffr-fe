@@ -22,6 +22,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { label: 'Home', link: '/' },
   { label: 'About', link: '/about' },
   { label: 'Login', link: '/login' },
   { label: 'Register', link: '/register' },
