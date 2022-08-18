@@ -261,7 +261,6 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <TextField
                 {...field}
-                className="materialUIInput"
                 id="pet-bio-field"
                 label="Pet Bio"
                 multiline
