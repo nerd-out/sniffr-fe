@@ -1,6 +1,21 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import frenchie from './frenchie.jpg';
+import { styled } from '@mui/material/styles';
+
+const HomeDogImage = styled(Box)<any>(({ theme }) => ({
+  borderRadius: '61% 39% 41% 59% / 31% 44% 56% 69%',
+  height: '120vh',
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  zIndex: 1,
+
+  '@media only screen and (max-width: 768px)': {
+    top: 0,
+    left: 0,
+  },
+}));
 
 const HomePage: React.FC = (): React.ReactElement => {
   const navigate = useNavigate();
@@ -39,18 +54,7 @@ const HomePage: React.FC = (): React.ReactElement => {
         </Button>
       </Box>
 
-      <Box
-        component="img"
-        src={frenchie}
-        sx={{
-          borderRadius: '61% 39% 41% 59% / 31% 44% 56% 69%',
-          height: '120vh',
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          zIndex: 1,
-        }}
-      />
+      <HomeDogImage component="img" src={frenchie} />
     </Box>
   );
 };
