@@ -1,4 +1,29 @@
-import { errorContrast, errorDark, errorLight, errorMain, infoContrast, infoDark, infoLight, infoMain, primaryContrast, primaryDark, primaryLight, primaryMain, secondaryContrast, secondaryDark, secondaryLight, secondaryMain, successContrast, successDark, successLight, successMain, warningContrast, warningDark, warningLight, warningMain } from './custom';
+import {
+  errorContrast,
+  errorDark,
+  errorLight,
+  errorMain,
+  infoContrast,
+  infoDark,
+  infoLight,
+  infoMain,
+  primaryContrast,
+  primaryDark,
+  primaryLight,
+  primaryMain,
+  secondaryContrast,
+  secondaryDark,
+  secondaryLight,
+  secondaryMain,
+  successContrast,
+  successDark,
+  successLight,
+  successMain,
+  warningContrast,
+  warningDark,
+  warningLight,
+  warningMain,
+} from './custom';
 
 const palette = {
   primary: {
