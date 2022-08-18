@@ -39,9 +39,11 @@ const Layout = (props: any) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Box sx={{ cursor: 'pointer' }}>
-          <Typography variant="h6" sx={{ my: 2 }} onClick={() => navigate('/')}>
-      </Box>
+      <Typography
+        variant="h6"
+        sx={{ my: 2, cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      >
         sniffr
       </Typography>
       <Divider />
@@ -80,7 +82,11 @@ const Layout = (props: any) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'block' },
+              cursor: 'pointer',
+            }}
             onClick={() => navigate('/')}
           >
             sniffr
