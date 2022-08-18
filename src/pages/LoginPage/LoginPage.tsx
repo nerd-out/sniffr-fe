@@ -1,6 +1,7 @@
 import { Box, Button, Link, TextField } from '@mui/material';
-import logo from '../../assets/logo/logo.svg';
 import { Link as RouterLink } from 'react-router-dom';
+
+import logo from '../../assets/logo/logo.svg';
 
 const LoginPage: React.FC = (): React.ReactElement => {
   return (

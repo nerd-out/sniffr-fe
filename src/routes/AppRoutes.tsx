@@ -5,8 +5,8 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { Layout } from '../pages';
 
+import { Layout } from '../pages';
 import routes from './routes';
 
 const AppRoutes: React.FC = (): React.ReactElement => {

@@ -4,6 +4,9 @@ const HomePage = lazy(() => import('../pages/HomePage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 const AboutPage = lazy(() => import('../pages/AboutPage'));
+const DogProfileSettingsPage = lazy(
+  () => import('../pages/DogProfileSettingsPage')
+);
 
 const routes = [
   {
@@ -21,6 +24,10 @@ const routes = [
   {
     path: '/about',
     element: <AboutPage />,
+  },
+  {
+    path: '/dog-settings',
+    element: <DogProfileSettingsPage />,
   },
 ];
 

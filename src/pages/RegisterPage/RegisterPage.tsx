@@ -1,7 +1,8 @@
 import { Box, Button, Link, TextField } from '@mui/material';
-import logo from '../../assets/logo/logo.svg';
-import { Link as RouterLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
+import logo from '../../assets/logo/logo.svg';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
   const [username, setUsername] = useState('');
