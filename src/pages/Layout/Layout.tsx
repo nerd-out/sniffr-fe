@@ -39,7 +39,9 @@ const Layout = (props: any) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2, cursor: 'pointer' }} onClick={() => navigate('/')}>
+      <Box sx={{ cursor: 'pointer' }}>
+          <Typography variant="h6" sx={{ my: 2 }} onClick={() => navigate('/')}>
+      </Box>
         sniffr
       </Typography>
       <Divider />
