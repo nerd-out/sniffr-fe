@@ -55,7 +55,7 @@ interface IFormInput {
   petSize: string;
 }
 
-const CreateDogProfilePage: React.FC = (): React.ReactElement => {
+const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       petSex: '',
@@ -283,4 +283,4 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
   );
 };
 
-export default CreateDogProfilePage;
+export default DogProfileSettingsPage;
