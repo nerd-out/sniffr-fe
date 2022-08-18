@@ -79,28 +79,35 @@ const Layout = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
+          <Box
             sx={{
-              flexGrow: 1,
-              display: { xs: 'none', sm: 'block' },
-              cursor: 'pointer',
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
             }}
-            onClick={() => navigate('/')}
           >
-            sniffr
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item: NavItem) => (
-              <Button
-                key={item.label}
-                sx={{ color: '#fff' }}
-                onClick={() => navigate(item.link)}
-              >
-                {item.label}
-              </Button>
-            ))}
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                cursor: 'pointer',
+              }}
+              onClick={() => navigate('/')}
+            >
+              sniffr
+            </Typography>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              {navItems.map((item: NavItem) => (
+                <Button
+                  key={item.label}
+                  sx={{ color: '#fff' }}
+                  onClick={() => navigate(item.link)}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>
