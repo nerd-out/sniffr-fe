@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import { Controller, SubmitHandler,useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 const ages = [
   {

@@ -80,7 +80,11 @@ const AboutPage: React.FC = (): React.ReactElement => {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
         {badassDevs.map((dev) => {
           return (
-            <Card variant="outlined" key={dev.name} sx={{ width: '240px', m: 1 }}>
+            <Card
+              variant="outlined"
+              key={dev.name}
+              sx={{ width: '240px', m: 1 }}
+            >
               <CardContent>
                 <Typography
                   sx={{ fontSize: 14 }}
