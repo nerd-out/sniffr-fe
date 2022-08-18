@@ -98,7 +98,6 @@ const CreateDogProfilePage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <TextField
                 {...field}
-                className="materialUIInput"
                 label="Age"
                 required
                 select
