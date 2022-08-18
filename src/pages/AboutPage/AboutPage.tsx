@@ -61,7 +61,7 @@ const badassDevs: BadassDevs[] = [
     title: 'TypeScript Adversary',
     adjective: 'may bite',
     line1: 'watch your back,',
-    line2: "this one's feisty!",
+    line2: "this one's spicy!",
   },
 ];
 
