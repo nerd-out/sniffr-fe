@@ -22,6 +22,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { label: 'Home', link: '/' },
   { label: 'About', link: '/about' },
   { label: 'Login', link: '/login' },
   { label: 'Register', link: '/register' },
@@ -38,7 +39,11 @@ const Layout = (props: any) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }} onClick={() => navigate('/')}>
+      <Typography
+        variant="h6"
+        sx={{ my: 2, cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      >
         sniffr
       </Typography>
       <Divider />
@@ -74,24 +79,35 @@ const Layout = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            onClick={() => navigate('/')}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
           >
-            sniffr
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item: NavItem) => (
-              <Button
-                key={item.label}
-                sx={{ color: '#fff' }}
-                onClick={() => navigate(item.link)}
-              >
-                {item.label}
-              </Button>
-            ))}
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                cursor: 'pointer',
+              }}
+              onClick={() => navigate('/')}
+            >
+              sniffr
+            </Typography>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              {navItems.map((item: NavItem) => (
+                <Button
+                  key={item.label}
+                  sx={{ color: '#fff' }}
+                  onClick={() => navigate(item.link)}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>
