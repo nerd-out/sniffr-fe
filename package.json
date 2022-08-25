@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
@@ -17,7 +19,6 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^0.27.2",
     "flow": "^0.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
