@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import frenchie from './frenchie.jpg';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
+import frenchie from './frenchie.jpg';
 
 const HomeDogImage = styled(Box)<any>(({ theme }) => ({
   borderRadius: '61% 39% 41% 59% / 31% 44% 56% 69%',
@@ -17,7 +18,7 @@ const HomeDogImage = styled(Box)<any>(({ theme }) => ({
   },
 }));
 
-const HomePage: React.FC = (): React.ReactElement => {
+const HomePage = () => {
   const navigate = useNavigate();
   return (
     <Box sx={{ position: 'relative', width: '100%' }}>
