@@ -62,7 +62,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true }}
           />
-
           <Controller
             control={control}
             name="password"
