@@ -36,7 +36,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-
         <form onSubmit={handleSubmit((values) => console.log(values))}>
           <Controller
             control={control}
