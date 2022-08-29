@@ -18,6 +18,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
       username: '',
     },
   });
+  
   return (
     <Box
       sx={{
