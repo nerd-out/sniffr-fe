@@ -1,6 +1,6 @@
 # Sniffr
 
-The best place for dogs to find a playmate.
+The place where good dogs go to find a playmate.
 
 ### Run this app:
 
