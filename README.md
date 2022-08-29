@@ -1,6 +1,6 @@
 # Sniffr
 
-The matchmaking site for dogs.
+The best place for dogs to find a playmate.
 
 ### Run this app:
 
