@@ -1,11 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "simple-import-sort",
-    "import"
-  ],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "import"],
   "extends": [
     "react-app",
     "plugin:react/recommended",
