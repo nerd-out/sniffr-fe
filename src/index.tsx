@@ -1,5 +1,3 @@
-import './index.css';
-
 import { ThemeProvider } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
