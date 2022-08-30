@@ -7,7 +7,6 @@ The place where good dogs go to find a playmate.
 1. `npm install`
 2. `npm run start`
 
-
 ### Guidelines for making changes:
 
 1. Assign yourself to a new or existing issue
@@ -22,5 +21,5 @@ The place where good dogs go to find a playmate.
 10. `git push origin your-issue-name`
 11. Create a PR
 12. Get 2 devs to review your PR
-13. Address review suggestions 
+13. Address review suggestions
 14. Merge PR
