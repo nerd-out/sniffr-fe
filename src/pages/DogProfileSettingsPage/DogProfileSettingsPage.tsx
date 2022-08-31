@@ -85,6 +85,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
               <TextField
                 {...field}
                 label="Name"
+                data-testid="pet-name-input"
                 required
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
@@ -270,6 +271,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
           />
           <Button
             type="submit"
+            data-testid="submit-button"
             variant="contained"
             fullWidth
             size="large"
