@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import RegisterPage from '../RegisterPage';
+import RegisterPage from './RegisterPage';
 
 describe('Register Page', () => {
   it('should have a button', () => {
