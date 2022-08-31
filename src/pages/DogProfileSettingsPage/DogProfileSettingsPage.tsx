@@ -76,7 +76,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
     <Box sx={{ width: 300 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
-          <Typography variant="h1">Create Dog</Typography>
+          <Typography variant="h1" data-testid="dog-settings-header">Create Dog</Typography>
           <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
             OP
           </Avatar>
@@ -85,12 +85,12 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
               <TextField
                 {...field}
                 label="Name"
-                data-testid="pet-name-input"
                 required
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
               />
             )}
+
             name="petName"
             control={control}
             defaultValue=""

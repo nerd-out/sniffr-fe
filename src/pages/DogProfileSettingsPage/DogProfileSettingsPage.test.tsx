@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import DogProfileSettingsPage from './DogProfileSettingsPage';
 
 describe('Dog Settings Page', () => {
-  it('should have a button', () => {
+  it('should have a submit button', () => {
     render(
       <Router>
         <DogProfileSettingsPage />
@@ -22,10 +22,30 @@ describe('Dog Settings Page', () => {
       </Router>
     );
 
-    const nameInput = screen.getByTestId('pet-name-input');
+    const nameInput = screen.getByRole('textbox',{ name : 'Name'});
     expect(nameInput).toBeInTheDocument();
     expect(nameInput).toBeRequired();
-    expect(nameInput)
-    
   });
+
+  it('should have radios', () => {
+    render(
+      <Router>
+        <DogProfileSettingsPage />
+      </Router>
+    );
+    const radios = screen.getAllByRole('radiogroup');
+    expect(radios).toHaveLength(4);
+  });
+
+  it('should have a header', () => {
+    render(
+      <Router>
+        <DogProfileSettingsPage />
+      </Router>
+    );
+    const header = screen.getByTestId('dog-settings-header');
+    expect(header).toBeInTheDocument();
+    expect(header).toHaveTextContent('Create Dog')
+  });
+  
 });
