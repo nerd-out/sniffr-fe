@@ -5,7 +5,9 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import { dogApi } from './redux/dog/createApi';
+import { authApi } from './redux/auth/authApi';
+import { authReducer } from './redux/auth/reducer';
+import { dogApi } from './redux/dog/dogApi';
 import { dogReducer } from './redux/dog/reducer';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';
@@ -13,11 +15,13 @@ import theme from './theme';
 const store = configureStore({
   reducer: {
     dogReducer,
+    authReducer,
     [dogApi.reducerPath]: dogApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(dogApi.middleware),
+    getDefaultMiddleware().concat(dogApi.middleware, authApi.middleware),
   // preloadedState: { },
 });
 
