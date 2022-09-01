@@ -33,8 +33,8 @@ describe('Dog Settings Page', () => {
         <DogProfileSettingsPage />
       </Router>
     );
-    const radios = screen.getAllByRole('radiogroup');
-    expect(radios).toHaveLength(4);
+    const radiogroups = screen.getAllByRole('radiogroup');
+    expect(radiogroups).toHaveLength(4);
   });
 
   it('should have radios', () => {
