@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
-import { useLoginQuery } from '../../redux/auth/authApi';
+import { useLoginMutation } from '../../redux/auth/authApi';
 
 interface LoginInputs {
   email: string;
@@ -20,11 +20,11 @@ const LoginPage: React.FC = (): React.ReactElement => {
     },
   });
 
-  const { data, error, isLoading } = useLoginQuery({ email: "jon@sniffr.be", password: "windows" });
+  // { email: "jon@sniffr.be", password: "windows" }
 
-  console.log("data", data);
-  console.log("error", error);
-  console.log("isLoading", isLoading);
+  const wut = useLoginMutation();
+
+  console.log("wut", wut);
 
   return (
     <Box

@@ -6,7 +6,7 @@ export const authApi = createApi({
     baseUrl: "https://sniffr-be.herokuapp.com",
   }),
   endpoints: (builder) => ({
-    login: builder.query<AuthState, Partial<AuthState>>({
+    login: builder.mutation<AuthState, any>({
       query(body) {
         return {
           url: `login`,
@@ -18,4 +18,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginQuery } = authApi;
+export const { useLoginMutation } = authApi;
