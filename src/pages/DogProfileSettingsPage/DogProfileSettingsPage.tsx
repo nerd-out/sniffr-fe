@@ -9,7 +9,7 @@ import {
   RadioGroup,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -17,31 +17,31 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 const ages = [
   {
     value: 'PUPPY',
-    label: 'Puppy: 1-2',
+    label: 'Puppy: 1-2'
   },
   {
     value: 'ADULT',
-    label: 'Adult: 3-10',
+    label: 'Adult: 3-10'
   },
   {
     value: 'SENIOR',
-    label: 'Senior: 10+',
-  },
+    label: 'Senior: 10+'
+  }
 ];
 
 const breeds = [
   {
     value: 'PITBULL',
-    label: 'Pitbull',
+    label: 'Pitbull'
   },
   {
     value: 'POODLE',
-    label: 'Poodle',
+    label: 'Poodle'
   },
   {
     value: 'TERRIER',
-    label: 'Terrier',
-  },
+    label: 'Terrier'
+  }
 ];
 
 interface IFormInput {
@@ -65,10 +65,10 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
       petBio: '',
       petVaccinations: false,
       petNeutered: false,
-      petSize: '',
-    },
+      petSize: ''
+    }
   });
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
   };
 
@@ -76,7 +76,9 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
     <Box sx={{ width: 300 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
-          <Typography variant="h1" data-testid="dog-settings-header">Create Dog</Typography>
+          <Typography variant="h1" data-testid="dog-settings-header">
+            Create Dog
+          </Typography>
           <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
             OP
           </Avatar>
@@ -90,7 +92,6 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
               />
             )}
-
             name="petName"
             control={control}
             defaultValue=""
@@ -105,7 +106,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
               >
-                {ages.map((option) => (
+                {ages.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
@@ -126,7 +127,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
               >
-                {breeds.map((option) => (
+                {breeds.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
