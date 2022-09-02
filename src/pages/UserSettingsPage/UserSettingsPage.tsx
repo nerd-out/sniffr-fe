@@ -11,8 +11,6 @@ interface UserInputs {
   user_bio: string;
   max_distance: number;
   zipcode: number;
-  // creation_time: string;
-  // last_update: string | null;
 }
 
 const UserSettingsPage: React.FC = (): React.ReactElement => {
