@@ -86,7 +86,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
                 type="password"
               />
             )}
-            rules={{ required: true, minLength: 10 }}
+            rules={{ required: true }}
           />
           <Button
             variant="contained"
