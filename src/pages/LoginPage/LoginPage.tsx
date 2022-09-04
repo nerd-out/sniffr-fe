@@ -1,4 +1,5 @@
 import { Box, Button, Link, TextField } from '@mui/material';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -20,11 +21,13 @@ const LoginPage: React.FC = (): React.ReactElement => {
     },
   });
 
-  // { email: "jon@sniffr.be", password: "windows" }
+  const [login, loginStatus] = useLoginMutation();
 
-  const wut = useLoginMutation();
-
-  console.log("wut", wut);
+  useEffect(()=> {
+    if (loginStatus.isSuccess) {
+      localStorage.setItem('token', loginStatus.data.token || '');
+    }
+  }, [loginStatus]);
 
   return (
     <Box
@@ -43,7 +46,13 @@ const LoginPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-        <form onSubmit={handleSubmit((values) => console.log("values", values))}>
+        <form onSubmit={handleSubmit((values) => {
+          login({
+            email: values.email,
+            password: values.password,
+          });
+        })
+        }>
           <Controller
             control={control}
             name="email"
