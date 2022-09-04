@@ -1,11 +1,13 @@
 import { Box, Button, Link, TextField } from '@mui/material';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
+import { useLoginMutation } from '../../redux/auth/authApi';
 
 interface LoginInputs {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -15,10 +17,18 @@ const LoginPage: React.FC = (): React.ReactElement => {
     reValidateMode: 'onBlur',
     defaultValues: {
       password: '',
-      username: '',
+      email: '',
     },
   });
-  
+
+  const [login, loginStatus] = useLoginMutation();
+
+  useEffect(()=> {
+    if (loginStatus.isSuccess) {
+      localStorage.setItem('token', loginStatus.data.token || '');
+    }
+  }, [loginStatus]);
+
   return (
     <Box
       sx={{
@@ -36,17 +46,23 @@ const LoginPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-        <form onSubmit={handleSubmit((values) => console.log(values))}>
+        <form onSubmit={handleSubmit((values) => {
+          login({
+            email: values.email,
+            password: values.password,
+          });
+        })
+        }>
           <Controller
             control={control}
-            name="username"
+            name="email"
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
               formState,
             }) => (
               <TextField
-                label="Username"
+                label="Email"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}

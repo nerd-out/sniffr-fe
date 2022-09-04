@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import HomePage from '../HomePage';
+import HomePage from './HomePage';
 
 describe('HomePage', () => {
   it('should render the correct heading text', () => {
