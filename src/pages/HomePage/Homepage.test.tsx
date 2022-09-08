@@ -1,7 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import HomePage from './HomePage';
+
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
 
 describe('HomePage', () => {
   it('should render the correct heading text', () => {
@@ -42,5 +50,21 @@ describe('HomePage', () => {
     const registerNowButton = screen.getByRole('button', { name: buttonText });
 
     expect(registerNowButton).toBeInTheDocument();
+  });
+
+  it('should redirect to register page when the user click Register Now button', () => {
+    render(
+      <Router>
+        <HomePage />
+      </Router>
+    );
+    const buttonText = 'Register Now';
+
+    const registerNowButton = screen.getByRole('button', { name: buttonText });
+
+    userEvent.click(registerNowButton);
+
+    expect(mockNavigate).toBeCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith('/register');
   });
 });
