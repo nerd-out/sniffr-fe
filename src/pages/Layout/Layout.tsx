@@ -29,6 +29,7 @@ const Layout = (props: any) => {
   const loggedInNavItems = [
     { label: 'Home', func: () => navigate('/user-options') },
     { label: 'Find a Match!', func: () => navigate('/swipe') },
+    { label: 'Matches', func: () => navigate('/matches') },
     { label: 'About', func: () => navigate('/about') },
     { label: 'Logout', func: logout }
   ];
