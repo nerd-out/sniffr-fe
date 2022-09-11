@@ -1,6 +1,4 @@
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
 
 const Swipes: React.FC = (): React.ReactElement => {
   return (
