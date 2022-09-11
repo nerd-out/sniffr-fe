@@ -1,12 +1,13 @@
-import { lazy } from 'react';
-
-const HomePage = lazy(() => import('../pages/HomePage'));
-const LoginPage = lazy(() => import('../pages/LoginPage'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage'));
-const AboutPage = lazy(() => import('../pages/AboutPage'));
-const DogProfileSettingsPage = lazy(
-  () => import('../pages/DogProfileSettingsPage')
-);
+import {
+  AboutPage,
+  DogProfileSettingsPage,
+  HomePage,
+  LoginPage,
+  Matches,
+  RegisterPage,
+  Swipes,
+  UserOptions
+} from '../pages';
 
 const routes = [
   {
@@ -28,6 +29,18 @@ const routes = [
   {
     path: '/dog-settings',
     element: <DogProfileSettingsPage />
+  },
+  {
+    path: '/user-options',
+    element: <UserOptions />
+  },
+  {
+    path: '/swipe',
+    element: <Swipes />
+  },
+  {
+    path: '/matches',
+    element: <Matches />
   }
 ];
 
