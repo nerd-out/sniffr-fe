@@ -11,24 +11,24 @@ const DogProfileSettingsPage = lazy(
 const routes = [
   {
     path: '/',
-    element: <HomePage />,
+    element: <HomePage />
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <LoginPage />
   },
   {
     path: '/register',
-    element: <RegisterPage />,
+    element: <RegisterPage />
   },
   {
     path: '/about',
-    element: <AboutPage />,
+    element: <AboutPage />
   },
   {
     path: '/dog-settings',
-    element: <DogProfileSettingsPage />,
-  },
+    element: <DogProfileSettingsPage />
+  }
 ];
 
 export default routes;

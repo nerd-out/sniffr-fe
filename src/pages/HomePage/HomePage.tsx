@@ -14,8 +14,8 @@ const HomeDogImage = styled(Box)<any>(({ theme }) => ({
 
   '@media only screen and (max-width: 768px)': {
     top: 0,
-    left: 0,
-  },
+    left: 0
+  }
 }));
 
 const HomePage = () => {
@@ -28,7 +28,7 @@ const HomePage = () => {
           position: 'fixed',
           top: '20%',
           left: '10%',
-          zIndex: 2,
+          zIndex: 2
         }}
       >
         <Typography
