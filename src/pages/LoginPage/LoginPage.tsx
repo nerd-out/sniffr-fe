@@ -24,7 +24,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
   });
 
   const [login, loginStatus] = useLoginMutation();
-  console.log('loginStatus', loginStatus);
 
   useEffect(() => {
     if (loginStatus.isSuccess) {
