@@ -1,7 +1,8 @@
-import { Box, Button, Link, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Alert, Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
@@ -12,6 +13,7 @@ interface LoginInputs {
 }
 
 const LoginPage: React.FC = (): React.ReactElement => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm<LoginInputs>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -22,10 +24,12 @@ const LoginPage: React.FC = (): React.ReactElement => {
   });
 
   const [login, loginStatus] = useLoginMutation();
+  console.log('loginStatus', loginStatus);
 
   useEffect(() => {
     if (loginStatus.isSuccess) {
       localStorage.setItem('token', loginStatus.data.token || '');
+      navigate('/user-options');
     }
   }, [loginStatus]);
 
@@ -105,18 +109,26 @@ const LoginPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true }}
           />
-          <Button
+          {loginStatus.isError && (
+            <Alert sx={{ mb: 2 }} severity="error">
+              Login failed. Please try again.
+            </Alert>
+          )}
+          <LoadingButton
             variant="contained"
             fullWidth
             size="large"
             sx={{ mb: 2 }}
             type="submit"
+            loading={loginStatus.isLoading}
           >
             Login
-          </Button>
+          </LoadingButton>
         </form>
         <Link component={RouterLink} to="/register">
-          Don&apos;t have an account? Register here!
+          <Typography variant="body2">
+            Don&apos;t have an account? Register here!
+          </Typography>
         </Link>
       </Box>
     </Box>

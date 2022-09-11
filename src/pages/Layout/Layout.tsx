@@ -16,26 +16,33 @@ import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-interface NavItem {
-  label: string;
-  link: string;
-}
-
-const navItems: NavItem[] = [
-  { label: 'Home', link: '/' },
-  { label: 'About', link: '/about' },
-  { label: 'Login', link: '/login' },
-  { label: 'Register', link: '/register' }
-];
-
-const logout = () => {
-  localStorage.removeItem('token');
-};
-
 const Layout = (props: any) => {
   const { window, children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
+  const loggedInNavItems = [
+    { label: 'Home', func: () => navigate('/user-options') },
+    { label: 'Find a Match!', func: () => navigate('/swipe') },
+    { label: 'About', func: () => navigate('/about') },
+    { label: 'Logout', func: logout }
+  ];
+
+  const loggedOutNavItems = [
+    { label: 'Home', func: () => navigate('/') },
+    { label: 'About', func: () => navigate('/about') },
+    { label: 'Login', func: () => navigate('/login') },
+    { label: 'Register', func: () => navigate('/register') }
+  ];
+
+  const navItems = !!localStorage.getItem('token')
+    ? loggedInNavItems
+    : loggedOutNavItems;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -52,22 +59,13 @@ const Layout = (props: any) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item: NavItem) => (
-          <ListItem
-            key={item.label}
-            disablePadding
-            onClick={() => navigate(item.link)}
-          >
+        {navItems.map(item => (
+          <ListItem key={item.label} disablePadding onClick={item.func}>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={<>{item.label}</>} />
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem key={'logout'} disablePadding onClick={logout}>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary={<>Logout</>} />
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );
@@ -107,18 +105,15 @@ const Layout = (props: any) => {
               sniffr
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item: NavItem) => (
+              {navItems.map(item => (
                 <Button
                   key={item.label}
                   sx={{ color: '#fff' }}
-                  onClick={() => navigate(item.link)}
+                  onClick={item.func}
                 >
                   {item.label}
                 </Button>
               ))}
-              <Button key={'logout'} sx={{ color: '#fff' }} onClick={logout}>
-                Logout
-              </Button>
             </Box>
           </Box>
         </Toolbar>

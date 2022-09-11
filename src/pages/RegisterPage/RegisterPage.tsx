@@ -1,4 +1,4 @@
-import { Box, Button, Link, TextField } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -77,7 +77,9 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           Register
         </Button>
         <Link component={RouterLink} to="/login">
-          Already have an account? Login here!
+          <Typography variant="body2">
+            Already have an account? Login here!
+          </Typography>
         </Link>
       </Box>
     </Box>
