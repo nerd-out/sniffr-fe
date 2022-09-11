@@ -17,11 +17,11 @@ const store = configureStore({
     dogReducer,
     authReducer,
     [dogApi.reducerPath]: dogApi.reducer,
-    [authApi.reducerPath]: authApi.reducer,
+    [authApi.reducerPath]: authApi.reducer
   },
   devTools: true,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(dogApi.middleware, authApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(dogApi.middleware, authApi.middleware)
   // preloadedState: { },
 });
 

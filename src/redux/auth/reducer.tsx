@@ -7,10 +7,9 @@ const initialState: AuthState = {
   password: ''
 };
 
-export const authReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(auth, (state: AuthState, action: Action) => {
-        state.email = action.payload.email;
-        state.password = action.payload.password;
-      });
+export const authReducer = createReducer(initialState, builder => {
+  builder.addCase(auth, (state: AuthState, action: Action) => {
+    state.email = action.payload.email;
+    state.password = action.payload.password;
+  });
 });

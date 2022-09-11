@@ -2,14 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "simple-import-sort", "import"],
-  "extends": [
-    "react-app",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  "extends": ["react-app", "plugin:react/recommended", "plugin:react-hooks/recommended", "eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
   "parserOptions": {
     "sourceType": "module"
   },

@@ -25,8 +25,12 @@ const navItems: NavItem[] = [
   { label: 'Home', link: '/' },
   { label: 'About', link: '/about' },
   { label: 'Login', link: '/login' },
-  { label: 'Register', link: '/register' },
+  { label: 'Register', link: '/register' }
 ];
+
+const logout = () => {
+  localStorage.removeItem('token');
+};
 
 const Layout = (props: any) => {
   const { window, children } = props;
@@ -59,6 +63,11 @@ const Layout = (props: any) => {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem key={'logout'} disablePadding onClick={logout}>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={<>Logout</>} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -83,7 +92,7 @@ const Layout = (props: any) => {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              width: '100%',
+              width: '100%'
             }}
           >
             <Typography
@@ -91,7 +100,7 @@ const Layout = (props: any) => {
               component="div"
               sx={{
                 display: { xs: 'none', sm: 'block' },
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
               onClick={() => navigate('/')}
             >
@@ -107,6 +116,9 @@ const Layout = (props: any) => {
                   {item.label}
                 </Button>
               ))}
+              <Button key={'logout'} sx={{ color: '#fff' }} onClick={logout}>
+                Logout
+              </Button>
             </Box>
           </Box>
         </Toolbar>
@@ -118,14 +130,14 @@ const Layout = (props: any) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
         >
           {drawer}

@@ -17,13 +17,13 @@ const LoginPage: React.FC = (): React.ReactElement => {
     reValidateMode: 'onBlur',
     defaultValues: {
       password: '',
-      email: '',
-    },
+      email: ''
+    }
   });
 
   const [login, loginStatus] = useLoginMutation();
 
-  useEffect(()=> {
+  useEffect(() => {
     if (loginStatus.isSuccess) {
       localStorage.setItem('token', loginStatus.data.token || '');
     }
@@ -36,7 +36,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
@@ -46,20 +46,21 @@ const LoginPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-        <form onSubmit={handleSubmit((values) => {
-          login({
-            email: values.email,
-            password: values.password,
-          });
-        })
-        }>
+        <form
+          onSubmit={handleSubmit(values => {
+            login({
+              email: values.email,
+              password: values.password
+            });
+          })}
+        >
           <Controller
             control={control}
             name="email"
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Email"
@@ -84,7 +85,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Password"

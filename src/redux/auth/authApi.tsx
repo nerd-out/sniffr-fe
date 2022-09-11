@@ -7,19 +7,19 @@ interface AuthResponse {
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://sniffr-be.herokuapp.com",
+    baseUrl: 'https://sniffr-be.herokuapp.com'
   }),
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     login: builder.mutation<AuthResponse, any>({
       query(body) {
         return {
           url: `login`,
           method: 'POST',
-          body,
+          body
         };
-      },
-    }),
-  }),
+      }
+    })
+  })
 });
 
 export const { useLoginMutation } = authApi;

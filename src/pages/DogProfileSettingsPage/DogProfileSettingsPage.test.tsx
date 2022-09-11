@@ -65,9 +65,9 @@ describe('Dog Settings Page', () => {
       </Router>
     );
 
-    const breed = screen.getByRole('button', { name: "Breed ​" });
+    const breed = screen.getByRole('button', { name: 'Breed ​' });
     expect(breed).toBeInTheDocument();
-  })
+  });
 
   it('should have Age drop down', () => {
     render(
@@ -76,9 +76,7 @@ describe('Dog Settings Page', () => {
       </Router>
     );
 
-    const age = screen.getByRole('button', { name: "Age ​" });
+    const age = screen.getByRole('button', { name: 'Age ​' });
     expect(age).toBeInTheDocument();
-  })
-
-  
+  });
 });

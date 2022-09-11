@@ -22,7 +22,7 @@ import {
   warningContrast,
   warningDark,
   warningLight,
-  warningMain,
+  warningMain
 } from './custom';
 
 const palette = {
@@ -30,38 +30,38 @@ const palette = {
     main: primaryMain,
     light: primaryLight,
     dark: primaryDark,
-    contrast: primaryContrast,
+    contrast: primaryContrast
   },
   secondary: {
     main: secondaryMain,
     light: secondaryLight,
     dark: secondaryDark,
-    contrast: secondaryContrast,
+    contrast: secondaryContrast
   },
   error: {
     main: errorMain,
     light: errorLight,
     dark: errorDark,
-    contrast: errorContrast,
+    contrast: errorContrast
   },
   warning: {
     main: warningMain,
     light: warningLight,
     dark: warningDark,
-    contrast: warningContrast,
+    contrast: warningContrast
   },
   info: {
     main: infoMain,
     light: infoLight,
     dark: infoDark,
-    contrast: infoContrast,
+    contrast: infoContrast
   },
   success: {
     main: successMain,
     light: successLight,
     dark: successDark,
-    contrast: successContrast,
-  },
+    contrast: successContrast
+  }
 };
 
 export default palette;
