@@ -1,24 +1,37 @@
-import { Box, Button, Link, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Alert, Box, Link, TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
+import { useLoginMutation } from '../../redux/auth/authApi';
 
 interface LoginInputs {
-  username: string;
+  email: string;
   password: string;
 }
 
 const LoginPage: React.FC = (): React.ReactElement => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm<LoginInputs>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     defaultValues: {
       password: '',
-      username: '',
-    },
+      email: ''
+    }
   });
-  
+
+  const [login, loginStatus] = useLoginMutation();
+
+  useEffect(() => {
+    if (loginStatus.isSuccess) {
+      localStorage.setItem('token', loginStatus.data.token || '');
+      navigate('/user-options');
+    }
+  }, [loginStatus]);
+
   return (
     <Box
       sx={{
@@ -26,7 +39,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
@@ -36,17 +49,24 @@ const LoginPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-        <form onSubmit={handleSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={handleSubmit(values => {
+            login({
+              email: values.email,
+              password: values.password
+            });
+          })}
+        >
           <Controller
             control={control}
-            name="username"
+            name="email"
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
-                label="Username"
+                label="Email"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
@@ -68,7 +88,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Password"
@@ -88,18 +108,26 @@ const LoginPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true }}
           />
-          <Button
+          {loginStatus.isError && (
+            <Alert sx={{ mb: 2 }} severity="error">
+              Login failed. Please try again.
+            </Alert>
+          )}
+          <LoadingButton
             variant="contained"
             fullWidth
             size="large"
             sx={{ mb: 2 }}
             type="submit"
+            loading={loginStatus.isLoading}
           >
             Login
-          </Button>
+          </LoadingButton>
         </form>
         <Link component={RouterLink} to="/register">
-          Don&apos;t have an account? Register here!
+          <Typography variant="body2">
+            Don&apos;t have an account? Register here!
+          </Typography>
         </Link>
       </Box>
     </Box>

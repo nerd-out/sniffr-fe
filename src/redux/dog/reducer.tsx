@@ -14,7 +14,7 @@ const initialState: DogState = {
   breedId: null,
   isFixed: false,
   bio: null,
-  pic: null,
+  pic: null
   // temperament: null,
   // size: null,
 };
@@ -35,7 +35,7 @@ const dogCru = (state: DogState, action: Action) => {
 };
 
 // Real reducer
-export const dogReducer = createReducer(initialState, (builder) => {
+export const dogReducer = createReducer(initialState, builder => {
   builder
     .addCase(createDog, dogCru)
     .addCase(updateDog, dogCru)

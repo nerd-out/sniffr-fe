@@ -1,4 +1,4 @@
-import { Box, Button, Link, TextField } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
@@ -39,7 +39,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
           value={username}
-          onChange={(e) => setUsername(e.currentTarget.value)}
+          onChange={e => setUsername(e.currentTarget.value)}
         />
         <TextField
           label="Password"
@@ -47,7 +47,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
           value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
+          onChange={e => setPassword(e.currentTarget.value)}
           error={lengthError}
           helperText={
             lengthError && <>Passwords must be at least 8 characters long.</>
@@ -62,7 +62,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           error={passError}
           helperText={passError && <>Passwords do not match.</>}
           value={password2}
-          onChange={(e) => setPassword2(e.currentTarget.value)}
+          onChange={e => setPassword2(e.currentTarget.value)}
           onBlur={() =>
             password !== password2 ? setPassError(true) : setPassError(false)
           }
@@ -77,7 +77,9 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           Register
         </Button>
         <Link component={RouterLink} to="/login">
-          Already have an account? Login here!
+          <Typography variant="body2">
+            Already have an account? Login here!
+          </Typography>
         </Link>
       </Box>
     </Box>

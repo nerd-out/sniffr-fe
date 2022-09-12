@@ -1,21 +1,30 @@
-import { AboutPage, DogSettingsPage, HomePage, LoginPage, RegisterPage, UserSettingsPage } from '../pages';
+import {
+  AboutPage,
+  DogSettingsPage,
+  HomePage,
+  LoginPage,
+  Matches,
+  RegisterPage,
+  Swipes,
+  UserOptions
+} from '../pages';
 
 const routes = [
   {
     path: '/',
-    element: <HomePage />,
+    element: <HomePage />
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <LoginPage />
   },
   {
     path: '/register',
-    element: <RegisterPage />,
+    element: <RegisterPage />
   },
   {
     path: '/about',
-    element: <AboutPage />,
+    element: <AboutPage />
   },
   {
     path: '/dog-settings',
@@ -25,6 +34,18 @@ const routes = [
     path: '/user-settings',
     element: <UserSettingsPage />,
   },
+  {
+    path: '/user-options',
+    element: <UserOptions />
+  },
+  {
+    path: '/swipe',
+    element: <Swipes />
+  },
+  {
+    path: '/matches',
+    element: <Matches />
+  }
 ];
 
 export default routes;

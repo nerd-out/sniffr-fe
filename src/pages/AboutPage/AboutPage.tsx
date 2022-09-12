@@ -4,7 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
-  Typography,
+  Typography
 } from '@mui/material';
 
 interface BadassDevs {
@@ -25,7 +25,7 @@ const badassDevs: BadassDevs[] = [
     title: 'TypeScript Advocate',
     adjective: 'meticulous',
     line1: 'mostly reasonable...',
-    line2: 'mostly',
+    line2: 'mostly'
   },
   {
     name: 'Joshua Gray',
@@ -34,7 +34,7 @@ const badassDevs: BadassDevs[] = [
     title: 'Idea Generator',
     adjective: 'big brain',
     line1: 'asks good questions',
-    line2: '10/10 would code for cash',
+    line2: '10/10 would code for cash'
   },
   {
     name: 'Mashima Button',
@@ -43,7 +43,7 @@ const badassDevs: BadassDevs[] = [
     title: 'Tiny PR Maker',
     adjective: 'cute as a ^',
     line1: 'code hygienist',
-    line2: 'tech debt tackler',
+    line2: 'tech debt tackler'
   },
   {
     name: 'Jonathan Finger',
@@ -52,7 +52,7 @@ const badassDevs: BadassDevs[] = [
     title: 'Data Dude',
     adjective: 'poofy',
     line1: 'just here for the flask app',
-    line2: 'idk JavaScript',
+    line2: 'idk JavaScript'
   },
   {
     name: 'Allie Robinson',
@@ -61,8 +61,8 @@ const badassDevs: BadassDevs[] = [
     title: 'TypeScript Adversary',
     adjective: 'may bite',
     line1: 'watch your back,',
-    line2: "this one's spicy!",
-  },
+    line2: "this one's spicy!"
+  }
 ];
 
 const AboutPage: React.FC = (): React.ReactElement => {
@@ -73,12 +73,12 @@ const AboutPage: React.FC = (): React.ReactElement => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <Typography variant="h4">The people who brought you sniffr:</Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
-        {badassDevs.map((dev) => {
+        {badassDevs.map(dev => {
           return (
             <Card
               variant="outlined"
