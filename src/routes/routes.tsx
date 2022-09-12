@@ -4,6 +4,7 @@ import {
   HomePage,
   LoginPage,
   Matches,
+  PageNotFound,
   RegisterPage,
   Swipes,
   UserOptions
@@ -41,6 +42,10 @@ const routes = [
   {
     path: '/matches',
     element: <Matches />
+  },
+  {
+    path: '*',
+    element: <PageNotFound />
   }
 ];
 
