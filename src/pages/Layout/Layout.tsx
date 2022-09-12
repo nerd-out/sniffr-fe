@@ -41,7 +41,7 @@ const Layout = (props: any) => {
     { label: 'Register', func: () => navigate('/register') }
   ];
 
-  const navItems = !!localStorage.getItem('token')
+  const navItems = localStorage.getItem('token')
     ? loggedInNavItems
     : loggedOutNavItems;
 

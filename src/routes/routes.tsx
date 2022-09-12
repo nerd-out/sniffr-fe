@@ -6,7 +6,8 @@ import {
   Matches,
   RegisterPage,
   Swipes,
-  UserOptions
+  UserOptions,
+  UserSettingsPage,
 } from '../pages';
 
 const routes = [
@@ -28,11 +29,11 @@ const routes = [
   },
   {
     path: '/dog-settings',
-    element: <DogSettingsPage />,
+    element: <DogSettingsPage />
   },
   {
     path: '/user-settings',
-    element: <UserSettingsPage />,
+    element: <UserSettingsPage />
   },
   {
     path: '/user-options',
