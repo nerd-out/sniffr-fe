@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.svg';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [passError, setPassError] = useState(false);
@@ -35,11 +35,11 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           sx={{ height: '100%', width: '100%' }}
         />
         <TextField
-          label="Username"
+          label="Email"
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
-          value={username}
-          onChange={e => setUsername(e.currentTarget.value)}
+          value={email}
+          onChange={e => setEmail(e.currentTarget.value)}
         />
         <TextField
           label="Password"
