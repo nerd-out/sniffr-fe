@@ -35,7 +35,9 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
 }) => {
   return (
     <FormControl fullWidth sx={{ mb: 2 }}>
-      <InputLabel ref={ref} id={name}>{label}</InputLabel>
+      <InputLabel ref={ref} id={name}>
+        {label}
+      </InputLabel>
       <Select labelId={name} id={name} label={name}>
         {options.map((option: DropdownOption) => (
           <MenuItem key={option.value} value={option.value}>

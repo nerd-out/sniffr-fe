@@ -18,7 +18,7 @@ const UserSettingsForm: React.FC = () => {
   const { control, handleSubmit } = useForm<User>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    defaultValues,
+    defaultValues
   });
 
   return (

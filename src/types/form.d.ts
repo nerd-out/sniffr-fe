@@ -1,3 +1,3 @@
 interface MUIReactHookFormControl {
-    control: Control<any>;
+  control: Control<any>;
 }

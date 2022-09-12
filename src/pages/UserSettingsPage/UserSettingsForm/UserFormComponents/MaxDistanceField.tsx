@@ -11,31 +11,33 @@ const distanceOptions = [
   { label: '100 Miles', value: 100 }
 ];
 
-const MaxDistanceField: React.FC<MUIReactHookFormControl> = ({ control }): React.ReactElement => (
-    <Controller
-      control={control}
-      name="max_distance"
-      render={({
-        field: { ref, onChange, onBlur, value, name },
-        fieldState: { isTouched, isDirty, error },
-        formState
-      }) => (
-        <DropdownField
-          error={error}
-          isDirty={isDirty}
-          isTouched={isTouched}
-          formState={formState}
-          label="Max Distance (miles)"
-          name="max_distance"
-          onBlur={onBlur}
-          onChange={onChange}
-          options={distanceOptions}
-          ref={ref}
-          value={value}
-        />
-      )}
-      rules={{ required: true }}
-    />
-  );
+const MaxDistanceField: React.FC<MUIReactHookFormControl> = ({
+  control
+}): React.ReactElement => (
+  <Controller
+    control={control}
+    name="max_distance"
+    render={({
+      field: { ref, onChange, onBlur, value, name },
+      fieldState: { isTouched, isDirty, error },
+      formState
+    }) => (
+      <DropdownField
+        error={error}
+        isDirty={isDirty}
+        isTouched={isTouched}
+        formState={formState}
+        label="Max Distance (miles)"
+        name="max_distance"
+        onBlur={onBlur}
+        onChange={onChange}
+        options={distanceOptions}
+        ref={ref}
+        value={value}
+      />
+    )}
+    rules={{ required: true }}
+  />
+);
 
 export default MaxDistanceField;

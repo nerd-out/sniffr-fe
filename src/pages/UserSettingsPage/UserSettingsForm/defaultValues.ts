@@ -7,7 +7,7 @@ const defaultValues: User = {
   user_pic: '',
   user_bio: '',
   max_distance: 0,
-  zipcode: '',
+  zipcode: ''
 };
 
 export default defaultValues;

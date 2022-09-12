@@ -7,7 +7,7 @@ import {
   RegisterPage,
   Swipes,
   UserOptions,
-  UserSettingsPage,
+  UserSettingsPage
 } from '../pages';
 
 const routes = [
