@@ -1,8 +1,4 @@
-import { LoadingButton } from '@mui/lab';
-import { Alert, Box, Link, TextField, Typography } from '@mui/material';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
 
 import PageNotFoundDog from './PageNotFoundDog.jpg';
 

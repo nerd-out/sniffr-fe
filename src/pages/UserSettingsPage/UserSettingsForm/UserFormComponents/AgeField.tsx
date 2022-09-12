@@ -11,7 +11,6 @@ const AgeField: React.FC<MUIReactHookFormControl> = ({
     render={({
       field: { ref, onChange, onBlur, value, name },
       fieldState: { isTouched, error },
-      formState
     }) => (
       <TextField
         label="Age"

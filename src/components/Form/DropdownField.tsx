@@ -14,10 +14,10 @@ interface DropdownFieldProps {
   onChange: () => void;
   onBlur: () => void;
   value: any;
-  isTouched: boolean;
-  isDirty: boolean;
+  isTouched?: boolean;
+  isDirty?: boolean;
   error?: FieldError;
-  formState: UseFormStateReturn<any>;
+  formState?: UseFormStateReturn<any>;
 }
 
 const DropdownField: React.FC<DropdownFieldProps> = ({
@@ -28,17 +28,13 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   onChange,
   onBlur,
   value,
-  isTouched,
-  isDirty,
-  error,
-  formState
 }) => {
   return (
     <FormControl fullWidth sx={{ mb: 2 }}>
-      <InputLabel ref={ref} id={name}>
+      <InputLabel id={name}>
         {label}
       </InputLabel>
-      <Select labelId={name} id={name} label={name}>
+      <Select labelId={name} id={name} label={name} ref={ref} onChange={onChange} onBlur={onBlur} value={value}>
         {options.map((option: DropdownOption) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}

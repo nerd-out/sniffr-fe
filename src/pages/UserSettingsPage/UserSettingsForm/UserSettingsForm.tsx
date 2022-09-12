@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import defaultValues from './defaultValues';
+import onSubmit from './onSubmit';
 import {
   AgeField,
   EmailField,
@@ -22,7 +23,7 @@ const UserSettingsForm: React.FC = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit(() => console.log('dope'))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <UsernameField control={control} />
       <EmailField control={control} />
       <NameField control={control} />

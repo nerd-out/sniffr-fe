@@ -17,7 +17,7 @@ const GenderField: React.FC<MUIReactHookFormControl> = ({
 }): React.ReactElement => (
   <Controller
     control={control}
-    name="user_bio"
+    name="gender"
     render={({
       field: { ref, onChange, onBlur, value, name },
       fieldState: { isTouched, isDirty, error },
