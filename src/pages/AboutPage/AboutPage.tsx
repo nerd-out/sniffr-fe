@@ -78,12 +78,12 @@ const AboutPage: React.FC = (): React.ReactElement => {
   return (
     <Box
       sx={{
-        m: 2,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '850px'
+        maxWidth: '850px',
+        width: '100%'
       }}
     >
       <Typography variant="h4">The people who brought you sniffr:</Typography>
