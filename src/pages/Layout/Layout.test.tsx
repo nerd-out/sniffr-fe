@@ -10,7 +10,7 @@ describe('Layout', () => {
         <Layout />
       </Router>
     );
-    const sniffr = screen.findByText('sniffr')
+    const sniffr = screen.findByText('sniffr');
     expect(sniffr).toBeTruthy();
   });
 });
