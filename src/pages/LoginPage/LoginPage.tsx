@@ -30,7 +30,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
       localStorage.setItem('token', loginStatus.data.token || '');
       navigate('/user-options');
     }
-  }, [loginStatus]);
+  }, [loginStatus, navigate]);
 
   return (
     <Box

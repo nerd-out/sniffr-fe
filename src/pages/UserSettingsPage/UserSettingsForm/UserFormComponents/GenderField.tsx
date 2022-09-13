@@ -1,6 +1,7 @@
-import { DropdownField } from 'components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
+
+import { DropdownField } from '../../../../components';
 
 const genderOptions = [
   { label: 'Female', value: 'female' },

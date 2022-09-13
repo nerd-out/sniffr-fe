@@ -1,6 +1,7 @@
-import { DropdownField } from 'components/Form';
 import React from 'react';
 import { Controller } from 'react-hook-form';
+
+import { DropdownField } from '../../../../components';
 
 const distanceOptions = [
   { label: '2 Miles', value: 2 },
