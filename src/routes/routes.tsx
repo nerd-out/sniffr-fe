@@ -8,7 +8,7 @@ import {
   RegisterPage,
   Swipes,
   UserOptions
-} from '../pages';
+} from 'sniffr-pages';
 
 const routes = [
   {

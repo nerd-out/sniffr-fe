@@ -5,9 +5,8 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
-
-import { Layout } from '../pages';
-import routes from './routes';
+import { Layout } from 'sniffr-pages';
+import { routes } from 'sniffr-routes';
 
 const AppRoutes: React.FC = (): React.ReactElement => {
   return (

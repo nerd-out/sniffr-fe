@@ -14,7 +14,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src/",
+    "paths": {
+      "sniffr-assets": ["./assets"],
+      "sniffr-components": ["./components"],
+      "sniffr-constants": ["./constants"],
+      "sniffr-pages": ["./pages"],
+      "sniffr-redux": ["./redux"],
+      "sniffr-routes": ["./routes"],
+      "sniffr-types": ["./types"],
+      "sniffr-utils": ["./utils"]
+    }
   },
   "include": ["src"]
 }

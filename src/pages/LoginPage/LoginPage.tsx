@@ -3,9 +3,8 @@ import { Alert, Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-
-import logo from '../../assets/logo/logo.svg';
-import { useLoginMutation } from '../../redux/auth/authApi';
+import { useLoginMutation } from 'redux/auth';
+import logo from 'sniffr-assets/logo/logo.svg';
 
 interface LoginInputs {
   email: string;
@@ -30,7 +29,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
       localStorage.setItem('token', loginStatus.data.token || '');
       navigate('/user-options');
     }
-  }, [loginStatus]);
+  }, [loginStatus, navigate]);
 
   return (
     <Box
