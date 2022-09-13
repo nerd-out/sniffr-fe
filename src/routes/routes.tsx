@@ -7,8 +7,9 @@ import {
   PageNotFound,
   RegisterPage,
   Swipes,
-  UserOptions
-} from '../pages';
+  UserOptions,
+} from '../pages'
+import PrivateRoute from './PrivateRoute';
 
 const routes = [
   {
@@ -32,16 +33,16 @@ const routes = [
     element: <DogProfileSettingsPage />
   },
   {
-    path: '/user-options',
-    element: <UserOptions />
-  },
-  {
     path: '/swipe',
     element: <Swipes />
   },
   {
     path: '/matches',
     element: <Matches />
+  },
+  {
+    path: '/user-options',
+    element: <PrivateRoute element={<UserOptions />} />
   },
   {
     path: '*',

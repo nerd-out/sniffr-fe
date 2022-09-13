@@ -1,6 +1,5 @@
 import { LoadingButton } from '@mui/lab';
 import { Alert, Box, Link, TextField, Typography } from '@mui/material';
-import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -25,13 +24,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
 
   const [login, loginStatus] = useLoginMutation();
 
-  useEffect(() => {
-    if (loginStatus.isSuccess) {
-      localStorage.setItem('token', loginStatus.data.token || '');
-      navigate('/user-options');
-    }
-  }, [loginStatus]);
-
   return (
     <Box
       sx={{
@@ -50,11 +42,15 @@ const LoginPage: React.FC = (): React.ReactElement => {
           sx={{ height: '100%', width: '100%' }}
         />
         <form
-          onSubmit={handleSubmit(values => {
+          onSubmit={handleSubmit((values: LoginInputs) => {
             login({
               email: values.email,
               password: values.password
-            });
+            }).unwrap()
+            .then((response)=> {
+              localStorage.setItem('token', response.token || '');
+              navigate('/user-options');
+              })
           })}
         >
           <Controller
