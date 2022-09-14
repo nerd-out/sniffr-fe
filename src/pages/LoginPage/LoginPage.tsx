@@ -48,7 +48,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
               password: values.password
             }).unwrap()
             .then((response: AuthResponse) => {
-              console.log(response)
               localStorage.setItem('token', response.token || '');
               navigate('/user-options');
               })
