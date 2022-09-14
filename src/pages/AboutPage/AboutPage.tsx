@@ -37,6 +37,15 @@ const badassDevs: BadassDevs[] = [
     line2: '10/10 would code for cash'
   },
   {
+    name: 'Benedict Schurwanz',
+    github: 'https://github.com/benedictSchurwanz',
+    linkedin: 'https://www.linkedin.com/in/benedictschurwanz/',
+    title: 'Code Tinkerer',
+    adjective: 'permanently curious',
+    line1: 'already down the rabbit hole',
+    line2: 'will come back with shiny object'
+  },
+  {
     name: 'Mashima Button',
     github: 'https://github.com/zimashima',
     linkedin: 'https://www.linkedin.com/in/mashimabutton/',
@@ -69,21 +78,29 @@ const AboutPage: React.FC = (): React.ReactElement => {
   return (
     <Box
       sx={{
-        m: 2,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        maxWidth: '850px',
+        width: '100%'
       }}
     >
       <Typography variant="h4">The people who brought you sniffr:</Typography>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          mt: 4,
+          justifyContent: 'center'
+        }}
+      >
         {badassDevs.map(dev => {
           return (
             <Card
               variant="outlined"
               key={dev.name}
-              sx={{ width: '240px', m: 1 }}
+              sx={{ width: '250px', m: 1 }}
             >
               <CardContent>
                 <Typography

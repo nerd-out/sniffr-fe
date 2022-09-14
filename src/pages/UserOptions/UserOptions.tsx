@@ -1,5 +1,5 @@
 import { Box, Paper } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const options = [
   { option: 'Find a Match!', link: '/swipe' },

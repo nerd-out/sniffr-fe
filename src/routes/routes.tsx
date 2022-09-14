@@ -4,11 +4,13 @@ import {
   HomePage,
   LoginPage,
   Matches,
+  PageNotFound,
   RegisterPage,
   Swipes,
   UserOptions,
   UserSettingsPage
 } from '../pages';
+import PrivateRoute from './PrivateRoute';
 
 const routes = [
   {
@@ -36,16 +38,20 @@ const routes = [
     element: <UserSettingsPage />
   },
   {
-    path: '/user-options',
-    element: <UserOptions />
-  },
-  {
     path: '/swipe',
     element: <Swipes />
   },
   {
     path: '/matches',
     element: <Matches />
+  },
+  {
+    path: '/user-options',
+    element: <PrivateRoute element={<UserOptions />} />
+  },
+  {
+    path: '*',
+    element: <PageNotFound />
   }
 ];
 
