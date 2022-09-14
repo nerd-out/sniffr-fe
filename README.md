@@ -23,3 +23,9 @@ The place where good dogs go to find a playmate.
 12. Get a dev to review your PR
 13. Address review suggestions
 14. Merge PR
+
+### General guidelines:
+- If you've been waiting for a review for more than one day, feel free to merge it! That's why we all have admin privileges; we don't want you to be stuck for too long. If you break something, we can always fix it later -- no worries.
+- Feel free to delete your package.lock, delete your node modules, and reinstall every time you make a new feature. We are keeping everything super up-to-date!
+- Assign yourself any issues you want to do. Please respect other people's issues -- do not work on them, change them, or complete them without asking the other person if you can participate first. 
+- Feel free to do as many unassigned issues as you want! There's no upper limit to how much everyone can participate. 
