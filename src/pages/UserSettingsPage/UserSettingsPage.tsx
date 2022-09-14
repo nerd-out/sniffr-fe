@@ -1,4 +1,12 @@
-import { Box, Button, TextField, Select, InputLabel, MenuItem, FormControl } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField
+} from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 
 interface UserInputs {
@@ -26,7 +34,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       user_pic: '',
       user_bio: '',
       max_distance: 0,
-      zipcode: 88901,
+      zipcode: 88901
     }
   });
 
@@ -37,23 +45,24 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <Box
         sx={{
           width: '25%',
           maxWidth: '350px',
-          minWidth: '250px' }}
+          minWidth: '250px'
+        }}
       >
-        <form onSubmit={handleSubmit((values) => console.log(values))}>
+        <form onSubmit={handleSubmit(values => console.log(values))}>
           <Controller
             control={control}
             name="username"
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Username"
@@ -62,7 +71,12 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
                 helperText={
-                  !!error && isTouched && <>This field <em>may</em> be required.</>
+                  !!error &&
+                  isTouched && (
+                    <>
+                      This field <em>may</em> be required.
+                    </>
+                  )
                 }
                 error={!!error && isTouched}
                 onChange={onChange}
@@ -79,7 +93,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Email"
@@ -87,7 +101,8 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
                 helperText={
-                  !!error && isTouched && <>Please enter a valid email format.</>
+                  !!error &&
+                  isTouched && <>Please enter a valid email format.</>
                 }
                 error={!!error && isTouched}
                 onChange={onChange}
@@ -98,7 +113,8 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             )}
             rules={{
               required: true,
-              pattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/ 
+              pattern:
+                /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/
             }}
           />
           <Controller
@@ -107,7 +123,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Full Name"
@@ -132,7 +148,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Age"
@@ -140,7 +156,8 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
                 helperText={
-                  !!error && isTouched && <>Users must be at least 18 years old.</>
+                  !!error &&
+                  isTouched && <>Users must be at least 18 years old.</>
                 }
                 error={!!error && isTouched}
                 onChange={onChange}
@@ -153,17 +170,14 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           />
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel id="gender">Gender</InputLabel>
-            <Select labelId="gender"
-              id="gender"
-              label="Gender"
-            >
-              <MenuItem value={"female"}>Female</MenuItem>
-              <MenuItem value={"male"}>Male</MenuItem>
-              <MenuItem value={"non-binary"}>Non-binary</MenuItem>
-              <MenuItem value={"trans"}>Transgender</MenuItem>
-              <MenuItem value={"intersex"}>Intersex</MenuItem>
-              <MenuItem value={"other"}>Other</MenuItem>
-              <MenuItem value={"not-disclosed"}>Prefer not to say</MenuItem>
+            <Select labelId="gender" id="gender" label="Gender">
+              <MenuItem value={'female'}>Female</MenuItem>
+              <MenuItem value={'male'}>Male</MenuItem>
+              <MenuItem value={'non-binary'}>Non-binary</MenuItem>
+              <MenuItem value={'trans'}>Transgender</MenuItem>
+              <MenuItem value={'intersex'}>Intersex</MenuItem>
+              <MenuItem value={'other'}>Other</MenuItem>
+              <MenuItem value={'not-disclosed'}>Prefer not to say</MenuItem>
             </Select>
           </FormControl>
           <Controller
@@ -172,7 +186,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="User Picture"
@@ -201,7 +215,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="User Bio"
@@ -211,7 +225,8 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
                 helperText={
-                  !!error && isTouched && <>Please say something about yourself.</>
+                  !!error &&
+                  isTouched && <>Please say something about yourself.</>
                 }
                 error={!!error && isTouched}
                 onChange={onChange}
@@ -228,14 +243,14 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             render={({
               field: { ref, onChange, onBlur, value, name },
               fieldState: { isTouched, isDirty, error },
-              formState,
+              formState
             }) => (
               <TextField
                 label="Zip Code"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
                 inputRef={ref}
-                placeholder={"20036"}
+                placeholder={'20036'}
                 helperText={
                   !!error && isTouched && <>Please enter a valid zip code.</>
                 }
@@ -247,13 +262,14 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               />
             )}
             rules={{
-              required: true, 
+              required: true,
               pattern: /^\d{5}(?:[-\s]\d{4})?$/
             }}
           />
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel id="max_distance">Max Distance (miles)</InputLabel>
-            <Select labelId="max_distance"
+            <Select
+              labelId="max_distance"
               id="max_distance"
               label="Max Distance (miles)"
             >
@@ -278,6 +294,6 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       </Box>
     </Box>
   );
-}
+};
 
 export default UserSettingsPage;
