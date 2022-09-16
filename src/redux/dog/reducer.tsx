@@ -3,7 +3,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 const createDog = createAction('CREATE/DOG');
 const updateDog = createAction('UPDATE/DOG');
 const getDog = createAction('GET/DOG');
-// const deleteDog = createAction('DELETE/DOG');
+const deleteDog = createAction('DELETE/DOG');
 
 const initialState: DogState = {
   name: null,
@@ -14,12 +14,11 @@ const initialState: DogState = {
   breedId: null,
   isFixed: false,
   bio: null,
-  pic: null
-  // temperament: null,
-  // size: null,
+  pic: null,
+  temperament: null,
+  size: null
 };
 
-// Reducer
 const dogCru = (state: DogState, action: Action) => {
   state.name = action.payload.dog_name;
   state.sex = action.payload.sex;
@@ -30,14 +29,26 @@ const dogCru = (state: DogState, action: Action) => {
   state.isFixed = action.payload.is_fixed;
   state.bio = action.payload.dog_bio;
   state.pic = action.payload.dog_pic;
-  // state.temperament = action.payload.temperament;
-  // state.size = action.payload.size;
+  state.temperament = action.payload.temperament;
+  state.size = action.payload.size;
 };
 
-// Real reducer
 export const dogReducer = createReducer(initialState, builder => {
   builder
     .addCase(createDog, dogCru)
     .addCase(updateDog, dogCru)
-    .addCase(getDog, dogCru);
+    .addCase(getDog, dogCru)
+    .addCase(deleteDog, (state: DogState, action: Action) => {
+      state.name = '';
+      state.sex = 'female';
+      state.age = null;
+      state.isVaccinated = false;
+      state.breed = null;
+      state.breedId = null;
+      state.isFixed = false;
+      state.bio = null;
+      state.pic = null;
+      state.temperament = null;
+      state.size = null;
+    });
 });

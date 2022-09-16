@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
+import FullWidthCenteredWrapper from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
   const [email, setEmail] = useState('');
@@ -18,15 +19,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
   }, [password, password2]);
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
           component="img"
@@ -82,7 +75,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           </Typography>
         </Link>
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 
