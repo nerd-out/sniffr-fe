@@ -40,7 +40,8 @@
     "format": "npx prettier --write .",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "flow": "flow"
+    "flow": "flow",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -68,7 +69,8 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "flow-bin": "^0.99.0",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "husky": "^8.0.0"
   },
   "react-dotenv": {
     "whitelist": [
