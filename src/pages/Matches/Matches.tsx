@@ -5,6 +5,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import FullWidthCenteredWrapper from '../ReusableComponents';
+
 const dummyMatchRows = [
   { name: 'Fido', owner: 'Bobby', email: 'bobby@gmail.com' },
   { name: 'Archie', owner: 'John', email: 'john@gmail.com' },
@@ -13,15 +15,7 @@ const dummyMatchRows = [
 
 const Matches: React.FC = (): React.ReactElement => {
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '500px', minWidth: '250px' }}>
         <Table sx={{ width: '100%' }} aria-label="simple table">
           <TableHead>
@@ -45,7 +39,7 @@ const Matches: React.FC = (): React.ReactElement => {
           </TableBody>
         </Table>
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

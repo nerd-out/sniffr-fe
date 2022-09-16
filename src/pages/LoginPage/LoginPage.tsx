@@ -5,6 +5,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
+import FullWidthCenteredWrapper from '../ReusableComponents';
 
 interface LoginInputs {
   email: string;
@@ -25,15 +26,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
   const [login, loginStatus] = useLoginMutation();
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
           component="img"
@@ -46,11 +39,12 @@ const LoginPage: React.FC = (): React.ReactElement => {
             login({
               email: values.email,
               password: values.password
-            }).unwrap()
-            .then((response: AuthResponse) => {
-              localStorage.setItem('token', response.token || '');
-              navigate('/user-options');
-              })
+            })
+              .unwrap()
+              .then((response: AuthResponse) => {
+                localStorage.setItem('token', response.token || '');
+                navigate('/user-options');
+              });
           })}
         >
           <Controller
@@ -126,7 +120,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
           </Typography>
         </Link>
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

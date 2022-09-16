@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import frenchie from './frenchie.jpg';
 
-const HomeDogImage = styled(Box)<any>(({ theme }) => ({
+const HomeDogImage = styled(Box)<any>(() => ({
   borderRadius: '61% 39% 41% 59% / 31% 44% 56% 69%',
   height: '120vh',
   position: 'fixed',

@@ -8,7 +8,6 @@ interface DogState {
   isFixed: boolean;
   bio: string | null;
   pic: string | null;
-  // add these in once the tables are made in the BE
-  // temperament: string | null;
-  // size: string;
+  temperament: string | null;
+  size: string | null;
 }
