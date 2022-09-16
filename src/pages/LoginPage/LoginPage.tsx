@@ -46,11 +46,12 @@ const LoginPage: React.FC = (): React.ReactElement => {
             login({
               email: values.email,
               password: values.password
-            }).unwrap()
-            .then((response: AuthResponse) => {
-              localStorage.setItem('token', response.token || '');
-              navigate('/user-options');
-              })
+            })
+              .unwrap()
+              .then((response: AuthResponse) => {
+                localStorage.setItem('token', response.token || '');
+                navigate('/user-options');
+              });
           })}
         >
           <Controller

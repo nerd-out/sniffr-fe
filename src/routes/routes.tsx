@@ -7,8 +7,8 @@ import {
   PageNotFound,
   RegisterPage,
   Swipes,
-  UserOptions,
-} from '../pages'
+  UserOptions
+} from '../pages';
 import PrivateRoute from './PrivateRoute';
 
 const routes = [
