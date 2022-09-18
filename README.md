@@ -27,7 +27,7 @@ The place where good dogs go to find a playmate.
 ### sniffr's main goals: 
 1. Hit MVP
 2. Learn
-3. Have fun
+3. Have fun! 🥳
 
 ### General guidelines:
 
