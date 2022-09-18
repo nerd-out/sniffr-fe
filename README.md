@@ -24,6 +24,11 @@ The place where good dogs go to find a playmate.
 13. Address review suggestions
 14. Merge PR
 
+### sniffr's main goals: 
+1. Hit MVP
+2. Have fun
+3. Learn
+
 ### General guidelines:
 
 - If you've been waiting for a review for more than one day, feel free to merge it! That's why we all have admin privileges; we don't want you to be stuck for too long. If you break something, we can always fix it later -- no worries.
