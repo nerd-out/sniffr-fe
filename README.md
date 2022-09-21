@@ -24,7 +24,8 @@ The place where good dogs go to find a playmate.
 13. Address review suggestions
 14. Merge PR
 
-### sniffr's main goals: 
+### sniffr's main goals:
+
 1. Hit MVP
 2. Learn
 3. Have fun! 🥳
