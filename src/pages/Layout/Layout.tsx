@@ -139,7 +139,7 @@ const Layout = (props: any) => {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main">
         <Toolbar />
         {children}
       </Box>
