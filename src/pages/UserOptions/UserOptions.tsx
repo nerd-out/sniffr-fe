@@ -23,7 +23,7 @@ const UserOptions: React.FC = (): React.ReactElement => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              m: 2,
+              mb: 2,
               p: 1,
               color: '#FFF',
               height: 60,
