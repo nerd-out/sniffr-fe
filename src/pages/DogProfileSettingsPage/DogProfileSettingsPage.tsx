@@ -15,35 +15,46 @@ import { deepPurple } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-const ages = [
-  {
-    value: 'PUPPY',
-    label: 'Puppy: 1-2'
-  },
-  {
-    value: 'ADULT',
-    label: 'Adult: 3-10'
-  },
-  {
-    value: 'SENIOR',
-    label: 'Senior: 10+'
-  }
-];
+// const ages = [
+//   {
+//     value: 'PUPPY',
+//     label: 'Puppy: 1-2'
+//   },
+//   {
+//     value: 'ADULT',
+//     label: 'Adult: 3-10'
+//   },
+//   {
+//     value: 'SENIOR',
+//     label: 'Senior: 10+'
+//   }
+// ];
 
 interface IBreed {
   breed_id: number;
   breed_name: string;
 }
 
+interface ISize {
+  size_id: number;
+  size: string;
+}
+
+interface ITemperament {
+  temperament_id: number;
+  temperament_type: string;
+}
+
 interface IFormInput {
   petSex: string;
   petName: string;
-  petAge: string;
+  petAge: number;
   petBio: string;
   petBreed: string;
   petNeutered: boolean;
   petVaccinations: boolean;
   petSize: string;
+  petTemperament: string;
 }
 
 const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
@@ -51,12 +62,13 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
     defaultValues: {
       petSex: '',
       petName: '',
-      petAge: '',
+      petAge: 0,
       petBreed: '',
       petBio: '',
       petVaccinations: false,
       petNeutered: false,
-      petSize: ''
+      petSize: '',
+      petTemperament: '',
     }
   });
   const onSubmit: SubmitHandler<IFormInput> = data => {
@@ -66,24 +78,42 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const [breeds, setBreeds] = useState([
     { label: 'select breed', value: 'default' }
   ]);
-  // const [ageDropDown, setAgeDropDown] = useState();
-  // const [temperamentDropDown, setTemperamentDropDown] = useState();
+  const [sizes, setSizes] = useState([
+    { label: 'select size', value: 'default' }
+  ]);
+  const [temperaments, setTemperaments] = useState([ { label: 'select size', value: 'default' }]);
 
   useEffect(() => {
     fetch('http://sniffr-be.herokuapp.com/breeds')
       .then(response => response.json())
       .then(data => {
-        const dropDownData = data.map((breed: IBreed) => ({
+        const breedData = data.map((breed: IBreed) => ({
           label: breed.breed_name,
           value: breed.breed_id
         }));
-        setBreeds(dropDownData);
+        setBreeds(breedData);
       });
-    console.log(breeds);
 
-    // fetch("http://sniffr-be.herokuapp.com/")
-    // .then(response => response.json())
-    // .then(data => setBreeds(data))
+    fetch("http://sniffr-be.herokuapp.com/sizes")
+    .then(response => response.json())
+    .then(data => {
+      const sizeData = data.map((size: ISize) => ({
+        label: size.size,
+        value: size.size_id
+      }));
+      setSizes(sizeData);
+    });
+
+    fetch('http://sniffr-be.herokuapp.com/temperaments')
+      .then(response => response.json())
+      .then(data => {
+        const temperamentData = data.map((temperament: ITemperament) => ({
+          label: temperament.temperament_type,
+          value: temperament.temperament_id
+        }));
+        setTemperaments(temperamentData);
+      });
+    
   }, []);
 
   return (
@@ -116,18 +146,32 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 {...field}
                 label="Age"
                 required
+                variant="outlined"
+                sx={{ mb: 2, width: '100%' }}
+              />
+            )}
+            name="petAge"
+            control={control}
+            defaultValue={0}
+          />
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Temperament"
+                required
                 select
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
               >
-                {ages.map(option => (
+                {temperaments.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}
               </TextField>
             )}
-            name="petAge"
+            name="petTemperament"
             control={control}
             defaultValue=""
           />
@@ -149,6 +193,27 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
               </TextField>
             )}
             name="petBreed"
+            control={control}
+            defaultValue=""
+          />
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Size"
+                required
+                select
+                variant="outlined"
+                sx={{ mb: 2, width: '100%' }}
+              >
+                {sizes.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+            name="petSize"
             control={control}
             defaultValue=""
           />
@@ -240,7 +305,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petNeutered"
             control={control}
           />
-          <FormLabel
+          {/* <FormLabel
             id="pet-size-label"
             required
             sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
@@ -269,7 +334,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="petSize"
             control={control}
-          />
+          /> */}
           <Controller
             render={({ field }) => (
               <TextField
