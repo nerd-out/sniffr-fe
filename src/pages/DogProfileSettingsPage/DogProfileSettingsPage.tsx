@@ -12,6 +12,7 @@ import {
   Typography
 } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 const ages = [
@@ -29,20 +30,10 @@ const ages = [
   }
 ];
 
-const breeds = [
-  {
-    value: 'PITBULL',
-    label: 'Pitbull'
-  },
-  {
-    value: 'POODLE',
-    label: 'Poodle'
-  },
-  {
-    value: 'TERRIER',
-    label: 'Terrier'
-  }
-];
+interface IBreed {
+  breed_id: number;
+  breed_name: string;
+}
 
 interface IFormInput {
   petSex: string;
@@ -71,6 +62,27 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
   };
+
+  const [breeds, setBreeds] = useState([{label: 'select breed', value: 'default'}]);
+  // const [ageDropDown, setAgeDropDown] = useState();
+  // const [temperamentDropDown, setTemperamentDropDown] = useState();
+
+  useEffect(() => {
+    fetch("http://sniffr-be.herokuapp.com/breeds")
+    .then(response => response.json())
+    .then(data => {
+      const dropDownData = data.map((breed: IBreed) => ({label: breed.breed_name, value: breed.breed_id}))
+      setBreeds(dropDownData)
+    } ) 
+    console.log(breeds)
+
+    // fetch("http://sniffr-be.herokuapp.com/")
+    // .then(response => response.json())
+    // .then(data => setBreeds(data)) 
+  }, [])
+
+  
+
 
   return (
     <Box sx={{ width: 300 }}>
