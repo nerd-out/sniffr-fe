@@ -63,26 +63,28 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
     console.log(data);
   };
 
-  const [breeds, setBreeds] = useState([{label: 'select breed', value: 'default'}]);
+  const [breeds, setBreeds] = useState([
+    { label: 'select breed', value: 'default' }
+  ]);
   // const [ageDropDown, setAgeDropDown] = useState();
   // const [temperamentDropDown, setTemperamentDropDown] = useState();
 
   useEffect(() => {
-    fetch("http://sniffr-be.herokuapp.com/breeds")
-    .then(response => response.json())
-    .then(data => {
-      const dropDownData = data.map((breed: IBreed) => ({label: breed.breed_name, value: breed.breed_id}))
-      setBreeds(dropDownData)
-    } ) 
-    console.log(breeds)
+    fetch('http://sniffr-be.herokuapp.com/breeds')
+      .then(response => response.json())
+      .then(data => {
+        const dropDownData = data.map((breed: IBreed) => ({
+          label: breed.breed_name,
+          value: breed.breed_id
+        }));
+        setBreeds(dropDownData);
+      });
+    console.log(breeds);
 
     // fetch("http://sniffr-be.herokuapp.com/")
     // .then(response => response.json())
-    // .then(data => setBreeds(data)) 
-  }, [])
-
-  
-
+    // .then(data => setBreeds(data))
+  }, []);
 
   return (
     <Box sx={{ width: 300 }}>
