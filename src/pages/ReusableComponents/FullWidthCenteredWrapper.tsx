@@ -11,11 +11,12 @@ const FullWidthCenteredWrapper: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        mt: 2,
+        mt: 4,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        p: 0
       }}
     >
       {children}

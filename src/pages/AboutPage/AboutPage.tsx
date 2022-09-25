@@ -83,7 +83,8 @@ const AboutPage: React.FC = (): React.ReactElement => {
         justifyContent: 'center',
         alignItems: 'center',
         maxWidth: '850px',
-        width: '100%'
+        width: '100%',
+        mt: 4
       }}
     >
       <Typography variant="h4">The people who brought you sniffr:</Typography>
