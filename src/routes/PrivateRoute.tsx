@@ -7,7 +7,7 @@ interface PrivateRouteProps {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({
   element
 }): React.ReactElement => {
-  if (!localStorage.getItem('token')) {
+  if (!localStorage.getItem('x-access-token')) {
     return <Navigate to={'/'} />;
   }
   return element;

@@ -22,7 +22,7 @@ const Layout = (props: any) => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('x-access-token');
     navigate('/');
   };
 
@@ -41,7 +41,7 @@ const Layout = (props: any) => {
     { label: 'Register', func: () => navigate('/register') }
   ];
 
-  const navItems = !!localStorage.getItem('token')
+  const navItems = !!localStorage.getItem('x-access-token')
     ? loggedInNavItems
     : loggedOutNavItems;
 
