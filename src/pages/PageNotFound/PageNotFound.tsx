@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import FullWidthCenteredWrapper from '../ReusableComponents';
 import PageNotFoundDog from './PageNotFoundDog.jpg';
 
-const LoginPage: React.FC = (): React.ReactElement => {
+const PageNotFound: React.FC = (): React.ReactElement => {
   return (
     <FullWidthCenteredWrapper>
       <Box
@@ -29,4 +29,4 @@ const LoginPage: React.FC = (): React.ReactElement => {
   );
 };
 
-export default LoginPage;
+export default PageNotFound;
