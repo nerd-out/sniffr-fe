@@ -10,7 +10,6 @@ import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
 import {
-  Alert,
   Box,
   CircularProgress,
   List,
@@ -25,6 +24,7 @@ import {
   useGetAvailableSwipesQuery
 } from '../../redux/swipes/swipesApi';
 import FullWidthCenteredWrapper from '../ReusableComponents';
+import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import demoAugie from './demoAugie.png';
 import demoCerberus from './demoCerberus.png';
 import demoMax from './demoMax.png';
@@ -51,9 +51,7 @@ const Swipes: React.FC = (): React.ReactElement => {
       <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
         {useQueryResult.isLoading && <CircularProgress color="secondary" />}
         {useQueryResult.isError && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {useQueryResult.error.data.message}
-          </Alert>
+          <ErrorAlert error={useQueryResult.error.data.message} />
         )}
         {useQueryResult.isSuccess && useQueryResult.data.length && (
           <DogProfile
@@ -208,6 +206,9 @@ const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
             justifyContent: 'space-between'
           }}
         >
+          {error && (
+            <ErrorAlert error={error} />
+          )}
           <LoadingButton
             startIcon={<ClearIcon />}
             variant="contained"
