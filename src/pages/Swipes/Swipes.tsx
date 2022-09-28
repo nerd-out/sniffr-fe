@@ -18,6 +18,7 @@ import {
   ListItemText,
   Typography
 } from '@mui/material';
+import { useState } from 'react';
 
 import {
   useCreateSwipeMutation,
@@ -38,9 +39,11 @@ const demoDogImages = {
 };
 
 const Swipes: React.FC = (): React.ReactElement => {
-  const useQueryResult = useGetAvailableSwipesQuery('swipes', {
+  const [reloadQuery, setReloadQuery] = useState(true);
+  const useQueryResult = useGetAvailableSwipesQuery(reloadQuery, {
     refetchOnMountOrArgChange: true
   });
+
   console.log('useQueryResult', useQueryResult);
 
   return (
@@ -53,7 +56,7 @@ const Swipes: React.FC = (): React.ReactElement => {
           </Alert>
         )}
         {useQueryResult.isSuccess && useQueryResult.data.length && (
-          <DogProfile data={useQueryResult.data} />
+          <DogProfile dogList={useQueryResult.data} setReloadQuery={setReloadQuery} reloadQuery={reloadQuery} />
         )}
         {useQueryResult.isSuccess && !useQueryResult.data.length && (
           <NoMoreMatches />
@@ -63,9 +66,9 @@ const Swipes: React.FC = (): React.ReactElement => {
   );
 };
 
-const DogProfile = ({ data }) => {
-  const dog = data[0];
-
+const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
+  const dog = dogList[0];
+  const [error, setError] = useState(null);
   const [match, matchStatus] = useCreateSwipeMutation();
 
   const handleMatchClick = isInterested => {
@@ -74,10 +77,10 @@ const DogProfile = ({ data }) => {
       is_interested: isInterested
     })
       .then(response => {
-        console.log('response', response);
+        setReloadQuery(!reloadQuery);
       })
       .error(error => {
-        console.log('error', error);
+        setError(error);
       });
   };
 

@@ -20,7 +20,7 @@ export const swipesApi = createApi({
       }
     }),
     getAvailableSwipes: builder.query({
-      query: endpoint => `${endpoint}`
+      query: (bool) => `swipes`
     })
   })
 });
