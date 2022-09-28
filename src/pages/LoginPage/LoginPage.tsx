@@ -45,7 +45,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
                 localStorage.setItem('x-access-token', response.token || '');
                 navigate('/user-options');
               })
-              .catch(error => console.log("login error", error))
+              .catch(error => console.log('login error', error));
           })}
         >
           <Controller

@@ -19,10 +19,10 @@ export const swipesApi = createApi({
         };
       }
     }),
-    getAvailableSwipes: builder.query({
+    getSwipe: builder.query({
       query: bool => `swipes`
     })
   })
 });
 
-export const { useGetAvailableSwipesQuery, useCreateSwipeMutation } = swipesApi;
+export const { useGetSwipeQuery, useCreateSwipeMutation } = swipesApi;
