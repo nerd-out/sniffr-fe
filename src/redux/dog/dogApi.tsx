@@ -3,8 +3,6 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
-
 export const dogApi = createApi({
   reducerPath: 'dog',
   baseQuery: fetchBaseQuery({
@@ -13,7 +11,6 @@ export const dogApi = createApi({
       headers.set('x-access-token', localStorage.getItem('x-access-token'));
       return headers;
     }
-
   }),
   endpoints: builder => ({
     createDog: builder.mutation<DogState, Partial<DogState>>({
@@ -34,4 +31,5 @@ export const dogApi = createApi({
   })
 });
 
-export const { useGetDogByIdQuery, useCreateDogMutation, useGetDogQuery } = dogApi;
+export const { useGetDogByIdQuery, useCreateDogMutation, useGetDogQuery } =
+  dogApi;

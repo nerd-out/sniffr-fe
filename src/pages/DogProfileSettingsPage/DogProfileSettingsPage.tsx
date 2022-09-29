@@ -62,8 +62,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const useQueryResult = useGetDogQuery(reloadQuery, {
     refetchOnMountOrArgChange: true
   });
-  console.log(useQueryResult)
-
+  console.log(useQueryResult);
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
@@ -109,7 +108,6 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
         }));
         setTemperaments(temperamentData);
       });
-
   }, []);
 
   return (
