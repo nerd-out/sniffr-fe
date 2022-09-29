@@ -21,11 +21,11 @@ const RegisterPage: React.FC = (): React.ReactElement => {
   }, [password, password2]);
 
   const [register, registerStatus] = useRegisterMutation();
-  
+
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
-        <Box /* sniffr logo box */
+        <Box
           component="img"
           src={logo}
           alt="logo"
