@@ -49,7 +49,11 @@ const Swipes: React.FC = (): React.ReactElement => {
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
-        {useQueryResult.isLoading && <CircularProgress color="secondary" />}
+        {useQueryResult.isLoading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress color="secondary" />
+          </Box>
+        )}
         {useQueryResult.isError && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
@@ -124,7 +128,7 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             zIndex: 3
           }}
         >
-          A {dog.temperament_type.toLowerCase()} {dog.breed}
+          A {dog.temperament_type.toLowerCase()} {dog.breed_name}
         </Typography>
       </Box>
       <Box
