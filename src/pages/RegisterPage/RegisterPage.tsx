@@ -1,8 +1,10 @@
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
+import { useRegisterMutation } from '../../redux/auth/authApi';
 import FullWidthCenteredWrapper from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
@@ -18,10 +20,12 @@ const RegisterPage: React.FC = (): React.ReactElement => {
     if (password.length >= 8) setLengthError(false);
   }, [password, password2]);
 
+  const [register, registerStatus] = useRegisterMutation();
+  
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
-        <Box
+        <Box /* sniffr logo box */
           component="img"
           src={logo}
           alt="logo"
@@ -60,15 +64,17 @@ const RegisterPage: React.FC = (): React.ReactElement => {
             password !== password2 ? setPassError(true) : setPassError(false)
           }
         />
-        <Button
+        <LoadingButton
           variant="contained"
           disabled={password !== password2}
           fullWidth
           size="large"
           sx={{ mb: 2 }}
+          type="submit"
+          loading={registerStatus.isLoading}
         >
           Register
-        </Button>
+        </LoadingButton>
         <Link component={RouterLink} to="/login">
           <Typography variant="body2">
             Already have an account? Login here!
