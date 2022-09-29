@@ -10,7 +10,6 @@ import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
 import {
-  Alert,
   Box,
   CircularProgress,
   List,
@@ -22,9 +21,10 @@ import { useState } from 'react';
 
 import {
   useCreateSwipeMutation,
-  useGetAvailableSwipesQuery
+  useGetSwipeQuery
 } from '../../redux/swipes/swipesApi';
 import FullWidthCenteredWrapper from '../ReusableComponents';
+import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import demoAugie from './demoAugie.png';
 import demoCerberus from './demoCerberus.png';
 import demoMax from './demoMax.png';
@@ -40,7 +40,7 @@ const demoDogImages = {
 
 const Swipes: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
-  const useQueryResult = useGetAvailableSwipesQuery(reloadQuery, {
+  const useQueryResult = useGetSwipeQuery(reloadQuery, {
     refetchOnMountOrArgChange: true
   });
 
@@ -51,14 +51,16 @@ const Swipes: React.FC = (): React.ReactElement => {
       <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
         {useQueryResult.isLoading && <CircularProgress color="secondary" />}
         {useQueryResult.isError && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {useQueryResult.error.data.message}
-          </Alert>
+          <ErrorAlert error={useQueryResult.error.data.message} />
         )}
-        {useQueryResult.isSuccess && useQueryResult.data.length && (
-          <DogProfile dogList={useQueryResult.data} setReloadQuery={setReloadQuery} reloadQuery={reloadQuery} />
+        {useQueryResult.isSuccess && useQueryResult.data.dog_name.length && (
+          <DogProfile
+            dog={useQueryResult.data}
+            setReloadQuery={setReloadQuery}
+            reloadQuery={reloadQuery}
+          />
         )}
-        {useQueryResult.isSuccess && !useQueryResult.data.length && (
+        {useQueryResult.isSuccess && !useQueryResult.data.dog_name.length && (
           <NoMoreMatches />
         )}
       </Box>
@@ -66,8 +68,8 @@ const Swipes: React.FC = (): React.ReactElement => {
   );
 };
 
-const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
-  const dog = dogList[0];
+const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
+  console.log('dog', dog);
   const [error, setError] = useState(null);
   const [match, matchStatus] = useCreateSwipeMutation();
 
@@ -136,64 +138,31 @@ const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
       >
         <Typography variant="body1" sx={{ pb: 1, mt: 3 }}>
           {dog.dog_bio}
-          Siri loves playing catch in the yard, herding unsuspecting poodles,
-          and drooling on the slobberiest tennis balls. She&apos;s pro at fetch
-          and will always want to be your friend!
         </Typography>
         <Typography variant="body1">
           <List dense={false} sx={{ pl: 0 }}>
-            <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-              <ListItemText
-                primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <BalanceIcon sx={{ mr: 1 }} /> {dog.size}
-                  </Box>
-                }
-              />
-            </ListItem>
-            <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-              <ListItemText
-                primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <CakeIcon sx={{ mr: 1 }} /> {dog.age} years old
-                  </Box>
-                }
-              />
-            </ListItem>
-            <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-              <ListItemText
-                primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    {dog.sex.toLowerCase() === 'female' ? (
-                      <FemaleIcon sx={{ mr: 1 }} />
-                    ) : (
-                      <MaleIcon sx={{ mr: 1 }} />
-                    )}{' '}
-                    {dog.sex}
-                  </Box>
-                }
-              />
-            </ListItem>
-            <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-              <ListItemText
-                primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <ContentCutIcon sx={{ mr: 1 }} />{' '}
-                    {dog.is_fixed ? 'Fixed' : 'Not Fixed'}
-                  </Box>
-                }
-              />
-            </ListItem>
-            <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-              <ListItemText
-                primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <VaccinesIcon sx={{ mr: 1 }} />{' '}
-                    {dog.is_vaccinated ? 'Vaccinated' : 'Not Vaccinated'}
-                  </Box>
-                }
-              />
-            </ListItem>
+            <DogProfileIconListItem>
+              <BalanceIcon sx={{ mr: 1 }} /> {dog.size}
+            </DogProfileIconListItem>
+            <DogProfileIconListItem>
+              <CakeIcon sx={{ mr: 1 }} /> {dog.age} years old
+            </DogProfileIconListItem>
+            <DogProfileIconListItem>
+              {dog.sex.toLowerCase() === 'female' ? (
+                <FemaleIcon sx={{ mr: 1 }} />
+              ) : (
+                <MaleIcon sx={{ mr: 1 }} />
+              )}{' '}
+              {dog.sex}
+            </DogProfileIconListItem>
+            <DogProfileIconListItem>
+              <ContentCutIcon sx={{ mr: 1 }} />{' '}
+              {dog.is_fixed ? 'Fixed' : 'Not Fixed'}
+            </DogProfileIconListItem>
+            <DogProfileIconListItem>
+              <VaccinesIcon sx={{ mr: 1 }} />{' '}
+              {dog.is_vaccinated ? 'Vaccinated' : 'Not Vaccinated'}
+            </DogProfileIconListItem>
           </List>
         </Typography>
         <Box
@@ -204,6 +173,7 @@ const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
             justifyContent: 'space-between'
           }}
         >
+          {error && <ErrorAlert error={error} />}
           <LoadingButton
             startIcon={<ClearIcon />}
             variant="contained"
@@ -231,6 +201,18 @@ const DogProfile = ({ dogList, setReloadQuery, reloadQuery }) => {
         </Box>
       </Box>
     </>
+  );
+};
+
+const DogProfileIconListItem = ({ children }) => {
+  return (
+    <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
+      <ListItemText
+        primary={
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>{children}</Box>
+        }
+      />
+    </ListItem>
   );
 };
 
