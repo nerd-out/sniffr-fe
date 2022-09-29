@@ -42,7 +42,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             })
               .unwrap()
               .then((response: AuthResponse) => {
-                localStorage.setItem('token', response.token || '');
+                localStorage.setItem('x-access-token', response.token || '');
                 navigate('/user-options');
               });
           })}
