@@ -42,7 +42,6 @@ const LoginPage: React.FC = (): React.ReactElement => {
               password: values.password
             })
               .then((response: any) => {
-                console.log("response", response)
                 localStorage.setItem('x-access-token', response.data.token || '');
                 navigate('/user-options');
               })
