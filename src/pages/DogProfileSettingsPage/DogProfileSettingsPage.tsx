@@ -14,21 +14,7 @@ import {
 import { deepPurple } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
-// const ages = [
-//   {
-//     value: 'PUPPY',
-//     label: 'Puppy: 1-2'
-//   },
-//   {
-//     value: 'ADULT',
-//     label: 'Adult: 3-10'
-//   },
-//   {
-//     value: 'SENIOR',
-//     label: 'Senior: 10+'
-//   }
-// ];
+import { useGetDogQuery } from '../../redux/dog/dogApi';
 
 interface IBreed {
   breed_id: number;
@@ -68,9 +54,17 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
       petVaccinations: false,
       petNeutered: false,
       petSize: '',
-      petTemperament: '',
+      petTemperament: ''
     }
   });
+
+  const [reloadQuery, setReloadQuery] = useState(true);
+  const useQueryResult = useGetDogQuery(reloadQuery, {
+    refetchOnMountOrArgChange: true
+  });
+  console.log(useQueryResult)
+
+
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
   };
@@ -81,7 +75,9 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const [sizes, setSizes] = useState([
     { label: 'select size', value: 'default' }
   ]);
-  const [temperaments, setTemperaments] = useState([ { label: 'select size', value: 'default' }]);
+  const [temperaments, setTemperaments] = useState([
+    { label: 'select size', value: 'default' }
+  ]);
 
   useEffect(() => {
     fetch('http://sniffr-be.herokuapp.com/breeds')
@@ -94,15 +90,15 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
         setBreeds(breedData);
       });
 
-    fetch("http://sniffr-be.herokuapp.com/sizes")
-    .then(response => response.json())
-    .then(data => {
-      const sizeData = data.map((size: ISize) => ({
-        label: size.size,
-        value: size.size_id
-      }));
-      setSizes(sizeData);
-    });
+    fetch('http://sniffr-be.herokuapp.com/sizes')
+      .then(response => response.json())
+      .then(data => {
+        const sizeData = data.map((size: ISize) => ({
+          label: size.size,
+          value: size.size_id
+        }));
+        setSizes(sizeData);
+      });
 
     fetch('http://sniffr-be.herokuapp.com/temperaments')
       .then(response => response.json())
@@ -113,12 +109,17 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
         }));
         setTemperaments(temperamentData);
       });
-    
+
   }, []);
 
   return (
     <Box sx={{ width: 300 }}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          console.log(event);
+        }}
+      >
         <Stack spacing={4}>
           <Typography variant="h1" data-testid="dog-settings-header">
             Create Dog
@@ -139,6 +140,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petName"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
           <Controller
             render={({ field }) => (
@@ -153,6 +155,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petAge"
             control={control}
             defaultValue={0}
+            rules={{ required: true }}
           />
           <Controller
             render={({ field }) => (
@@ -174,6 +177,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petTemperament"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
           <Controller
             render={({ field }) => (
@@ -195,6 +199,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petBreed"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
           <Controller
             render={({ field }) => (
@@ -216,6 +221,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petSize"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
 
           <FormLabel
@@ -246,6 +252,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="petSex"
             control={control}
+            rules={{ required: true }}
           />
           <FormLabel
             id="pet-vaccinations-label"
@@ -275,6 +282,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="petVaccinations"
             control={control}
+            rules={{ required: true }}
           />
           <FormLabel
             id="pet-neutered-label"
@@ -304,37 +312,8 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="petNeutered"
             control={control}
+            rules={{ required: true }}
           />
-          {/* <FormLabel
-            id="pet-size-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Size
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup aria-labelledby="pet-size-label" {...field}>
-                <FormControlLabel
-                  value="small"
-                  control={<Radio required />}
-                  label="Small (up to 20 lbs)"
-                />
-                <FormControlLabel
-                  value="medium"
-                  control={<Radio required />}
-                  label="Medium (20 to 50 lbs)"
-                />
-                <FormControlLabel
-                  value="large"
-                  control={<Radio required />}
-                  label="Large (50+ lbs)"
-                />
-              </RadioGroup>
-            )}
-            name="petSize"
-            control={control}
-          /> */}
           <Controller
             render={({ field }) => (
               <TextField
@@ -348,6 +327,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             name="petBio"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
           <Button
             type="submit"
