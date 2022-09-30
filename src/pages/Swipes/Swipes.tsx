@@ -23,7 +23,7 @@ import {
   useCreateSwipeMutation,
   useGetSwipeQuery
 } from '../../redux/swipes/swipesApi';
-import { isObjectEmpty } from '../../utils';
+import { isObjectEmptyNullOrUndefined } from '../../utils';
 import FullWidthCenteredWrapper from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import demoAugie from './demoAugie.png';
@@ -47,8 +47,8 @@ const Swipes: React.FC = (): React.ReactElement => {
 
   console.log('useQueryResult', useQueryResult);
   console.log(
-    'isObjectEmpty(useQueryResult.data)',
-    isObjectEmpty(useQueryResult.data)
+    'isObjectEmptyNullOrUndefined(useQueryResult.data)',
+    isObjectEmptyNullOrUndefined(useQueryResult.data)
   );
 
   return (
@@ -69,9 +69,10 @@ const Swipes: React.FC = (): React.ReactElement => {
             reloadQuery={reloadQuery}
           />
         )}
-        {useQueryResult.isSuccess && isObjectEmpty(useQueryResult.data) && (
-          <NoMoreMatches />
-        )}
+        {useQueryResult.isSuccess &&
+          isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+            <NoMoreMatches />
+          )}
       </Box>
     </FullWidthCenteredWrapper>
   );
