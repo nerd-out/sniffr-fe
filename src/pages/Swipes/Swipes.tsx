@@ -62,13 +62,14 @@ const Swipes: React.FC = (): React.ReactElement => {
         {useQueryResult.isError && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
-        {useQueryResult.isSuccess && useQueryResult.data.dog_name.length && (
-          <DogProfile
-            dog={useQueryResult.data}
-            setReloadQuery={setReloadQuery}
-            reloadQuery={reloadQuery}
-          />
-        )}
+        {useQueryResult.isSuccess &&
+          !isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+            <DogProfile
+              dog={useQueryResult.data}
+              setReloadQuery={setReloadQuery}
+              reloadQuery={reloadQuery}
+            />
+          )}
         {useQueryResult.isSuccess &&
           isObjectEmptyNullOrUndefined(useQueryResult.data) && (
             <NoMoreMatches />
