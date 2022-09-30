@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const swipesApi = createApi({
-  reducerPath: 'swipes',
+       reducerPath: 'swipes',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://sniffr-be.herokuapp.com',
-    prepareHeaders: headers => {
+          prepareHeaders: headers => {
       headers.set('x-access-token', localStorage.getItem('x-access-token'));
       return headers;
     }
@@ -13,7 +13,7 @@ export const swipesApi = createApi({
     createSwipe: builder.mutation({
       query(body) {
         return {
-          url: `swipe`,
+               url: `swipe`,
           method: 'POST',
           body
         };
