@@ -1,4 +1,4 @@
-# Sniffr
+# sniffr
 
 The place where good dogs go to find a playmate.
 
