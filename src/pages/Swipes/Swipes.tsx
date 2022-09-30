@@ -12,6 +12,7 @@ import { LoadingButton } from '@mui/lab';
 import {
   Box,
   CircularProgress,
+  Grow,
   List,
   ListItem,
   ListItemText,
@@ -93,122 +94,124 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
   };
 
   return (
-    <>
-      <Box sx={{ position: 'relative', zIndex: 0 }}>
+    <Grow in={true}>
+      <Box>
+        <Box sx={{ position: 'relative', zIndex: 0 }}>
+          <Box
+            component="img"
+            sx={{
+              width: '100%',
+              borderRadius: '10px',
+              mb: 1,
+              boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)',
+              zIndex: 1
+            }}
+            src={demoDogImages[dog.dog_name]}
+          />
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: '500',
+              textShadow: '1px 1px 4px rgba(255,255,255,1)',
+              position: 'absolute',
+              bottom: '50px',
+              left: '10px',
+              zIndex: 3
+            }}
+          >
+            {dog.dog_name}
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              fontWeight: '500',
+              textShadow: '1px 1px 4px rgba(255,255,255,1)',
+              position: 'absolute',
+              bottom: '27px',
+              left: '10px',
+              zIndex: 3
+            }}
+          >
+            A {dog.temperament_type.toLowerCase()} {dog.breed_name}
+          </Typography>
+        </Box>
         <Box
-          component="img"
           sx={{
-            width: '100%',
             borderRadius: '10px',
-            mb: 1,
-            boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)',
-            zIndex: 1
-          }}
-          src={demoDogImages[dog.dog_name]}
-        />
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: '500',
-            textShadow: '1px 1px 4px rgba(255,255,255,1)',
-            position: 'absolute',
-            bottom: '50px',
-            left: '10px',
-            zIndex: 3
+            mb: 4,
+            p: 2,
+            mt: -4,
+            boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
           }}
         >
-          {dog.dog_name}
-        </Typography>
-        <Typography
-          variant="subtitle2"
-          sx={{
-            fontWeight: '500',
-            textShadow: '1px 1px 4px rgba(255,255,255,1)',
-            position: 'absolute',
-            bottom: '27px',
-            left: '10px',
-            zIndex: 3
-          }}
-        >
-          A {dog.temperament_type.toLowerCase()} {dog.breed_name}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          borderRadius: '10px',
-          mb: 4,
-          p: 2,
-          mt: -4,
-          boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
-        }}
-      >
-        <Typography variant="body1" sx={{ pb: 1, mt: 3 }}>
-          {dog.dog_bio}
-        </Typography>
-        <Typography variant="body1">
-          <List dense={false} sx={{ pl: 0 }}>
-            <DogProfileIconListItem>
-              <BalanceIcon sx={{ mr: 1 }} /> {dog.size}
-            </DogProfileIconListItem>
-            <DogProfileIconListItem>
-              <CakeIcon sx={{ mr: 1 }} /> {dog.age} years old
-            </DogProfileIconListItem>
-            <DogProfileIconListItem>
-              {dog.sex.toLowerCase() === 'female' ? (
-                <FemaleIcon sx={{ mr: 1 }} />
-              ) : (
-                <MaleIcon sx={{ mr: 1 }} />
-              )}{' '}
-              {dog.sex}
-            </DogProfileIconListItem>
-            <DogProfileIconListItem>
-              <ContentCutIcon sx={{ mr: 1 }} />{' '}
-              {dog.is_fixed ? 'Fixed' : 'Not Fixed'}
-            </DogProfileIconListItem>
-            <DogProfileIconListItem>
-              <VaccinesIcon sx={{ mr: 1 }} />{' '}
-              {dog.is_vaccinated ? 'Vaccinated' : 'Not Vaccinated'}
-            </DogProfileIconListItem>
-          </List>
-        </Typography>
-        <Box
-          sx={{
-            width: '100%',
-            mt: 2,
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
-          {error && <ErrorAlert error={error} />}
-          <LoadingButton
-            startIcon={<ClearIcon />}
-            variant="contained"
-            size="large"
-            color="error"
-            onClick={() => handleMatchClick(false)}
-            fullWidth
-            loading={!isMatchButton && matchStatus.isLoading}
-            disabled={matchStatus.isLoading}
-            sx={{ mr: 0.5 }}
+          <Typography variant="body1" sx={{ pb: 1, mt: 3 }}>
+            {dog.dog_bio}
+          </Typography>
+          <Typography variant="body1">
+            <List dense={false} sx={{ pl: 0 }}>
+              <DogProfileIconListItem>
+                <BalanceIcon sx={{ mr: 1 }} /> {dog.size}
+              </DogProfileIconListItem>
+              <DogProfileIconListItem>
+                <CakeIcon sx={{ mr: 1 }} /> {dog.age} years old
+              </DogProfileIconListItem>
+              <DogProfileIconListItem>
+                {dog.sex.toLowerCase() === 'female' ? (
+                  <FemaleIcon sx={{ mr: 1 }} />
+                ) : (
+                  <MaleIcon sx={{ mr: 1 }} />
+                )}{' '}
+                {dog.sex}
+              </DogProfileIconListItem>
+              <DogProfileIconListItem>
+                <ContentCutIcon sx={{ mr: 1 }} />{' '}
+                {dog.is_fixed ? 'Fixed' : 'Not Fixed'}
+              </DogProfileIconListItem>
+              <DogProfileIconListItem>
+                <VaccinesIcon sx={{ mr: 1 }} />{' '}
+                {dog.is_vaccinated ? 'Vaccinated' : 'Not Vaccinated'}
+              </DogProfileIconListItem>
+            </List>
+          </Typography>
+          <Box
+            sx={{
+              width: '100%',
+              mt: 2,
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}
           >
-            Nope
-          </LoadingButton>
-          <LoadingButton
-            startIcon={<CheckIcon />}
-            variant="contained"
-            size="large"
-            color="success"
-            onClick={() => handleMatchClick(true)}
-            fullWidth
-            loading={isMatchButton && matchStatus.isLoading}
-            disabled={matchStatus.isLoading}
-            sx={{ ml: 0.5 }}
-          >
-            Match Me!
-          </LoadingButton>
+            {error && <ErrorAlert error={error} />}
+            <LoadingButton
+              startIcon={<ClearIcon />}
+              variant="contained"
+              size="large"
+              color="error"
+              onClick={() => handleMatchClick(false)}
+              fullWidth
+              loading={!isMatchButton && matchStatus.isLoading}
+              disabled={matchStatus.isLoading}
+              sx={{ mr: 0.5 }}
+            >
+              Nope
+            </LoadingButton>
+            <LoadingButton
+              startIcon={<CheckIcon />}
+              variant="contained"
+              size="large"
+              color="success"
+              onClick={() => handleMatchClick(true)}
+              fullWidth
+              loading={isMatchButton && matchStatus.isLoading}
+              disabled={matchStatus.isLoading}
+              sx={{ ml: 0.5 }}
+            >
+              Match Me!
+            </LoadingButton>
+          </Box>
         </Box>
       </Box>
-    </>
+    </Grow>
   );
 };
 
