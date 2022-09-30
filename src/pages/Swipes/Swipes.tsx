@@ -45,7 +45,6 @@ const Swipes: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
-
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
