@@ -45,11 +45,6 @@ const Swipes: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
-  console.log('useQueryResult', useQueryResult);
-  console.log(
-    'isObjectEmptyNullOrUndefined(useQueryResult.data)',
-    isObjectEmptyNullOrUndefined(useQueryResult.data)
-  );
 
   return (
     <FullWidthCenteredWrapper>
