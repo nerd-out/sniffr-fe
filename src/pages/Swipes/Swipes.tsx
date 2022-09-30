@@ -23,6 +23,7 @@ import {
   useCreateSwipeMutation,
   useGetSwipeQuery
 } from '../../redux/swipes/swipesApi';
+import { isObjectEmpty } from '../../utils';
 import FullWidthCenteredWrapper from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import demoAugie from './demoAugie.png';
@@ -45,6 +46,10 @@ const Swipes: React.FC = (): React.ReactElement => {
   });
 
   console.log('useQueryResult', useQueryResult);
+  console.log(
+    'isObjectEmpty(useQueryResult.data)',
+    isObjectEmpty(useQueryResult.data)
+  );
 
   return (
     <FullWidthCenteredWrapper>
@@ -64,7 +69,7 @@ const Swipes: React.FC = (): React.ReactElement => {
             reloadQuery={reloadQuery}
           />
         )}
-        {useQueryResult.isSuccess && !useQueryResult.data.dog_name.length && (
+        {useQueryResult.isSuccess && isObjectEmpty(useQueryResult.data) && (
           <NoMoreMatches />
         )}
       </Box>
@@ -75,9 +80,11 @@ const Swipes: React.FC = (): React.ReactElement => {
 const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
   console.log('dog', dog);
   const [error, setError] = useState(null);
+  const [isMatchButton, setIsMatchButton] = useState();
   const [match, matchStatus] = useCreateSwipeMutation();
 
   const handleMatchClick = isInterested => {
+    setIsMatchButton(isInterested);
     match({
       swiped_dog_id: dog.dog_id,
       is_interested: isInterested
@@ -185,7 +192,8 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             color="error"
             onClick={() => handleMatchClick(false)}
             fullWidth
-            loading={matchStatus.isLoading}
+            loading={!isMatchButton && matchStatus.isLoading}
+            disabled={matchStatus.isLoading}
             sx={{ mr: 0.5 }}
           >
             Nope
@@ -197,7 +205,8 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             color="success"
             onClick={() => handleMatchClick(true)}
             fullWidth
-            loading={matchStatus.isLoading}
+            loading={isMatchButton && matchStatus.isLoading}
+            disabled={matchStatus.isLoading}
             sx={{ ml: 0.5 }}
           >
             Match Me!
