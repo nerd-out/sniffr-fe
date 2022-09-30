@@ -75,7 +75,6 @@ const Swipes: React.FC = (): React.ReactElement => {
 };
 
 const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
-  console.log('dog', dog);
   const [error, setError] = useState(null);
   const [isMatchButton, setIsMatchButton] = useState();
   const [match, matchStatus] = useCreateSwipeMutation();
