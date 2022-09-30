@@ -23,6 +23,7 @@ import {
   useCreateSwipeMutation,
   useGetSwipeQuery
 } from '../../redux/swipes/swipesApi';
+import { isObjectEmptyNullOrUndefined } from '../../utils';
 import FullWidthCenteredWrapper from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import demoAugie from './demoAugie.png';
@@ -44,7 +45,6 @@ const Swipes: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
-  console.log('useQueryResult', useQueryResult);
 
   return (
     <FullWidthCenteredWrapper>
@@ -57,27 +57,30 @@ const Swipes: React.FC = (): React.ReactElement => {
         {useQueryResult.isError && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
-        {useQueryResult.isSuccess && useQueryResult.data.dog_name.length && (
-          <DogProfile
-            dog={useQueryResult.data}
-            setReloadQuery={setReloadQuery}
-            reloadQuery={reloadQuery}
-          />
-        )}
-        {useQueryResult.isSuccess && !useQueryResult.data.dog_name.length && (
-          <NoMoreMatches />
-        )}
+        {useQueryResult.isSuccess &&
+          !isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+            <DogProfile
+              dog={useQueryResult.data}
+              setReloadQuery={setReloadQuery}
+              reloadQuery={reloadQuery}
+            />
+          )}
+        {useQueryResult.isSuccess &&
+          isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+            <NoMoreMatches />
+          )}
       </Box>
     </FullWidthCenteredWrapper>
   );
 };
 
 const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
-  console.log('dog', dog);
   const [error, setError] = useState(null);
+  const [isMatchButton, setIsMatchButton] = useState();
   const [match, matchStatus] = useCreateSwipeMutation();
 
   const handleMatchClick = isInterested => {
+    setIsMatchButton(isInterested);
     match({
       swiped_dog_id: dog.dog_id,
       is_interested: isInterested
@@ -185,7 +188,8 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             color="error"
             onClick={() => handleMatchClick(false)}
             fullWidth
-            loading={matchStatus.isLoading}
+            loading={!isMatchButton && matchStatus.isLoading}
+            disabled={matchStatus.isLoading}
             sx={{ mr: 0.5 }}
           >
             Nope
@@ -197,7 +201,8 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             color="success"
             onClick={() => handleMatchClick(true)}
             fullWidth
-            loading={matchStatus.isLoading}
+            loading={isMatchButton && matchStatus.isLoading}
+            disabled={matchStatus.isLoading}
             sx={{ ml: 0.5 }}
           >
             Match Me!
