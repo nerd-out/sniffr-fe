@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const dogApi = createApi({
   reducerPath: 'dog',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL_PROD_BE
+    baseUrl: 'https://sniffr-be.herokuapp.com'
   }),
   endpoints: builder => ({
     createDog: builder.mutation<DogState, Partial<DogState>>({
