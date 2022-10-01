@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import NoMoreMatchesDogs from './NoMoreMatchesDogs.jpg';
 
 const NoMoreMatches: React.FC = (): React.ReactElement => {

@@ -9,15 +9,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
-import {
-  Box,
-  CircularProgress,
-  Grow,
-  List,
-  ListItem,
-  ListItemText,
-  Typography
-} from '@mui/material';
+import { Box, CircularProgress, Grow, List, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import {
@@ -25,20 +17,13 @@ import {
   useGetSwipeQuery
 } from '../../redux/swipes/swipesApi';
 import { isObjectEmptyNullOrUndefined } from '../../utils';
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import {
+  FullWidthCenteredWrapper,
+  ProfileIconListItem
+} from '../ReusableComponents';
+import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
-import demoAugie from './demoAugie.png';
-import demoCerberus from './demoCerberus.png';
-import demoMax from './demoMax.png';
-import demoSiri from './demoSiri.png';
 import NoMoreMatches from './NoMoreMatches';
-
-const demoDogImages = {
-  Augie: demoAugie,
-  Max: demoMax,
-  Siri: demoSiri,
-  Cerberus: demoCerberus
-};
 
 const Swipes: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
@@ -106,7 +91,7 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
               boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)',
               zIndex: 1
             }}
-            src={demoDogImages[dog.dog_name]}
+            src={demoDogImageGetter(dog)}
           />
           <Typography
             variant="h1"
@@ -149,28 +134,28 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
           </Typography>
           <Typography variant="body1">
             <List dense={false} sx={{ pl: 0 }}>
-              <DogProfileIconListItem>
+              <ProfileIconListItem>
                 <BalanceIcon sx={{ mr: 1 }} /> {dog.size}
-              </DogProfileIconListItem>
-              <DogProfileIconListItem>
+              </ProfileIconListItem>
+              <ProfileIconListItem>
                 <CakeIcon sx={{ mr: 1 }} /> {dog.age} years old
-              </DogProfileIconListItem>
-              <DogProfileIconListItem>
+              </ProfileIconListItem>
+              <ProfileIconListItem>
                 {dog.sex.toLowerCase() === 'female' ? (
                   <FemaleIcon sx={{ mr: 1 }} />
                 ) : (
                   <MaleIcon sx={{ mr: 1 }} />
                 )}{' '}
                 {dog.sex}
-              </DogProfileIconListItem>
-              <DogProfileIconListItem>
+              </ProfileIconListItem>
+              <ProfileIconListItem>
                 <ContentCutIcon sx={{ mr: 1 }} />{' '}
                 {dog.is_fixed ? 'Fixed' : 'Not Fixed'}
-              </DogProfileIconListItem>
-              <DogProfileIconListItem>
+              </ProfileIconListItem>
+              <ProfileIconListItem>
                 <VaccinesIcon sx={{ mr: 1 }} />{' '}
                 {dog.is_vaccinated ? 'Vaccinated' : 'Not Vaccinated'}
-              </DogProfileIconListItem>
+              </ProfileIconListItem>
             </List>
           </Typography>
           <Box
@@ -212,18 +197,6 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
         </Box>
       </Box>
     </Grow>
-  );
-};
-
-const DogProfileIconListItem = ({ children }) => {
-  return (
-    <ListItem sx={{ pt: 0, pb: 0, pl: 0 }}>
-      <ListItemText
-        primary={
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>{children}</Box>
-        }
-      />
-    </ListItem>
   );
 };
 
