@@ -59,7 +59,8 @@ const Matches: React.FC = (): React.ReactElement => {
           height: '100px',
           m: 1,
           p: 2,
-          boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.3)',
+          // boxShadow: '1px 1px 20px 1px rgba(0,0,0,0.3)',
+          backgroundColor: '#f2f2f2',
           borderRadius: '10px'
         }}
       >
@@ -83,7 +84,7 @@ const Matches: React.FC = (): React.ReactElement => {
           <Box
             sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}
           >
-            <IconButton sx={{ width: '40px', height: '40px' }}>
+            <IconButton sx={{ width: '45px', height: '45px' }}>
               <DeleteOutlineIcon color="error" />
             </IconButton>
           </Box>
