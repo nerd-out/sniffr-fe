@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import PageNotFoundDog from './PageNotFoundDog.jpg';
 
 const PageNotFound: React.FC = (): React.ReactElement => {

@@ -5,7 +5,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 
 interface LoginInputs {
