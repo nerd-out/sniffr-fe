@@ -1,19 +1,17 @@
-import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EmailIcon from '@mui/icons-material/Email';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import PersonIcon from '@mui/icons-material/Person';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import PetsIcon from '@mui/icons-material/Pets';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import { useGetMatchesQuery } from '../../redux/matches/matchesApi';
+import { isListEmptyNullOrUndefined } from '../../utils';
 import {
+  ErrorAlert,
   FullWidthCenteredWrapper,
   ProfileIconListItem
 } from '../ReusableComponents';
+import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 
 const dummyMatches = [
@@ -49,6 +47,8 @@ const Matches: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
+  console.log('useQueryResult', useQueryResult);
+
   const MatchListItem = (props: any) => {
     const { match } = props;
     console.log('match', match);
@@ -59,17 +59,17 @@ const Matches: React.FC = (): React.ReactElement => {
           height: '100px',
           m: 1,
           p: 2,
-          // boxShadow: '1px 1px 20px 1px rgba(0,0,0,0.3)',
           backgroundColor: '#f2f2f2',
           borderRadius: '10px'
         }}
       >
-        <Box sx={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+        <Box sx={{ width: '100%', display: 'flex' }}>
           <Box
             component="img"
             src={demoDogImageGetter(match)}
             sx={{ width: '100px', borderRadius: '10px', mb: 2 }}
           />
+
           <Box sx={{ ml: 2 }}>
             <Typography variant="h2" sx={{ mb: 1 }}>
               {match.dog_name}
@@ -81,13 +81,12 @@ const Matches: React.FC = (): React.ReactElement => {
               <MailOutlineIcon sx={{ mr: 1 }} /> {match.owner_email}
             </ProfileIconListItem>
           </Box>
-          <Box
-            sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}
-          >
-            <IconButton sx={{ width: '45px', height: '45px' }}>
-              <DeleteOutlineIcon color="error" />
-            </IconButton>
-          </Box>
+
+          <Box sx={{ flexGrow: 1 }}></Box>
+
+          <IconButton sx={{ width: '45px', height: '45px' }}>
+            <DeleteOutlineIcon color="error" />
+          </IconButton>
         </Box>
       </Box>
     );
@@ -99,15 +98,20 @@ const Matches: React.FC = (): React.ReactElement => {
         sx={{
           width: '100%',
           minWidth: '300px',
-          maxWidth: '500px',
+          maxWidth: '800px',
           display: 'flex',
           justifyContent: 'center',
           flexWrap: 'wrap'
         }}
       >
-        {dummyMatches.map(match => (
-          <MatchListItem key={match.dog_id} match={match} />
-        ))}
+        <CenteredLoader isLoading={useQueryResult.isLoading} />
+        {useQueryResult.isError && (
+          <ErrorAlert error="Error Finding Matches. Please try again." />
+        )}
+        {!isListEmptyNullOrUndefined(useQueryResult.data) &&
+          useQueryResult.data.map((match: any) => (
+            <MatchListItem key={match.dog_id} match={match} />
+          ))}
       </Box>
     </FullWidthCenteredWrapper>
   );

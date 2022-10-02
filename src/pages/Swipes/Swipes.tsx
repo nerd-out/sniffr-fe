@@ -21,6 +21,7 @@ import {
   FullWidthCenteredWrapper,
   ProfileIconListItem
 } from '../ReusableComponents';
+import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 import NoMoreMatches from './NoMoreMatches';
@@ -31,14 +32,12 @@ const Swipes: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
+  console.log('useQueryResult', useQueryResult);
+
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
-        {useQueryResult.isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress color="secondary" />
-          </Box>
-        )}
+        <CenteredLoader isLoading={useQueryResult.isLoading} />
         {useQueryResult.isError && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
