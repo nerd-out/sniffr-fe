@@ -5,7 +5,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
-import { isObjectEmptyNullOrUndefined } from '../../utils';
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 
@@ -45,18 +44,14 @@ const LoginPage: React.FC = (): React.ReactElement => {
               password: values.password
             })
               .then((response: any) => {
-                console.log('response', response);
-                if (!isObjectEmptyNullOrUndefined(response.error)) {
-                  loginStatus.isError = !!response.error.data;
-                  loginStatus.error = response.error.data;
-                }
+                console.log('login response', response);
                 localStorage.setItem(
                   'x-access-token',
                   response.data.token || ''
                 );
                 navigate('/user-options');
               })
-              .catch(error => console.log('error', error));
+              .catch(error => console.log('login error', error));
           })}
         >
           <Controller

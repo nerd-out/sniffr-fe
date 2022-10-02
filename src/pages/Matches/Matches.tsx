@@ -98,7 +98,7 @@ const Matches: React.FC = (): React.ReactElement => {
         sx={{
           width: '100%',
           minWidth: '300px',
-          maxWidth: '800px',
+          maxWidth: '600px',
           display: 'flex',
           justifyContent: 'center',
           flexWrap: 'wrap'
