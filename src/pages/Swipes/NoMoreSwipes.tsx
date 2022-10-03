@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import NoMoreMatchesDogs from './NoMoreMatchesDogs.jpg';
 
-const NoMoreMatches: React.FC = (): React.ReactElement => {
+const NoMoreSwipes: React.FC = (): React.ReactElement => {
   return (
     <FullWidthCenteredWrapper>
       <Box
@@ -38,4 +38,4 @@ const NoMoreMatches: React.FC = (): React.ReactElement => {
   );
 };
 
-export default NoMoreMatches;
+export default NoMoreSwipes;

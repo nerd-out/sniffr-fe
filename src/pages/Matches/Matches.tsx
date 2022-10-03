@@ -13,33 +13,7 @@ import {
 } from '../ReusableComponents';
 import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
-
-const dummyMatches = [
-  {
-    dog_name: 'Max',
-    owner_name: 'Allie',
-    owner_email: 'allie@gmail.com',
-    dog_id: 1
-  },
-  {
-    dog_name: 'Cerberus',
-    owner_name: 'Jon',
-    owner_email: 'jon@gmail.com',
-    dog_id: 2
-  },
-  {
-    dog_name: 'Siri',
-    owner_name: 'Dan',
-    owner_email: 'dan@gmail.com',
-    dog_id: 3
-  },
-  {
-    dog_name: 'Augie',
-    owner_name: 'Josh',
-    owner_email: 'josh@gmail.com',
-    dog_id: 4
-  }
-];
+import EmptyMatches from './EmptyMatches';
 
 const Matches: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
@@ -112,6 +86,7 @@ const Matches: React.FC = (): React.ReactElement => {
           useQueryResult.data.map((match: any) => (
             <MatchListItem key={match.dog_id} match={match} />
           ))}
+        {isListEmptyNullOrUndefined(useQueryResult.data) && <EmptyMatches />}
       </Box>
     </FullWidthCenteredWrapper>
   );

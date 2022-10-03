@@ -51,7 +51,7 @@ const badassDevs: BadassDevs[] = [
     name: 'Mashima Button',
     github: 'https://github.com/zimashima',
     linkedin: 'https://www.linkedin.com/in/mashimabutton/',
-    title: 'Tiny PR Maker',
+    title: 'Tiny PR Pusher',
     adjective: 'cute as a ^',
     line1: 'code hygienist',
     line2: 'tech debt tackler'
@@ -69,10 +69,10 @@ const badassDevs: BadassDevs[] = [
     name: 'Allie Robinson',
     github: 'https://github.com/allie-rae',
     linkedin: 'https://www.linkedin.com/in/allie-robinson/',
-    title: 'TypeScript Adversary',
-    adjective: 'may bite',
-    line1: 'watch your back,',
-    line2: "this one's spicy!"
+    title: 'Chaos Coordinator',
+    adjective: 'sparkly',
+    line1: 'maddeningly motivated',
+    line2: 'will judge your ESlint config'
   }
 ];
 
