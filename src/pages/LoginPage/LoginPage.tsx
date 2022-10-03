@@ -1,5 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { LoadingButton } from '@mui/lab';
 import { Box, Link, TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -26,7 +29,15 @@ const LoginPage: React.FC = (): React.ReactElement => {
 
   const [login, loginStatus] = useLoginMutation();
 
-  console.log('loginStatus', loginStatus);
+  useEffect(() => {
+    if (loginStatus.isError === true) {
+      return;
+    }
+    if (loginStatus.isSuccess === true) {
+      localStorage.setItem('x-access-token', loginStatus.data.token || '');
+      navigate('/user-options');
+    }
+  }, [loginStatus, navigate]);
 
   return (
     <FullWidthCenteredWrapper>
@@ -42,16 +53,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             login({
               email: values.email,
               password: values.password
-            })
-              .then((response: any) => {
-                console.log('login response', response);
-                localStorage.setItem(
-                  'x-access-token',
-                  response.data.token || ''
-                );
-                navigate('/user-options');
-              })
-              .catch(error => console.log('login error', error));
+            });
           })}
         >
           <Controller
@@ -106,7 +108,9 @@ const LoginPage: React.FC = (): React.ReactElement => {
             rules={{ required: true }}
           />
           {loginStatus.isError && (
-            <ErrorAlert error="Login failed. Please try again." />
+            <ErrorAlert
+              error={`Error ${loginStatus.error?.status}: ${loginStatus.error?.data?.error}`}
+            />
           )}
           <LoadingButton
             variant="contained"
