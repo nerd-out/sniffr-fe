@@ -26,6 +26,8 @@ const LoginPage: React.FC = (): React.ReactElement => {
 
   const [login, loginStatus] = useLoginMutation();
 
+  console.log('loginStatus', loginStatus);
+
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
@@ -42,6 +44,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
               password: values.password
             })
               .then((response: any) => {
+                console.log('login response', response);
                 localStorage.setItem(
                   'x-access-token',
                   response.data.token || ''
