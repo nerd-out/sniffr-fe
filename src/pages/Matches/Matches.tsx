@@ -13,6 +13,7 @@ import {
 } from '../ReusableComponents';
 import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
+import EmptyMatches from './EmptyMatches';
 
 const dummyMatches = [
   {
@@ -112,6 +113,7 @@ const Matches: React.FC = (): React.ReactElement => {
           useQueryResult.data.map((match: any) => (
             <MatchListItem key={match.dog_id} match={match} />
           ))}
+        {isListEmptyNullOrUndefined(useQueryResult.data) && <EmptyMatches />}
       </Box>
     </FullWidthCenteredWrapper>
   );

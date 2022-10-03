@@ -9,7 +9,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
-import { Box, CircularProgress, Grow, List, Typography } from '@mui/material';
+import { Box, Grow, List, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import {
@@ -24,7 +24,7 @@ import {
 import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
-import NoMoreMatches from './NoMoreMatches';
+import NoMoreSwipes from './NoMoreSwipes';
 
 const Swipes: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
@@ -36,7 +36,7 @@ const Swipes: React.FC = (): React.ReactElement => {
 
   return (
     <FullWidthCenteredWrapper>
-      <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
+      <Box sx={{ width: '40%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
         <CenteredLoader isLoading={useQueryResult.isLoading} />
         {useQueryResult.isError && (
           <ErrorAlert error={useQueryResult.error.data.message} />
@@ -50,9 +50,7 @@ const Swipes: React.FC = (): React.ReactElement => {
             />
           )}
         {useQueryResult.isSuccess &&
-          isObjectEmptyNullOrUndefined(useQueryResult.data) && (
-            <NoMoreMatches />
-          )}
+          isObjectEmptyNullOrUndefined(useQueryResult.data) && <NoMoreSwipes />}
       </Box>
     </FullWidthCenteredWrapper>
   );
