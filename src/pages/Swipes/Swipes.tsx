@@ -74,7 +74,6 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
 
   useEffect(() => {
     if (matchStatus.isSuccess) {
-      console.log('matchStatus', matchStatus);
       setReloadQuery(!reloadQuery);
     }
   }, [matchStatus, setReloadQuery, reloadQuery]);
