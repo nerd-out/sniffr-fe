@@ -15,33 +15,6 @@ import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import EmptyMatches from './EmptyMatches';
 
-const dummyMatches = [
-  {
-    dog_name: 'Max',
-    owner_name: 'Allie',
-    owner_email: 'allie@gmail.com',
-    dog_id: 1
-  },
-  {
-    dog_name: 'Cerberus',
-    owner_name: 'Jon',
-    owner_email: 'jon@gmail.com',
-    dog_id: 2
-  },
-  {
-    dog_name: 'Siri',
-    owner_name: 'Dan',
-    owner_email: 'dan@gmail.com',
-    dog_id: 3
-  },
-  {
-    dog_name: 'Augie',
-    owner_name: 'Josh',
-    owner_email: 'josh@gmail.com',
-    dog_id: 4
-  }
-];
-
 const Matches: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
   const useQueryResult = useGetMatchesQuery(reloadQuery, {
