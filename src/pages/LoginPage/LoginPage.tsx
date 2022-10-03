@@ -1,11 +1,12 @@
 import { LoadingButton } from '@mui/lab';
-import { Alert, Box, Link, TextField, Typography } from '@mui/material';
+import { Box, Link, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
+import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 
 interface LoginInputs {
   email: string;
@@ -40,11 +41,14 @@ const LoginPage: React.FC = (): React.ReactElement => {
               email: values.email,
               password: values.password
             })
-              .unwrap()
-              .then((response: AuthResponse) => {
-                localStorage.setItem('x-access-token', response.token || '');
+              .then((response: any) => {
+                localStorage.setItem(
+                  'x-access-token',
+                  response.data.token || ''
+                );
                 navigate('/user-options');
-              });
+              })
+              .catch(error => console.log('login error', error));
           })}
         >
           <Controller
@@ -99,9 +103,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             rules={{ required: true }}
           />
           {loginStatus.isError && (
-            <Alert sx={{ mb: 2 }} severity="error">
-              Login failed. Please try again.
-            </Alert>
+            <ErrorAlert error="Login failed. Please try again." />
           )}
           <LoadingButton
             variant="contained"

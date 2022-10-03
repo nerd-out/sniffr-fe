@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useRegisterMutation } from '../../redux/auth/authApi';
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
   const [email, setEmail] = useState('');
