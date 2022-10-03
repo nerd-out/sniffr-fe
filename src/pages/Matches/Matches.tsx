@@ -21,11 +21,9 @@ const Matches: React.FC = (): React.ReactElement => {
     refetchOnMountOrArgChange: true
   });
 
-  console.log('useQueryResult', useQueryResult);
-
   const MatchListItem = (props: any) => {
     const { match } = props;
-    console.log('match', match);
+
     return (
       <Box
         sx={{
