@@ -76,15 +76,20 @@ const Matches: React.FC = (): React.ReactElement => {
           flexWrap: 'wrap'
         }}
       >
+        {/* if loading */}
         <CenteredLoader isLoading={useQueryResult.isLoading} />
+        {/* if error */}
         {useQueryResult.isError && (
           <ErrorAlert error="Error Finding Matches. Please try again." />
         )}
+        {/* if success + matches */}
         {!isListEmptyNullOrUndefined(useQueryResult.data) &&
           useQueryResult.data.map((match: any) => (
             <MatchListItem key={match.dog_id} match={match} />
           ))}
-        {isListEmptyNullOrUndefined(useQueryResult.data) && <EmptyMatches />}
+        {/* if success + no matches */}
+        {isListEmptyNullOrUndefined(useQueryResult.data) &&
+          !useQueryResult.isLoading && <EmptyMatches />}
       </Box>
     </FullWidthCenteredWrapper>
   );

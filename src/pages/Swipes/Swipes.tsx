@@ -10,7 +10,7 @@ import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
 import { Box, Grow, List, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   useCreateSwipeMutation,
@@ -34,20 +34,26 @@ const Swipes: React.FC = (): React.ReactElement => {
 
   return (
     <FullWidthCenteredWrapper>
-      <Box sx={{ width: '40%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
+      <Box sx={{ width: '40%', minWidth: '350px', maxWidth: '700px', p: 0 }}>
+        {/* if loading  */}
         <CenteredLoader isLoading={useQueryResult.isLoading} />
-        {useQueryResult.isError && (
+        {/* if error  */}
+        {useQueryResult.isError && !useQueryResult.isLoading && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
+        {/* if success + available match  */}
         {useQueryResult.isSuccess &&
-          !isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+          !isObjectEmptyNullOrUndefined(useQueryResult.data) &&
+          !useQueryResult.isLoading && (
             <DogProfile
               dog={useQueryResult.data}
               setReloadQuery={setReloadQuery}
               reloadQuery={reloadQuery}
             />
           )}
+        {/* if success + no available match */}
         {useQueryResult.isSuccess &&
+          !useQueryResult.isLoading &&
           isObjectEmptyNullOrUndefined(useQueryResult.data) && <NoMoreSwipes />}
       </Box>
     </FullWidthCenteredWrapper>
@@ -55,7 +61,6 @@ const Swipes: React.FC = (): React.ReactElement => {
 };
 
 const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
-  const [error, setError] = useState(null);
   const [isMatchButton, setIsMatchButton] = useState();
   const [match, matchStatus] = useCreateSwipeMutation();
 
@@ -64,14 +69,14 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
     match({
       swiped_dog_id: dog.dog_id,
       is_interested: isInterested
-    })
-      .then(response => {
-        setReloadQuery(!reloadQuery);
-      })
-      .error(error => {
-        setError(error);
-      });
+    });
   };
+
+  useEffect(() => {
+    if (matchStatus.isSuccess) {
+      setReloadQuery(!reloadQuery);
+    }
+  }, [matchStatus, setReloadQuery, reloadQuery]);
 
   return (
     <Grow in={true}>
@@ -153,6 +158,14 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
               </ProfileIconListItem>
             </List>
           </Typography>
+          {matchStatus.isError && !matchStatus.isLoading && (
+            <ErrorAlert
+              error={
+                matchStatus.error.data.error ||
+                'Error retrieving match. Please try again.'
+              }
+            />
+          )}
           <Box
             sx={{
               width: '100%',
@@ -161,7 +174,6 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
               justifyContent: 'space-between'
             }}
           >
-            {error && <ErrorAlert error={error} />}
             <LoadingButton
               startIcon={<ClearIcon />}
               variant="contained"
