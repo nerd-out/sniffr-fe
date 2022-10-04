@@ -2,9 +2,10 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import logo from '../../assets/logo/logo.svg';
-import { useRegisterMutation } from '../../redux/auth/authApi';
+import { useRegistrationMutation } from '../../redux/auth/authApi';
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
@@ -20,7 +21,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
     if (password.length >= 8) setLengthError(false);
   }, [password, passwordConfirmation]);
 
-  const [register, registerStatus] = useRegisterMutation();
+  const [registration, registrationStatus] = useRegistrationMutation();
 
   return (
     <FullWidthCenteredWrapper>
@@ -73,7 +74,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           size="large"
           sx={{ mb: 2 }}
           type="submit"
-          loading={registerStatus.isLoading}
+          loading={registrationStatus.isLoading}
         >
           Register
         </LoadingButton>

@@ -15,7 +15,7 @@ export const authApi = createApi({
         };
       }
     }),
-    register: builder.mutation<AuthResponse, any>({
+    registration: builder.mutation<AuthResponse, any>({
       query(body) {
         return {
           url: `register`,
@@ -27,4 +27,4 @@ export const authApi = createApi({
   })
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegistrationMutation } = authApi;
