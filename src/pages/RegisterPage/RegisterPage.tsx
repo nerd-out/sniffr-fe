@@ -10,15 +10,15 @@ import { FullWidthCenteredWrapper } from '../ReusableComponents';
 const RegisterPage: React.FC = (): React.ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [passError, setPassError] = useState(false);
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
   const [lengthError, setLengthError] = useState(false);
 
   useEffect(() => {
-    if (password2.length === 0) setPassError(false);
-    if (password === password2) setPassError(false);
+    if (passwordConfirmation.length === 0) setPasswordError(false);
+    if (password === passwordConfirmation) setPasswordError(false);
     if (password.length >= 8) setLengthError(false);
-  }, [password, password2]);
+  }, [password, passwordConfirmation]);
 
   const [register, registerStatus] = useRegisterMutation();
 
@@ -56,17 +56,19 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           type="password"
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
-          error={passError}
-          helperText={passError && <>Passwords do not match.</>}
-          value={password2}
-          onChange={e => setPassword2(e.currentTarget.value)}
+          error={passwordError}
+          helperText={passwordError && <>Passwords do not match.</>}
+          value={passwordConfirmation}
+          onChange={e => setPasswordConfirmation(e.currentTarget.value)}
           onBlur={() =>
-            password !== password2 ? setPassError(true) : setPassError(false)
+            password !== passwordConfirmation
+              ? setPasswordError(true)
+              : setPasswordError(false)
           }
         />
         <LoadingButton
           variant="contained"
-          disabled={password !== password2}
+          disabled={password !== passwordConfirmation}
           fullWidth
           size="large"
           sx={{ mb: 2 }}
