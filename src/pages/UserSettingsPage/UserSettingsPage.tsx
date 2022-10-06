@@ -5,12 +5,12 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField
+  TextField,
+  Autocomplete,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-
+// import { SingleSelect } from "react-select-material-ui";
 interface UserInputs {
-  username: string;
   email: string;
   name: string;
   age: number;
@@ -26,7 +26,6 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     defaultValues: {
-      username: '',
       email: '',
       name: '',
       age: 0,
@@ -37,6 +36,25 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       zipcode: 88901
     }
   });
+
+  const maxDistanceOptions = [
+    { value: 2,   label: '2 miles'},
+    { value: 5,   label: '5 miles'},
+    { value: 10,  label: '10 miles'},
+    { value: 20,  label: '20 miles'},
+    { value: 50,  label: '50 miles'},
+    { value: 100, label: '100 miles'},
+  ];
+
+  const genderOptions = [
+    { value: 'female', label: 'Female'},
+    { value: 'male', label: 'Male'},
+    { value: 'non-binary', label: 'Non-Binary'},
+    { value: 'trans', label: 'Transgender'},
+    { value: 'intersex', label: 'Intersex'},
+    { value: 'other', label: 'Other'},
+    { value: 'not-disclosed', label: 'Prefer not to say'}
+  ];
 
   return (
     <Box
@@ -57,35 +75,20 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       >
         <form onSubmit={handleSubmit(values => console.log(values))}>
           <Controller
+            name="gender"
             control={control}
-            name="username"
-            render={({
-              field: { ref, onChange, onBlur, value, name },
-              fieldState: { isTouched, isDirty, error },
-              formState
-            }) => (
-              <TextField
-                label="Username"
-                // TODO: Can users change their usernames?
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-                inputRef={ref}
-                helperText={
-                  !!error &&
-                  isTouched && (
-                    <>
-                      This field <em>may</em> be required.
-                    </>
-                  )
-                }
-                error={!!error && isTouched}
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                name={name}
+            render={(stuff) => {
+              console.log(stuff);
+              return (
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={genderOptions}
+                  sx={{ width: 300 }}
+                  renderInput={(params: any) => <TextField {...params} label="Gender" />}
               />
-            )}
-            rules={{ required: true }}
+              );
+            }}
           />
           <Controller
             control={control}
@@ -168,7 +171,15 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true, min: 18 }}
           />
-          <FormControl fullWidth sx={{ mb: 2 }}>
+          {/* <Controller fullWidth sx={{ mb: 2 }}
+            control={control}
+            name="gender"
+            render={
+              ({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error },
+                formState,
+            }) => (
             <InputLabel id="gender">Gender</InputLabel>
             <Select labelId="gender" id="gender" label="Gender">
               <MenuItem value={'female'}>Female</MenuItem>
@@ -178,8 +189,26 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               <MenuItem value={'intersex'}>Intersex</MenuItem>
               <MenuItem value={'other'}>Other</MenuItem>
               <MenuItem value={'not-disclosed'}>Prefer not to say</MenuItem>
-            </Select>
-          </FormControl>
+            </Select>)}
+              error={!!error && isTouched}
+              onChange={onChange}
+              onBlur={onBlur}
+              placeholder="https://example.com/picture.jpg"
+              value={value}
+              name={name}
+            }
+          </Controller> */}
+          {/* <Controller
+              render={SingleSelect}
+              options={[{value: "yes", label: "no"},{value: "no", label: "yes"}]}
+              name="gender"
+              label="React Select material-ui gender"
+              SelectProps={{
+                isClearable: false,
+                isSearchable: true
+              }}
+              control={control}
+            /> */}
           <Controller
             control={control}
             name="user_pic"
