@@ -31,7 +31,7 @@ const NoMoreSwipes: React.FC = (): React.ReactElement => {
           component="img"
           src={NoMoreMatchesDogs}
           alt="page not found"
-          sx={{ height: '100%', width: '100%', borderRadius: '50px', mt: 2 }}
+          sx={{ height: '100%', width: '100%', borderRadius: '10px', mt: 2 }}
         />
       </Box>
     </FullWidthCenteredWrapper>
