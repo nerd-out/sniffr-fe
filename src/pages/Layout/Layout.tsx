@@ -27,7 +27,7 @@ const Layout = (props: any) => {
   };
 
   const loggedInNavItems = [
-    { label: 'Home', func: () => navigate('/user-options') },
+    { label: 'Options', func: () => navigate('/user-options') },
     { label: 'Find a Match!', func: () => navigate('/swipe') },
     { label: 'Matches', func: () => navigate('/matches') },
     { label: 'About', func: () => navigate('/about') },
@@ -139,7 +139,7 @@ const Layout = (props: any) => {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main">
+      <Box component="main" sx={{ width: '100%' }}>
         <Toolbar />
         {children}
       </Box>

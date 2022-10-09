@@ -9,8 +9,8 @@ import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { LoadingButton } from '@mui/lab';
-import { Box, CircularProgress, Grow, List, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Box, Grow, List, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 import {
   useCreateSwipeMutation,
@@ -21,9 +21,10 @@ import {
   FullWidthCenteredWrapper,
   ProfileIconListItem
 } from '../ReusableComponents';
+import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
-import NoMoreMatches from './NoMoreMatches';
+import NoMoreSwipes from './NoMoreSwipes';
 
 const Swipes: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
@@ -33,34 +34,33 @@ const Swipes: React.FC = (): React.ReactElement => {
 
   return (
     <FullWidthCenteredWrapper>
-      <Box sx={{ width: '50%', minWidth: '350px', maxWidth: '950px', p: 0 }}>
-        {useQueryResult.isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress color="secondary" />
-          </Box>
-        )}
-        {useQueryResult.isError && (
+      <Box sx={{ width: '40%', minWidth: '350px', maxWidth: '700px', p: 0 }}>
+        {/* if loading  */}
+        <CenteredLoader isLoading={useQueryResult.isLoading} />
+        {/* if error  */}
+        {useQueryResult.isError && !useQueryResult.isLoading && (
           <ErrorAlert error={useQueryResult.error.data.message} />
         )}
+        {/* if success + available match  */}
         {useQueryResult.isSuccess &&
-          !isObjectEmptyNullOrUndefined(useQueryResult.data) && (
+          !isObjectEmptyNullOrUndefined(useQueryResult.data) &&
+          !useQueryResult.isLoading && (
             <DogProfile
               dog={useQueryResult.data}
               setReloadQuery={setReloadQuery}
               reloadQuery={reloadQuery}
             />
           )}
+        {/* if success + no available match */}
         {useQueryResult.isSuccess &&
-          isObjectEmptyNullOrUndefined(useQueryResult.data) && (
-            <NoMoreMatches />
-          )}
+          !useQueryResult.isLoading &&
+          isObjectEmptyNullOrUndefined(useQueryResult.data) && <NoMoreSwipes />}
       </Box>
     </FullWidthCenteredWrapper>
   );
 };
 
 const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
-  const [error, setError] = useState(null);
   const [isMatchButton, setIsMatchButton] = useState();
   const [match, matchStatus] = useCreateSwipeMutation();
 
@@ -69,14 +69,14 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
     match({
       swiped_dog_id: dog.dog_id,
       is_interested: isInterested
-    })
-      .then(response => {
-        setReloadQuery(!reloadQuery);
-      })
-      .error(error => {
-        setError(error);
-      });
+    });
   };
+
+  useEffect(() => {
+    if (matchStatus.isSuccess) {
+      setReloadQuery(!reloadQuery);
+    }
+  }, [matchStatus, setReloadQuery, reloadQuery]);
 
   return (
     <Grow in={true}>
@@ -158,6 +158,14 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
               </ProfileIconListItem>
             </List>
           </Typography>
+          {matchStatus.isError && !matchStatus.isLoading && (
+            <ErrorAlert
+              error={
+                matchStatus.error.data.error ||
+                'Error retrieving match. Please try again.'
+              }
+            />
+          )}
           <Box
             sx={{
               width: '100%',
@@ -166,7 +174,6 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
               justifyContent: 'space-between'
             }}
           >
-            {error && <ErrorAlert error={error} />}
             <LoadingButton
               startIcon={<ClearIcon />}
               variant="contained"

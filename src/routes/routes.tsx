@@ -30,19 +30,19 @@ const routes = [
   },
   {
     path: '/dog-settings',
-    element: <DogProfileSettingsPage />
+    element: <PrivateRoute route={<DogProfileSettingsPage />} />
   },
   {
     path: '/swipe',
-    element: <Swipes />
+    element: <PrivateRoute route={<Swipes />} />
   },
   {
     path: '/matches',
-    element: <Matches />
+    element: <PrivateRoute route={<Matches />} />
   },
   {
     path: '/user-options',
-    element: <PrivateRoute element={<UserOptions />} />
+    element: <PrivateRoute route={<UserOptions />} />
   },
   {
     path: '*',
