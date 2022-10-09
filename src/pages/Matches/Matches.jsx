@@ -1,12 +1,15 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import { useGetMatchesQuery } from '../../redux/matches/matchesApi';
+import {
+  useDeleteMatchMutation,
+  useGetMatchesQuery
+} from '../../redux/matches/matchesApi';
 import { isListEmptyNullOrUndefined } from '../../utils';
 import {
+  DeleteConfirmationButton,
   ErrorAlert,
   FullWidthCenteredWrapper,
   ProfileIconListItem
@@ -15,20 +18,23 @@ import { CenteredLoader } from '../ReusableComponents/CenteredLoader';
 import { demoDogImageGetter } from '../ReusableComponents/demoDogImageGetter';
 import EmptyMatches from './EmptyMatches';
 
-const Matches: React.FC = (): React.ReactElement => {
+const Matches = () => {
   const [reloadQuery, setReloadQuery] = useState(true);
   const useQueryResult = useGetMatchesQuery(reloadQuery, {
     refetchOnMountOrArgChange: true
   });
+  const [deleteMatch, deleteMatchStatus] = useDeleteMatchMutation();
 
-  const MatchListItem = (props: any) => {
+  console.log('deleteMatchStatus', deleteMatchStatus);
+
+  const MatchListItem = props => {
     const { match } = props;
 
     return (
       <Box
         sx={{
           width: '100%',
-          height: '100px',
+          // height: '100px',
           m: 1,
           p: 2,
           backgroundColor: '#f2f2f2',
@@ -39,9 +45,8 @@ const Matches: React.FC = (): React.ReactElement => {
           <Box
             component="img"
             src={demoDogImageGetter(match)}
-            sx={{ width: '100px', borderRadius: '10px', mb: 2 }}
+            sx={{ width: '100px', borderRadius: '10px' }}
           />
-
           <Box sx={{ ml: 2 }}>
             <Typography variant="h2" sx={{ mb: 1 }}>
               {match.dog_name}
@@ -56,10 +61,20 @@ const Matches: React.FC = (): React.ReactElement => {
 
           <Box sx={{ flexGrow: 1 }}></Box>
 
-          <IconButton sx={{ width: '45px', height: '45px' }}>
-            <DeleteOutlineIcon color="error" />
-          </IconButton>
+          <DeleteConfirmationButton
+            deleteFunc={deleteMatch}
+            deleteId={{ dog_id: match.dog_id }}
+            isDeleting={deleteMatchStatus.isLoading}
+          />
         </Box>
+        {deleteMatchStatus.isError && !deleteMatchStatus.isLoading && (
+          <ErrorAlert
+            error={deleteMatchStatus.error.data.error}
+            marginBottom={0}
+            marginTop={2}
+            isOutlined={true}
+          />
+        )}
       </Box>
     );
   };
@@ -84,7 +99,7 @@ const Matches: React.FC = (): React.ReactElement => {
         )}
         {/* if success + matches */}
         {!isListEmptyNullOrUndefined(useQueryResult.data) &&
-          useQueryResult.data.map((match: any) => (
+          useQueryResult.data.map(match => (
             <MatchListItem key={match.dog_id} match={match} />
           ))}
         {/* if success + no matches */}
