@@ -5,7 +5,7 @@ import { useState } from 'react';
 interface DeleteProps {
   isDeleting: boolean;
   deleteFunc: any;
-  deleteId: any;
+  deleteId: number;
 }
 
 export const DeleteConfirmationButton: React.FC = (props: DeleteProps) => {

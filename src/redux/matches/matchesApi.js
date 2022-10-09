@@ -14,11 +14,10 @@ export const matchesApi = createApi({
       query: bool => `matches`
     }),
     deleteMatch: builder.mutation({
-      query(body) {
+      query(id) {
         return {
-          url: `matches`,
-          method: 'DELETE',
-          body
+          url: `matches/${id}`,
+          method: 'DELETE'
         };
       }
     })

@@ -25,8 +25,6 @@ const Matches = () => {
   });
   const [deleteMatch, deleteMatchStatus] = useDeleteMatchMutation();
 
-  console.log('deleteMatchStatus', deleteMatchStatus);
-
   const MatchListItem = props => {
     const { match } = props;
 
@@ -34,7 +32,6 @@ const Matches = () => {
       <Box
         sx={{
           width: '100%',
-          // height: '100px',
           m: 1,
           p: 2,
           backgroundColor: '#f2f2f2',
@@ -63,7 +60,7 @@ const Matches = () => {
 
           <DeleteConfirmationButton
             deleteFunc={deleteMatch}
-            deleteId={{ dog_id: match.dog_id }}
+            deleteId={match.dog_id}
             isDeleting={deleteMatchStatus.isLoading}
           />
         </Box>
