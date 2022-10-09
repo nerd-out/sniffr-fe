@@ -162,7 +162,7 @@ const DogProfile = ({ dog, setReloadQuery, reloadQuery }) => {
             <ErrorAlert
               error={
                 matchStatus.error.data.error ||
-                'Error retrieving match. Please try again.'
+                'Something went wrong. Please try again.'
               }
             />
           )}
