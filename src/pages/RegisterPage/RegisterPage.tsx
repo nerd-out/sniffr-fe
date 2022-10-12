@@ -1,22 +1,27 @@
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import logo from '../../assets/logo/logo.svg';
+import { useRegistrationMutation } from '../../redux/auth/authApi';
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [passError, setPassError] = useState(false);
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
   const [lengthError, setLengthError] = useState(false);
 
   useEffect(() => {
-    if (password2.length === 0) setPassError(false);
-    if (password === password2) setPassError(false);
+    if (passwordConfirmation.length === 0) setPasswordError(false);
+    if (password === passwordConfirmation) setPasswordError(false);
     if (password.length >= 8) setLengthError(false);
-  }, [password, password2]);
+  }, [password, passwordConfirmation]);
+
+  const [registration, registrationStatus] = useRegistrationMutation();
 
   return (
     <FullWidthCenteredWrapper>
@@ -52,23 +57,27 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           type="password"
           variant="outlined"
           sx={{ mb: 2, width: '100%' }}
-          error={passError}
-          helperText={passError && <>Passwords do not match.</>}
-          value={password2}
-          onChange={e => setPassword2(e.currentTarget.value)}
+          error={passwordError}
+          helperText={passwordError && <>Passwords do not match.</>}
+          value={passwordConfirmation}
+          onChange={e => setPasswordConfirmation(e.currentTarget.value)}
           onBlur={() =>
-            password !== password2 ? setPassError(true) : setPassError(false)
+            password !== passwordConfirmation
+              ? setPasswordError(true)
+              : setPasswordError(false)
           }
         />
-        <Button
+        <LoadingButton
           variant="contained"
-          disabled={password !== password2}
+          disabled={password !== passwordConfirmation}
           fullWidth
           size="large"
           sx={{ mb: 2 }}
+          type="submit"
+          loading={registrationStatus.isLoading}
         >
           Register
-        </Button>
+        </LoadingButton>
         <Link component={RouterLink} to="/login">
           <Typography variant="body2">
             Already have an account? Login here!
