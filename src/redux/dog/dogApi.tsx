@@ -6,7 +6,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const dogApi = createApi({
   reducerPath: 'dog',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL_PROD_BE,
+    baseUrl: 'https://sniffr-be.herokuapp.com',
     prepareHeaders: headers => {
       headers.set('x-access-token', localStorage.getItem('x-access-token'));
       return headers;

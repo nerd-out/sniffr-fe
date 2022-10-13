@@ -14,6 +14,7 @@ import {
 import { deepPurple } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
 import { useGetDogQuery } from '../../redux/dog/dogApi';
 
 interface IBreed {
@@ -43,26 +44,31 @@ interface IFormInput {
   petTemperament: string;
 }
 
-const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
-      petSex: '',
-      petName: '',
-      petAge: 0,
-      petBreed: '',
-      petBio: '',
-      petVaccinations: false,
-      petNeutered: false,
-      petSize: '',
-      petTemperament: ''
-    }
-  });
 
+//?.data[0]?.sex
+
+
+const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const [reloadQuery, setReloadQuery] = useState(true);
   const useQueryResult = useGetDogQuery(reloadQuery, {
     refetchOnMountOrArgChange: true
   });
   console.log(useQueryResult);
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      age: useQueryResult.data[0].breed_id || '',
+      breed_id: useQueryResult.data[0].breed_id || 137,
+      dog_bio: useQueryResult.data[0].dog_bio|| '',
+      dog_id: useQueryResult.data[0].dog_id || null,
+      dog_name: useQueryResult.data[0].dog_name || '',
+      dog_pic: useQueryResult.data[0].dog_pic || '',
+      is_fixed: useQueryResult.data[0].is_fixed || false,
+      is_vaccinated: useQueryResult.data[0].is_vaccinated || false,
+      sex: useQueryResult.data[0].sex || 'Male',
+      size_id: useQueryResult.data[0].size_id || 1,
+      temperament_id: useQueryResult.data[0].temperament_id || 1,
+    }
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
@@ -135,7 +141,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
               />
             )}
-            name="petName"
+            name="dog_name"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -150,9 +156,9 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 sx={{ mb: 2, width: '100%' }}
               />
             )}
-            name="petAge"
+            name="age"
             control={control}
-            defaultValue={0}
+            defaultValue=""
             rules={{ required: true }}
           />
           <Controller
@@ -172,7 +178,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 ))}
               </TextField>
             )}
-            name="petTemperament"
+            name="temperament_id"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -194,7 +200,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 ))}
               </TextField>
             )}
-            name="petBreed"
+            name="breed_id"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -216,7 +222,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 ))}
               </TextField>
             )}
-            name="petSize"
+            name="size_id"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -248,7 +254,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 />
               </RadioGroup>
             )}
-            name="petSex"
+            name="sex"
             control={control}
             rules={{ required: true }}
           />
@@ -278,7 +284,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 />
               </RadioGroup>
             )}
-            name="petVaccinations"
+            name="is_vaccinated"
             control={control}
             rules={{ required: true }}
           />
@@ -308,7 +314,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 />
               </RadioGroup>
             )}
-            name="petNeutered"
+            name="is_fixed"
             control={control}
             rules={{ required: true }}
           />
@@ -322,7 +328,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
                 rows={4}
               />
             )}
-            name="petBio"
+            name="dog_bio"
             control={control}
             defaultValue=""
             rules={{ required: true }}
