@@ -12,8 +12,16 @@ export const matchesApi = createApi({
   endpoints: builder => ({
     getMatches: builder.query({
       query: bool => `matches`
+    }),
+    deleteMatch: builder.mutation({
+      query(id) {
+        return {
+          url: `matches/${id}`,
+          method: 'DELETE'
+        };
+      }
     })
   })
 });
 
-export const { useGetMatchesQuery } = matchesApi;
+export const { useGetMatchesQuery, useDeleteMatchMutation } = matchesApi;
