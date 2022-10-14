@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useGetDogQuery } from '../../redux/dog/dogApi';
+
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 interface IBreed {
