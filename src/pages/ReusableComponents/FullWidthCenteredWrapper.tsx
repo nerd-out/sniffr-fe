@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const FullWidthCenteredWrapper: React.FC<Props> = ({
+export const FullWidthCenteredWrapper: React.FC<Props> = ({
   children
 }): React.ReactElement => {
   return (
@@ -23,5 +23,3 @@ const FullWidthCenteredWrapper: React.FC<Props> = ({
     </Box>
   );
 };
-
-export default FullWidthCenteredWrapper;

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import PageNotFoundDog from './PageNotFoundDog.jpg';
 
 const PageNotFound: React.FC = (): React.ReactElement => {
@@ -22,7 +22,7 @@ const PageNotFound: React.FC = (): React.ReactElement => {
           component="img"
           src={PageNotFoundDog}
           alt="page not found"
-          sx={{ height: '100%', width: '100%', borderRadius: '50px', mt: 2 }}
+          sx={{ height: '100%', width: '100%', borderRadius: '10px', mt: 2 }}
         />
       </Box>
     </FullWidthCenteredWrapper>

@@ -9,7 +9,7 @@ import { authApi } from './redux/auth/authApi';
 import { authReducer } from './redux/auth/reducer';
 import { dogApi } from './redux/dog/dogApi';
 import { dogReducer } from './redux/dog/reducer';
-import { swipesReducer } from './redux/swipes/reducer';
+import { matchesApi } from './redux/matches/matchesApi';
 import { swipesApi } from './redux/swipes/swipesApi';
 import theme from './theme';
 
@@ -17,17 +17,18 @@ const store = configureStore({
   reducer: {
     dogReducer,
     authReducer,
-    swipesReducer,
     [dogApi.reducerPath]: dogApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
-    [swipesApi.reducerPath]: swipesApi.reducer
+    [swipesApi.reducerPath]: swipesApi.reducer,
+    [matchesApi.reducerPath]: matchesApi.reducer
   },
   devTools: true,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
       dogApi.middleware,
       authApi.middleware,
-      swipesApi.middleware
+      swipesApi.middleware,
+      matchesApi.middleware
     )
 });
 

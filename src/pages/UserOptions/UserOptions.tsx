@@ -1,7 +1,7 @@
 import { Box, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import FullWidthCenteredWrapper from '../ReusableComponents';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const options = [
   { option: 'Find a Match!', link: '/swipe' },

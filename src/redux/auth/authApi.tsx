@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL_PROD_BE
+    baseUrl: 'https://sniffr-be.herokuapp.com'
   }),
   endpoints: builder => ({
     login: builder.mutation<AuthResponse, any>({
@@ -14,8 +14,17 @@ export const authApi = createApi({
           body
         };
       }
+    }),
+    registration: builder.mutation<AuthResponse, any>({
+      query(body) {
+        return {
+          url: `register`,
+          method: 'POST',
+          body
+        };
+      }
     })
   })
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useRegistrationMutation } = authApi;

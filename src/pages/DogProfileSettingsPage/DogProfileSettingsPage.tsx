@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   FormControlLabel,
@@ -11,7 +10,6 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { deepPurple } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -44,29 +42,23 @@ interface IFormInput {
   petTemperament: string;
 }
 
+const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
+  const { useQueryResult } = props;
+  console.log('useQueryResult', useQueryResult);
 
-//?.data[0]?.sex
-
-
-const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
-  const [reloadQuery, setReloadQuery] = useState(true);
-  const useQueryResult = useGetDogQuery(reloadQuery, {
-    refetchOnMountOrArgChange: true
-  });
-  console.log(useQueryResult);
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      age: useQueryResult.data[0].breed_id || '',
-      breed_id: useQueryResult.data[0].breed_id || 137,
-      dog_bio: useQueryResult.data[0].dog_bio|| '',
-      dog_id: useQueryResult.data[0].dog_id || null,
-      dog_name: useQueryResult.data[0].dog_name || '',
-      dog_pic: useQueryResult.data[0].dog_pic || '',
-      is_fixed: useQueryResult.data[0].is_fixed || false,
-      is_vaccinated: useQueryResult.data[0].is_vaccinated || false,
-      sex: useQueryResult.data[0].sex || 'Male',
-      size_id: useQueryResult.data[0].size_id || 1,
-      temperament_id: useQueryResult.data[0].temperament_id || 1,
+      age: useQueryResult?.data?.age,
+      breed_id: useQueryResult?.data?.breed_id,
+      dog_bio: useQueryResult?.data?.dog_bio,
+      dog_id: useQueryResult?.data?.dog_id,
+      dog_name: useQueryResult?.data?.dog_name,
+      dog_pic: useQueryResult?.data?.dog_pic,
+      is_fixed: useQueryResult?.data?.is_fixed,
+      is_vaccinated: useQueryResult?.data?.is_vaccinated,
+      sex: useQueryResult?.data?.sex,
+      size_id: useQueryResult?.data?.size_id,
+      temperament_id: useQueryResult?.data?.temperament_id
     }
   });
 
@@ -117,7 +109,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   }, []);
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 300, mt: 4 }}>
       <form
         onSubmit={event => {
           event.preventDefault();
@@ -128,9 +120,6 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
           <Typography variant="h1" data-testid="dog-settings-header">
             Create Dog
           </Typography>
-          <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
-            OP
-          </Avatar>
           <Controller
             render={({ field }) => (
               <TextField
@@ -143,7 +132,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="dog_name"
             control={control}
-            defaultValue=""
+            // defaultValue=""
             rules={{ required: true }}
           />
           <Controller
@@ -180,7 +169,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="temperament_id"
             control={control}
-            defaultValue=""
+            // defaultValue=""
             rules={{ required: true }}
           />
           <Controller
@@ -202,7 +191,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="breed_id"
             control={control}
-            defaultValue=""
+            // defaultValue=""
             rules={{ required: true }}
           />
           <Controller
@@ -224,7 +213,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="size_id"
             control={control}
-            defaultValue=""
+            // defaultValue=""
             rules={{ required: true }}
           />
 
@@ -239,16 +228,16 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <RadioGroup
                 aria-labelledby="pet-sex-label"
-                defaultValue="female"
+                // defaultValue="female"
                 {...field}
               >
                 <FormControlLabel
-                  value="female"
+                  value="Female"
                   control={<Radio required />}
                   label="Female"
                 />
                 <FormControlLabel
-                  value="male"
+                  value="Male"
                   control={<Radio required />}
                   label="Male"
                 />
@@ -269,7 +258,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <RadioGroup
                 aria-label="pet-vaccinations-label"
-                defaultValue={false}
+                // defaultValue={false}
                 {...field}
               >
                 <FormControlLabel
@@ -299,7 +288,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             render={({ field }) => (
               <RadioGroup
                 aria-label="pet-neutered-label"
-                defaultValue={false}
+                // defaultValue={false}
                 {...field}
               >
                 <FormControlLabel
@@ -330,7 +319,7 @@ const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
             )}
             name="dog_bio"
             control={control}
-            defaultValue=""
+            // defaultValue=""
             rules={{ required: true }}
           />
           <Button

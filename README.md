@@ -1,4 +1,4 @@
-# Sniffr
+# sniffr
 
 The place where good dogs go to find a playmate.
 
@@ -7,6 +7,10 @@ The place where good dogs go to find a playmate.
 1. `npm install`
 2. `npm run start`
 
+### Backend Routes:
+
+[![Run w/ Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/12180328/2s83tGnWnR)
+
 ### Guidelines for making changes:
 
 1. Assign yourself to a new or existing issue
@@ -14,15 +18,12 @@ The place where good dogs go to find a playmate.
 3. `git pull origin main`
 4. `git branch -b your-issue-name`
 5. Make changes to the codebase
-6. `npm run lint:fix`
-7. `npm run format`
-8. `git add .`
-9. `git commit -m "this message is what I did"`
-10. `git push origin your-issue-name`
-11. Create a PR
-12. Get a dev to review your PR
-13. Address review suggestions
-14. Merge PR
+6. `git commit -a -m "this message is what I did"`
+7. `git push origin your-issue-name`
+8. Create a PR
+9. Get a dev to review your PR
+10. Address review suggestions
+11. Merge PR
 
 ### sniffr's main goals:
 
