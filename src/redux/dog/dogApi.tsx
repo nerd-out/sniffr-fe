@@ -22,7 +22,7 @@ export const dogApi = createApi({
         };
       }
     }),
-    getDog: builder.query<DogState, boolean>({
+    getDog: builder.query<Any, boolean>({
       query: (arg: boolean) => `dogs/user`
     }),
     getDogById: builder.query<DogState, number>({

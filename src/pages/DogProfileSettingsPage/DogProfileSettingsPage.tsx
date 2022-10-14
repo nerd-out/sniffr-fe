@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import {
   Box,
   Button,
@@ -12,8 +14,8 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
 import { useGetDogQuery } from '../../redux/dog/dogApi';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
 interface IBreed {
   breed_id: number;
@@ -28,18 +30,6 @@ interface ISize {
 interface ITemperament {
   temperament_id: number;
   temperament_type: string;
-}
-
-interface IFormInput {
-  petSex: string;
-  petName: string;
-  petAge: number;
-  petBio: string;
-  petBreed: string;
-  petNeutered: boolean;
-  petVaccinations: boolean;
-  petSize: string;
-  petTemperament: string;
 }
 
 const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
@@ -109,232 +99,216 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
   }, []);
 
   return (
-    <Box sx={{ width: 300, mt: 4 }}>
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          console.log(event);
-        }}
-      >
-        <Stack spacing={4}>
-          <Typography variant="h1" data-testid="dog-settings-header">
-            Create Dog
-          </Typography>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Name"
-                required
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              />
-            )}
-            name="dog_name"
-            control={control}
-            // defaultValue=""
-            rules={{ required: true }}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Age"
-                required
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              />
-            )}
-            name="age"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Temperament"
-                required
-                select
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              >
-                {temperaments.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="temperament_id"
-            control={control}
-            // defaultValue=""
-            rules={{ required: true }}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Breed"
-                required
-                select
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              >
-                {breeds.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="breed_id"
-            control={control}
-            // defaultValue=""
-            rules={{ required: true }}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Size"
-                required
-                select
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              >
-                {sizes.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="size_id"
-            control={control}
-            // defaultValue=""
-            rules={{ required: true }}
-          />
+    <FullWidthCenteredWrapper>
+      <Box sx={{ width: 300, mt: 4 }}>
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            console.log(event);
+          }}
+        >
+          <Stack spacing={4}>
+            <Typography variant="h1" data-testid="dog-settings-header">
+              Create Dog
+            </Typography>
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name"
+                  required
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                />
+              )}
+              name="dog_name"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Age"
+                  required
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                />
+              )}
+              name="age"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Temperament"
+                  required
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {temperaments.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+              name="temperament_id"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Breed"
+                  required
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {breeds.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+              name="breed_id"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Size"
+                  required
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {sizes.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+              name="size_id"
+              control={control}
+              rules={{ required: true }}
+            />
 
-          <FormLabel
-            id="pet-sex-label"
-            sx={{ fontWeight: 600, fontSize: 20 }}
-            required
-          >
-            Sex
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-labelledby="pet-sex-label"
-                // defaultValue="female"
-                {...field}
-              >
-                <FormControlLabel
-                  value="Female"
-                  control={<Radio required />}
-                  label="Female"
+            <FormLabel
+              id="pet-sex-label"
+              sx={{ fontWeight: 600, fontSize: 20 }}
+              required
+            >
+              Sex
+            </FormLabel>
+            <Controller
+              render={({ field }) => (
+                <RadioGroup aria-labelledby="pet-sex-label" {...field}>
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio required />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio required />}
+                    label="Male"
+                  />
+                </RadioGroup>
+              )}
+              name="sex"
+              control={control}
+              rules={{ required: true }}
+            />
+            <FormLabel
+              id="pet-vaccinations-label"
+              required
+              sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
+            >
+              Up to date on vaccinations?
+            </FormLabel>
+            <Controller
+              render={({ field }) => (
+                <RadioGroup aria-label="pet-vaccinations-label" {...field}>
+                  <FormControlLabel
+                    value={true}
+                    control={<Radio required />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={false}
+                    control={<Radio required />}
+                    label="No"
+                  />
+                </RadioGroup>
+              )}
+              name="is_vaccinated"
+              control={control}
+              rules={{ required: true }}
+            />
+            <FormLabel
+              id="pet-neutered-label"
+              required
+              sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
+            >
+              Is this dog neutered/spayed?
+            </FormLabel>
+            <Controller
+              render={({ field }) => (
+                <RadioGroup aria-label="pet-neutered-label" {...field}>
+                  <FormControlLabel
+                    value={true}
+                    control={<Radio required />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={false}
+                    control={<Radio required />}
+                    label="No"
+                  />
+                </RadioGroup>
+              )}
+              name="is_fixed"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="pet-bio-field"
+                  label="Pet Bio"
+                  multiline
+                  rows={4}
                 />
-                <FormControlLabel
-                  value="Male"
-                  control={<Radio required />}
-                  label="Male"
-                />
-              </RadioGroup>
-            )}
-            name="sex"
-            control={control}
-            rules={{ required: true }}
-          />
-          <FormLabel
-            id="pet-vaccinations-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Up to date on vaccinations?
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-label="pet-vaccinations-label"
-                // defaultValue={false}
-                {...field}
-              >
-                <FormControlLabel
-                  value={true}
-                  control={<Radio required />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio required />}
-                  label="No"
-                />
-              </RadioGroup>
-            )}
-            name="is_vaccinated"
-            control={control}
-            rules={{ required: true }}
-          />
-          <FormLabel
-            id="pet-neutered-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Is this dog neutered/spayed?
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-label="pet-neutered-label"
-                // defaultValue={false}
-                {...field}
-              >
-                <FormControlLabel
-                  value={true}
-                  control={<Radio required />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio required />}
-                  label="No"
-                />
-              </RadioGroup>
-            )}
-            name="is_fixed"
-            control={control}
-            rules={{ required: true }}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                id="pet-bio-field"
-                label="Pet Bio"
-                multiline
-                rows={4}
-              />
-            )}
-            name="dog_bio"
-            control={control}
-            // defaultValue=""
-            rules={{ required: true }}
-          />
-          <Button
-            type="submit"
-            data-testid="submit-button"
-            variant="contained"
-            fullWidth
-            size="large"
-            sx={{ mb: 2 }}
-          >
-            Submit
-          </Button>
-        </Stack>
-      </form>
-    </Box>
+              )}
+              name="dog_bio"
+              control={control}
+              rules={{ required: true }}
+            />
+            <Button
+              type="submit"
+              data-testid="submit-button"
+              variant="contained"
+              fullWidth
+              size="large"
+              sx={{ mb: 2 }}
+            >
+              Submit
+            </Button>
+          </Stack>
+        </form>
+      </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

@@ -1,6 +1,5 @@
 import {
   AboutPage,
-  DogProfileSettingsPage,
   HomePage,
   LoginPage,
   Matches,
@@ -9,6 +8,7 @@ import {
   Swipes,
   UserOptions
 } from '../pages';
+import { DogProfileWrapper } from '../pages/DogProfileSettingsPage/DogProfileWrapper';
 import PrivateRoute from './PrivateRoute';
 
 const routes = [
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: '/dog-settings',
-    element: <PrivateRoute route={<DogProfileSettingsPage />} />
+    element: <PrivateRoute route={<DogProfileWrapper />} />
   },
   {
     path: '/swipe',

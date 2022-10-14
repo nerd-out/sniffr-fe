@@ -1,15 +1,20 @@
 import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 
-export const CenteredLoader = (props: any) => {
-  const { isLoading } = props;
-  const Loader = isLoading ? (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <CircularProgress color="secondary" />
-    </Box>
-  ) : (
-    <></>
-  );
+interface LoaderProps {
+  isLoading: boolean;
+}
 
-  return Loader;
+export const CenteredLoader = (props: LoaderProps) => {
+  const { isLoading } = props;
+
+  return (
+    <>
+      {isLoading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress color="secondary" />
+        </Box>
+      )}
+    </>
+  );
 };
