@@ -5,7 +5,7 @@ const updateDog = createAction('UPDATE/DOG');
 const getDog = createAction('GET/DOG');
 const deleteDog = createAction('DELETE/DOG');
 
-const initialState: DogState = {
+const initialState = {
   name: null,
   sex: 'female',
   age: null,
@@ -19,7 +19,7 @@ const initialState: DogState = {
   size: null
 };
 
-const dogCru = (state: DogState, action: Action) => {
+const dogCru = (state, action) => {
   state.name = action.payload.dog_name;
   state.sex = action.payload.sex;
   state.age = action.payload.age;
@@ -38,7 +38,7 @@ export const dogReducer = createReducer(initialState, builder => {
     .addCase(createDog, dogCru)
     .addCase(updateDog, dogCru)
     .addCase(getDog, dogCru)
-    .addCase(deleteDog, (state: DogState, action: Action) => {
+    .addCase(deleteDog, (state, action) => {
       state.name = '';
       state.sex = 'female';
       state.age = null;
