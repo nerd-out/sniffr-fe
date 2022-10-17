@@ -13,7 +13,7 @@ import {
   Typography
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 
@@ -34,8 +34,6 @@ interface ITemperament {
 
 const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
   const { useQueryResult } = props;
-  console.log('useQueryResult', useQueryResult);
-
   const { control, handleSubmit } = useForm({
     defaultValues: {
       age: useQueryResult?.data?.age,
@@ -51,10 +49,6 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
       temperament_id: useQueryResult?.data?.temperament_id
     }
   });
-
-  const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
-  };
 
   const [breeds, setBreeds] = useState([
     { label: 'select breed', value: 'default' }
@@ -101,50 +95,74 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
   return (
     <FullWidthCenteredWrapper>
       <Box sx={{ width: 300, mt: 4 }}>
-        <form
-          onSubmit={event => {
-            event.preventDefault();
-            console.log(event);
-          }}
-        >
+        <form onSubmit={handleSubmit(values => console.log('values', values))}>
           <Stack spacing={4}>
             <Typography variant="h1" data-testid="dog-settings-header">
               Create Dog
             </Typography>
             <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Name"
-                  required
-                  variant="outlined"
-                  sx={{ mb: 2, width: '100%' }}
-                />
-              )}
               name="dog_name"
               control={control}
               rules={{ required: true }}
-            />
-            <Controller
-              render={({ field }) => (
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error },
+                formState
+              }) => (
                 <TextField
-                  {...field}
-                  label="Age"
-                  required
+                  label="Name"
                   variant="outlined"
                   sx={{ mb: 2, width: '100%' }}
+                  value={value}
+                  onChange={onChange}
+                  inputRef={ref}
+                  name={name}
+                  onBlur={onBlur}
+                  error={!!error}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
                 />
               )}
+            />
+            <Controller
               name="age"
               control={control}
               rules={{ required: true }}
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error },
+                formState
+              }) => (
+                <TextField
+                  label="Age"
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                  value={value}
+                  onChange={onChange}
+                  inputRef={ref}
+                  name={name}
+                  onBlur={onBlur}
+                  error={!!error}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
+                />
+              )}
             />
             <Controller
               render={({ field }) => (
                 <TextField
                   {...field}
                   label="Temperament"
-                  required
                   select
                   variant="outlined"
                   sx={{ mb: 2, width: '100%' }}
@@ -165,7 +183,6 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                 <TextField
                   {...field}
                   label="Breed"
-                  required
                   select
                   variant="outlined"
                   sx={{ mb: 2, width: '100%' }}
@@ -186,7 +203,6 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                 <TextField
                   {...field}
                   label="Size"
-                  required
                   select
                   variant="outlined"
                   sx={{ mb: 2, width: '100%' }}
@@ -203,97 +219,101 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
               rules={{ required: true }}
             />
 
-            <FormLabel
-              id="pet-sex-label"
-              sx={{ fontWeight: 600, fontSize: 20 }}
-              required
-            >
+            <FormLabel id="pet-sex-label">
               Sex
+              <Controller
+                render={({ field }) => (
+                  <RadioGroup aria-labelledby="pet-sex-label" {...field}>
+                    <FormControlLabel
+                      value="Female"
+                      control={<Radio size="small" />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="Male"
+                      control={<Radio size="small" />}
+                      label="Male"
+                    />
+                  </RadioGroup>
+                )}
+                name="sex"
+                control={control}
+                rules={{ required: true }}
+              />
             </FormLabel>
-            <Controller
-              render={({ field }) => (
-                <RadioGroup aria-labelledby="pet-sex-label" {...field}>
-                  <FormControlLabel
-                    value="Female"
-                    control={<Radio required />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="Male"
-                    control={<Radio required />}
-                    label="Male"
-                  />
-                </RadioGroup>
-              )}
-              name="sex"
-              control={control}
-              rules={{ required: true }}
-            />
-            <FormLabel
-              id="pet-vaccinations-label"
-              required
-              sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-            >
+            <FormLabel id="pet-vaccinations-label">
               Up to date on vaccinations?
+              <Controller
+                render={({ field }) => (
+                  <RadioGroup aria-label="pet-vaccinations-label" {...field}>
+                    <FormControlLabel
+                      value={true}
+                      control={<Radio size="small" />}
+                      label="Yes"
+                    />
+                    <FormControlLabel
+                      value={false}
+                      control={<Radio size="small" />}
+                      label="No"
+                    />
+                  </RadioGroup>
+                )}
+                name="is_vaccinated"
+                control={control}
+                rules={{ required: true }}
+              />
             </FormLabel>
-            <Controller
-              render={({ field }) => (
-                <RadioGroup aria-label="pet-vaccinations-label" {...field}>
-                  <FormControlLabel
-                    value={true}
-                    control={<Radio required />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value={false}
-                    control={<Radio required />}
-                    label="No"
-                  />
-                </RadioGroup>
-              )}
-              name="is_vaccinated"
-              control={control}
-              rules={{ required: true }}
-            />
-            <FormLabel
-              id="pet-neutered-label"
-              required
-              sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-            >
+            <FormLabel id="pet-neutered-label">
               Is this dog neutered/spayed?
+              <Controller
+                name="is_fixed"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <RadioGroup aria-label="pet-neutered-label" {...field}>
+                    <FormControlLabel
+                      value={true}
+                      control={<Radio size="small" />}
+                      label="Yes"
+                    />
+                    <FormControlLabel
+                      value={false}
+                      control={<Radio size="small" />}
+                      label="No"
+                    />
+                  </RadioGroup>
+                )}
+              />
             </FormLabel>
             <Controller
-              render={({ field }) => (
-                <RadioGroup aria-label="pet-neutered-label" {...field}>
-                  <FormControlLabel
-                    value={true}
-                    control={<Radio required />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value={false}
-                    control={<Radio required />}
-                    label="No"
-                  />
-                </RadioGroup>
-              )}
-              name="is_fixed"
+              name="dog_bio"
               control={control}
               rules={{ required: true }}
-            />
-            <Controller
-              render={({ field }) => (
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error },
+                formState
+              }) => (
                 <TextField
-                  {...field}
+                  inputRef={ref}
                   id="pet-bio-field"
                   label="Pet Bio"
                   multiline
                   rows={4}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  name={name}
+                  error={!!error}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
                 />
               )}
-              name="dog_bio"
-              control={control}
-              rules={{ required: true }}
             />
             <Button
               type="submit"
