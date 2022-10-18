@@ -16,7 +16,7 @@ export const dogApi = createApi({
     createDog: builder.mutation<DogState, Partial<DogState>>({
       query(body) {
         return {
-          url: `dogs`,
+          url: `dog`,
           method: 'POST',
           body
         };
