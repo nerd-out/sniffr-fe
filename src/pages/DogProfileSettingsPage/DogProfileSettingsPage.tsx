@@ -3,6 +3,7 @@
 import {
   Box,
   Button,
+  FormControl,
   FormControlLabel,
   FormLabel,
   MenuItem,
@@ -15,7 +16,8 @@ import {
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { FullWidthCenteredWrapper } from '../ReusableComponents';
+import { useCreateDogMutation } from '../../redux/dog/dogApi';
+import { ErrorAlert, FullWidthCenteredWrapper } from '../ReusableComponents';
 
 interface IBreed {
   breed_id: number;
@@ -34,6 +36,7 @@ interface ITemperament {
 
 const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
   const { useQueryResult } = props;
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       age: useQueryResult?.data?.age,
@@ -46,7 +49,8 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
       is_vaccinated: useQueryResult?.data?.is_vaccinated,
       sex: useQueryResult?.data?.sex,
       size_id: useQueryResult?.data?.size_id,
-      temperament_id: useQueryResult?.data?.temperament_id
+      temperament_id: useQueryResult?.data?.temperament_id,
+      owner_id: useQueryResult?.data?.owner_id
     }
   });
 
@@ -92,14 +96,35 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
       });
   }, []);
 
+  const [createOrEditDog, createOrEditDogStatus] = useCreateDogMutation();
+
   return (
     <FullWidthCenteredWrapper>
-      <Box sx={{ width: 300, mt: 4 }}>
-        <form onSubmit={handleSubmit(values => console.log('values', values))}>
+      <Box sx={{ width: 300, mb: 4 }}>
+        <Typography
+          variant="h1"
+          data-testid="dog-settings-header"
+          sx={{ mb: 4 }}
+        >
+          Create Dog
+        </Typography>
+        <form
+          onSubmit={handleSubmit(values =>
+            createOrEditDog({
+              dog_name: values.dog_name,
+              dog_id: values.dog_id,
+              breed_id: values.breed_id,
+              owner_id: values.owner_id,
+              age: Number(values.age),
+              sex: values.sex,
+              is_vaccinated: Boolean(values.is_vaccinated),
+              is_fixed: Boolean(values.is_fixed),
+              dog_bio: values.dog_bio,
+              dog_pic: ''
+            })
+          )}
+        >
           <Stack spacing={4}>
-            <Typography variant="h1" data-testid="dog-settings-header">
-              Create Dog
-            </Typography>
             <Controller
               name="dog_name"
               control={control}
@@ -112,7 +137,6 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                 <TextField
                   label="Name"
                   variant="outlined"
-                  sx={{ mb: 2, width: '100%' }}
                   value={value}
                   onChange={onChange}
                   inputRef={ref}
@@ -148,6 +172,9 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                   name={name}
                   onBlur={onBlur}
                   error={!!error}
+                  isTouched={isTouched}
+                  isDirty={isDirty}
+                  {...formState}
                   helperText={
                     !!error && (
                       <Box sx={{ textTransform: 'capitalize' }}>
@@ -159,6 +186,9 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
               )}
             />
             <Controller
+              name="temperament_id"
+              control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <TextField
                   {...field}
@@ -174,11 +204,11 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                   ))}
                 </TextField>
               )}
-              name="temperament_id"
-              control={control}
-              rules={{ required: true }}
             />
             <Controller
+              name="breed_id"
+              control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <TextField
                   {...field}
@@ -194,9 +224,6 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                   ))}
                 </TextField>
               )}
-              name="breed_id"
-              control={control}
-              rules={{ required: true }}
             />
             <Controller
               render={({ field }) => (
@@ -218,12 +245,23 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
               control={control}
               rules={{ required: true }}
             />
-
-            <FormLabel id="pet-sex-label">
-              Sex
-              <Controller
-                render={({ field }) => (
-                  <RadioGroup aria-labelledby="pet-sex-label" {...field}>
+            <Controller
+              name="sex"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState
+              }) => (
+                <FormControl
+                  inputRef={ref}
+                  onChange={onChange}
+                  name={name}
+                  value={value}
+                >
+                  <FormLabel id="pet-sex-label">Sex</FormLabel>
+                  <RadioGroup aria-labelledby="pet-sex-label" value={value}>
                     <FormControlLabel
                       value="Female"
                       control={<Radio size="small" />}
@@ -235,17 +273,32 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                       label="Male"
                     />
                   </RadioGroup>
-                )}
-                name="sex"
-                control={control}
-                rules={{ required: true }}
-              />
-            </FormLabel>
-            <FormLabel id="pet-vaccinations-label">
-              Up to date on vaccinations?
-              <Controller
-                render={({ field }) => (
-                  <RadioGroup aria-label="pet-vaccinations-label" {...field}>
+                </FormControl>
+              )}
+            />
+            <Controller
+              name="is_vaccinated"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState
+              }) => (
+                <FormControl
+                  inputRef={ref}
+                  onChange={onChange}
+                  name={name}
+                  value={value}
+                >
+                  <FormLabel id="pet-vaccinations-label">
+                    Up to date on vaccinations?
+                  </FormLabel>
+                  <RadioGroup
+                    aria-label="pet-vaccinations-label"
+                    value={value}
+                    name={name}
+                  >
                     <FormControlLabel
                       value={true}
                       control={<Radio size="small" />}
@@ -257,20 +310,32 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                       label="No"
                     />
                   </RadioGroup>
-                )}
-                name="is_vaccinated"
-                control={control}
-                rules={{ required: true }}
-              />
-            </FormLabel>
-            <FormLabel id="pet-neutered-label">
-              Is this dog neutered/spayed?
-              <Controller
-                name="is_fixed"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <RadioGroup aria-label="pet-neutered-label" {...field}>
+                </FormControl>
+              )}
+            />
+            <Controller
+              name="is_fixed"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState
+              }) => (
+                <FormControl
+                  inputRef={ref}
+                  onChange={onChange}
+                  name={name}
+                  value={value}
+                >
+                  <FormLabel id="pet-neutered-label">
+                    Is this dog neutered/spayed?
+                  </FormLabel>
+                  <RadioGroup
+                    aria-label="pet-neutered-label"
+                    value={value}
+                    name={name}
+                  >
                     <FormControlLabel
                       value={true}
                       control={<Radio size="small" />}
@@ -282,9 +347,9 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                       label="No"
                     />
                   </RadioGroup>
-                )}
-              />
-            </FormLabel>
+                </FormControl>
+              )}
+            />
             <Controller
               name="dog_bio"
               control={control}
@@ -315,13 +380,24 @@ const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
                 />
               )}
             />
+            {useQueryResult.isError && !useQueryResult.isLoading && (
+              <ErrorAlert error={useQueryResult.data.error} />
+            )}
+            {createOrEditDogStatus.isError &&
+              !createOrEditDogStatus.isLoading && (
+                <ErrorAlert
+                  error={
+                    createOrEditDogStatus.error.error ||
+                    createOrEditDogStatus.error.data.error
+                  }
+                />
+              )}
             <Button
               type="submit"
               data-testid="submit-button"
               variant="contained"
               fullWidth
               size="large"
-              sx={{ mb: 2 }}
             >
               Submit
             </Button>
