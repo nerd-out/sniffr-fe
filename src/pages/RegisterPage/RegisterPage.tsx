@@ -54,6 +54,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
+                helperText="Password must be a minimum of 8 characters long"
                 label="Email"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
@@ -74,6 +75,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
+                helperText="Invalid email"
                 label="Password"
                 type="password"
                 variant="outlined"
@@ -108,6 +110,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
+                helperText="Passwords must match"
                 label="Confirm Password"
                 type="password"
                 variant="outlined"
