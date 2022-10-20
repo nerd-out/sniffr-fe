@@ -74,7 +74,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
         }}
       >
         <form onSubmit={handleSubmit(values => console.log(values))}>
-          <Controller
+          <Controller // FIXME: must send value
             name="gender"
             control={control}
             render={(stuff) => {
@@ -84,7 +84,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                   disablePortal
                   id="combo-box-demo"
                   options={genderOptions}
-                  sx={{ width: 300 }}
+                  sx={{ mb: 2, width: '100%' }}
                   renderInput={(params: any) => <TextField {...params} label="Gender" />}
               />
               );
@@ -295,21 +295,34 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               pattern: /^\d{5}(?:[-\s]\d{4})?$/
             }}
           />
-          <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel id="max_distance">Max Distance (miles)</InputLabel>
-            <Select
-              labelId="max_distance"
-              id="max_distance"
-              label="Max Distance (miles)"
-            >
-              <MenuItem value={2}>2 miles</MenuItem>
-              <MenuItem value={5}>5 miles</MenuItem>
-              <MenuItem value={10}>10 miles</MenuItem>
-              <MenuItem value={20}>20 miles</MenuItem>
-              <MenuItem value={50}>50 miles</MenuItem>
-              <MenuItem value={100}>100 miles</MenuItem>
-            </Select>
-          </FormControl>
+          <Controller
+            control={control}
+            name="max_distance"
+            render={({
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => (
+              <Select
+                labelId="max_distance"
+                id="max_distance"
+                // options={maxDistanceOptions}
+                label="Max Distance (miles)"
+                sx={{ mb: 2, width: '100%' }}
+                helperText={
+                  !!error &&
+                  isTouched && <>How far are you willing to go?</>
+                }
+              >
+                <MenuItem value={2}>2 miles</MenuItem>
+                <MenuItem value={5}>5 miles</MenuItem>
+                <MenuItem value={10}>10 miles</MenuItem>
+                <MenuItem value={20}>20 miles</MenuItem>
+                <MenuItem value={50}>50 miles</MenuItem>
+                <MenuItem value={100}>100 miles</MenuItem>
+              </Select>
+            )}
+          />
           <Button
             variant="contained"
             fullWidth
