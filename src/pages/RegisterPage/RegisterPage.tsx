@@ -54,7 +54,6 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
-                helperText="Password must be a minimum of 8 characters long"
                 label="Email"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
@@ -62,6 +61,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
                 onChange={onChange}
                 inputRef={ref}
                 error={!!error}
+                helperText={error && 'Invalid email'}
               />
             )}
           />
@@ -75,7 +75,6 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
-                helperText="Invalid email"
                 label="Password"
                 type="password"
                 variant="outlined"
@@ -85,12 +84,9 @@ const RegisterPage: React.FC = (): React.ReactElement => {
                 name={name}
                 inputRef={ref}
                 error={!!error}
-                // error={lengthError}
-                // helperText={
-                //   lengthError && (
-                //     <>Passwords must be at least 8 characters long.</>
-                //   )
-                // }
+                helperText={
+                  error && 'Password must be a minimum of 8 characters long'
+                }
                 // onBlur={() => setLengthError(password.length < 8)}
               />
             )}
@@ -110,15 +106,13 @@ const RegisterPage: React.FC = (): React.ReactElement => {
               formState
             }) => (
               <TextField
-                helperText="Passwords must match"
                 label="Confirm Password"
                 type="password"
                 variant="outlined"
                 sx={{ mb: 2, width: '100%' }}
                 value={value}
                 error={!!error}
-                // error={passwordError}
-                // helperText={passwordError && <>Passwords do not match.</>}
+                helperText={error && 'Passwords must match'}
                 // onBlur={() =>
                 //   password !== passwordConfirmation
                 //     ? setPasswordError(true)
