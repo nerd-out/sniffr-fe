@@ -69,14 +69,14 @@ describe('Dog Settings Page', () => {
     expect(breed).toBeInTheDocument();
   });
 
-  it('should have Age drop down', () => {
+  it('should have Size drop down', () => {
     render(
       <Router>
         <DogProfileSettingsPage />
       </Router>
     );
 
-    const age = screen.getByRole('button', { name: 'Age ​' });
+    const age = screen.getByRole('button', { name: 'Size ​' });
     expect(age).toBeInTheDocument();
   });
 });

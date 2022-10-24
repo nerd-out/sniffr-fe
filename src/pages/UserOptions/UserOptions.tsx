@@ -1,6 +1,8 @@
 import { Box, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
+
 const options = [
   { option: 'Find a Match!', link: '/swipe' },
   { option: 'Matches List', link: '/matches' },
@@ -12,15 +14,7 @@ const UserOptions: React.FC = (): React.ReactElement => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         {options.map(o => (
           <Paper
@@ -29,7 +23,7 @@ const UserOptions: React.FC = (): React.ReactElement => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              m: 2,
+              mb: 2,
               p: 1,
               color: '#FFF',
               height: 60,
@@ -46,7 +40,7 @@ const UserOptions: React.FC = (): React.ReactElement => {
           </Paper>
         ))}
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

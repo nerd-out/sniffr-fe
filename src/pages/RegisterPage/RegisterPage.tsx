@@ -1,32 +1,30 @@
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { LoadingButton } from '@mui/lab';
+import { Alert, Box, Link, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
+import { useRegistrationMutation } from '../../redux/auth/authApi';
+import { ErrorAlert, FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [passError, setPassError] = useState(false);
-  const [lengthError, setLengthError] = useState(false);
+  const { control, handleSubmit } = useForm({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    defaultValues: {
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    }
+  });
 
-  useEffect(() => {
-    if (password2.length === 0) setPassError(false);
-    if (password === password2) setPassError(false);
-    if (password.length >= 8) setLengthError(false);
-  }, [password, password2]);
+  const [registration, registrationStatus] = useRegistrationMutation();
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
           component="img"
@@ -34,55 +32,127 @@ const RegisterPage: React.FC = (): React.ReactElement => {
           alt="logo"
           sx={{ height: '100%', width: '100%' }}
         />
-        <TextField
-          label="Email"
-          variant="outlined"
-          sx={{ mb: 2, width: '100%' }}
-          value={email}
-          onChange={e => setEmail(e.currentTarget.value)}
-        />
-        <TextField
-          label="Password"
-          type="password"
-          variant="outlined"
-          sx={{ mb: 2, width: '100%' }}
-          value={password}
-          onChange={e => setPassword(e.currentTarget.value)}
-          error={lengthError}
-          helperText={
-            lengthError && <>Passwords must be at least 8 characters long.</>
-          }
-          onBlur={() => setLengthError(password.length < 8)}
-        />
-        <TextField
-          label="Confirm Password"
-          type="password"
-          variant="outlined"
-          sx={{ mb: 2, width: '100%' }}
-          error={passError}
-          helperText={passError && <>Passwords do not match.</>}
-          value={password2}
-          onChange={e => setPassword2(e.currentTarget.value)}
-          onBlur={() =>
-            password !== password2 ? setPassError(true) : setPassError(false)
-          }
-        />
-        <Button
-          variant="contained"
-          disabled={password !== password2}
-          fullWidth
-          size="large"
-          sx={{ mb: 2 }}
+        <form
+          onSubmit={handleSubmit(({ email, password }) => {
+            registration({
+              email,
+              password
+            });
+          })}
         >
-          Register
-        </Button>
+          <Controller
+            control={control}
+            name="email"
+            rules={{
+              required: true,
+              pattern:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            }}
+            render={({
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => (
+              <TextField
+                label="Email"
+                variant="outlined"
+                sx={{ mb: 2, width: '100%' }}
+                value={value}
+                onChange={onChange}
+                inputRef={ref}
+                error={!!error}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            rules={{ required: true, minLength: 4 }}
+            render={({
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => (
+              <TextField
+                label="Password"
+                type="password"
+                variant="outlined"
+                sx={{ mb: 2, width: '100%' }}
+                value={value}
+                onChange={onChange}
+                name={name}
+                inputRef={ref}
+                error={!!error}
+                // error={lengthError}
+                // helperText={
+                //   lengthError && (
+                //     <>Passwords must be at least 8 characters long.</>
+                //   )
+                // }
+                // onBlur={() => setLengthError(password.length < 8)}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="passwordConfirmation"
+            rules={{
+              required: true,
+              minLength: 4
+              // validate: currentInputValue =>
+              //   currentInputValue === formValues.password
+            }}
+            render={({
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => (
+              <TextField
+                label="Confirm Password"
+                type="password"
+                variant="outlined"
+                sx={{ mb: 2, width: '100%' }}
+                value={value}
+                error={!!error}
+                // error={passwordError}
+                // helperText={passwordError && <>Passwords do not match.</>}
+                // onBlur={() =>
+                //   password !== passwordConfirmation
+                //     ? setPasswordError(true)
+                //     : setPasswordError(false)
+                // }
+                onChange={onChange}
+              />
+            )}
+          />
+
+          {registrationStatus.isError && (
+            <ErrorAlert error={registrationStatus.error.data.error} />
+          )}
+          {registrationStatus.isSuccess && (
+            <Alert severity="success" sx={{ marginBottom: 2 }}>
+              Success!
+            </Alert>
+          )}
+          <LoadingButton
+            variant="contained"
+            // disabled={password !== passwordConfirmation}
+            fullWidth
+            size="large"
+            sx={{ mb: 2 }}
+            type="submit"
+            loading={registrationStatus.isLoading}
+          >
+            Register
+          </LoadingButton>
+        </form>
         <Link component={RouterLink} to="/login">
           <Typography variant="body2">
             Already have an account? Login here!
           </Typography>
         </Link>
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

@@ -22,12 +22,12 @@ const Layout = (props: any) => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('x-access-token');
     navigate('/');
   };
 
   const loggedInNavItems = [
-    { label: 'Home', func: () => navigate('/user-options') },
+    { label: 'Options', func: () => navigate('/user-options') },
     { label: 'Find a Match!', func: () => navigate('/swipe') },
     { label: 'Matches', func: () => navigate('/matches') },
     { label: 'About', func: () => navigate('/about') },
@@ -41,7 +41,7 @@ const Layout = (props: any) => {
     { label: 'Register', func: () => navigate('/register') }
   ];
 
-  const navItems = !!localStorage.getItem('token')
+  const navItems = !!localStorage.getItem('x-access-token')
     ? loggedInNavItems
     : loggedOutNavItems;
 
@@ -139,7 +139,7 @@ const Layout = (props: any) => {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main" sx={{ width: '100%' }}>
         <Toolbar />
         {children}
       </Box>

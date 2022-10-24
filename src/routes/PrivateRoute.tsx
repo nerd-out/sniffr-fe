@@ -1,14 +1,16 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
-    element: React.ReactElement | any;
+  route: React.ReactElement | any;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }): React.ReactElement => {
-  if (!localStorage.getItem('token')) {
-    return <Navigate to={'/'} />
+const PrivateRoute: React.FC<PrivateRouteProps> = ({
+  route
+}): React.ReactElement => {
+  if (!localStorage.getItem('x-access-token')) {
+    return <Navigate to={'/'} />;
   }
-  return element;
-}
+  return route;
+};
 
 export default PrivateRoute;

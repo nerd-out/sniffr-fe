@@ -1,18 +1,11 @@
 import { Box, Typography } from '@mui/material';
 
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import PageNotFoundDog from './PageNotFoundDog.jpg';
 
-const LoginPage: React.FC = (): React.ReactElement => {
+const PageNotFound: React.FC = (): React.ReactElement => {
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box
         sx={{
           width: '70%',
@@ -29,11 +22,11 @@ const LoginPage: React.FC = (): React.ReactElement => {
           component="img"
           src={PageNotFoundDog}
           alt="page not found"
-          sx={{ height: '100%', width: '100%', borderRadius: '50px', mt: 2 }}
+          sx={{ height: '100%', width: '100%', borderRadius: '10px', mt: 2 }}
         />
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 
-export default LoginPage;
+export default PageNotFound;

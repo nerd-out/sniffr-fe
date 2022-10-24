@@ -1,14 +1,16 @@
+import { NumberLiteralType } from 'typescript';
+
 interface DogState {
-  name: string | null;
+  dog_name: string | null;
   sex: string;
   age: number | null;
-  isVaccinated: boolean;
-  breed: string | null;
-  breedId: number | null;
-  isFixed: boolean;
-  bio: string | null;
-  pic: string | null;
-  // add these in once the tables are made in the BE
-  // temperament: string | null;
-  // size: string;
+  is_vaccinated: boolean;
+  breed_name: string | null;
+  breed_id: number | null;
+  is_fixed: boolean;
+  dog_bio: string | null;
+  dog_pic: string | null;
+  temperament_type: string | null;
+  size: string | null;
+  dog_id: NumberLiteralType;
 }
