@@ -6,7 +6,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 // import { SingleSelect } from "react-select-material-ui";
@@ -32,8 +33,8 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       gender: '',
       user_pic: '',
       user_bio: '',
-      max_distance: 0,
-      zipcode: 88901
+      max_distance: 10,
+      zipcode: 12345
     }
   });
 
@@ -66,6 +67,9 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
         alignItems: 'center'
       }}
     >
+      <Typography variant="h1" data-testid="dog-settings-header" sx={{ mb: 4 }}>
+        User Settings
+      </Typography>
       <Box
         sx={{
           width: '25%',
@@ -77,17 +81,24 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           <Controller // FIXME: must send value
             name="gender"
             control={control}
-            render={stuff => {
-              console.log(stuff);
+            render={({
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => {
+              console.log('Gender value', value);
               return (
                 <Autocomplete
-                  disablePortal
                   id="gender"
                   options={genderOptions}
+                  value={value}
+                  onChange={(event, values) => onChange(values)}
                   sx={{ mb: 2, width: '100%' }}
                   renderInput={(params: any) => (
                     <TextField {...params} label="Gender" />
                   )}
+                  // value={value}
+                  // onChange={(event: any, newValue: string | null) => {
                 />
               );
             }}
@@ -95,22 +106,30 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           <Controller
             name="max_distance"
             control={control}
-            render={(
-              params: any
-              // field: { ref, onChange, onBlur, value, name },
-              // fieldState: { isTouched, isDirty, error },
-              // formState
-            ) => {
-              console.log(params);
+            render={({
+              // params: any
+              field: { ref, onChange, onBlur, value, name },
+              fieldState: { isTouched, isDirty, error },
+              formState
+            }) => {
+              console.log('MaxDist', value);
               return (
                 <Autocomplete
-                  disablePortal
-                  // labelId="max_distance"
                   id="max_distance"
                   options={maxDistanceOptions}
+                  onBlur={onBlur}
+                  onChange={(event, values) => onChange(values)}
+                  value={value.toString()}
                   sx={{ mb: 2, width: '100%' }}
+                  isOptionEqualToValue={(option, value) =>
+                    option.label === value.label
+                  }
                   renderInput={(params: any) => (
-                    <TextField {...params} label="Max Distance (miles)" />
+                    <TextField
+                      {...params}
+                      label="Max Distance (miles)"
+                      // inputRef={params.ref}
+                    />
                   )}
                 />
               );
