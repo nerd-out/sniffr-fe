@@ -1,5 +1,4 @@
 import {
-  Autocomplete,
   Box,
   Button,
   FormControl,
@@ -34,7 +33,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
       user_pic: '',
       user_bio: '',
       max_distance: 10,
-      zipcode: 12345
+      zipcode: 20036
     }
   });
 
@@ -78,63 +77,6 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
         }}
       >
         <form onSubmit={handleSubmit(values => console.log(values))}>
-          <Controller // FIXME: must send value
-            name="gender"
-            control={control}
-            render={({
-              field: { ref, onChange, onBlur, value, name },
-              fieldState: { isTouched, isDirty, error },
-              formState
-            }) => {
-              console.log('Gender value', value);
-              return (
-                <Autocomplete
-                  id="gender"
-                  options={genderOptions}
-                  value={value}
-                  onChange={(event, values) => onChange(values)}
-                  sx={{ mb: 2, width: '100%' }}
-                  renderInput={(params: any) => (
-                    <TextField {...params} label="Gender" />
-                  )}
-                  // value={value}
-                  // onChange={(event: any, newValue: string | null) => {
-                />
-              );
-            }}
-          />
-          <Controller
-            name="max_distance"
-            control={control}
-            render={({
-              // params: any
-              field: { ref, onChange, onBlur, value, name },
-              fieldState: { isTouched, isDirty, error },
-              formState
-            }) => {
-              console.log('MaxDist', value);
-              return (
-                <Autocomplete
-                  id="max_distance"
-                  options={maxDistanceOptions}
-                  onBlur={onBlur}
-                  onChange={(event, values) => onChange(values)}
-                  value={value.toString()}
-                  sx={{ mb: 2, width: '100%' }}
-                  isOptionEqualToValue={(option, value) =>
-                    option.label === value.label
-                  }
-                  renderInput={(params: any) => (
-                    <TextField
-                      {...params}
-                      label="Max Distance (miles)"
-                      // inputRef={params.ref}
-                    />
-                  )}
-                />
-              );
-            }}
-          />
           <Controller
             control={control}
             name="email"
@@ -216,18 +158,27 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true, min: 18 }}
           />
-          {/* TODO: Move Gender here */}
-          {/* <Controller
-              render={SingleSelect}
-              options={[{value: "yes", label: "no"},{value: "no", label: "yes"}]}
-              name="gender"
-              label="React Select material-ui gender"
-              SelectProps={{
-                isClearable: false,
-                isSearchable: true
-              }}
-              control={control}
-            /> */}
+          <Controller
+            name="gender"
+            control={control}
+            render={({ field }) => {
+              return (
+                <TextField
+                  {...field}
+                  label="Gender"
+                  select
+                  sx={{ mb: 2, width: '100%' }}
+                  variant="outlined"
+                >
+                  {genderOptions.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              );
+            }}
+          />
           <Controller
             control={control}
             name="user_pic"
@@ -314,7 +265,27 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               pattern: /^\d{5}(?:[-\s]\d{4})?$/
             }}
           />
-          {/* TODO: Move Max-distance here */}
+          <Controller
+            name="max_distance"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Max Distance (miles)"
+                select
+                sx={{ mb: 2, width: '100%' }}
+                variant="outlined"
+                // inputProps={params.inputProps}
+                // inputRef={params.ref}
+              >
+                {maxDistanceOptions.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
           <Button
             variant="contained"
             fullWidth
