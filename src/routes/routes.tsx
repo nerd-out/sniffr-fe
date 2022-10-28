@@ -10,6 +10,7 @@ import {
   UserOptions,
   UserSettingsPage
 } from '../pages';
+import { DogProfileWrapper } from '../pages/DogProfileSettingsPage/DogProfileWrapper';
 import PrivateRoute from './PrivateRoute';
 
 const routes = [
@@ -31,7 +32,7 @@ const routes = [
   },
   {
     path: '/dog-settings',
-    element: <DogSettingsPage />
+    element: <PrivateRoute route={<DogProfileWrapper />} />
   },
   {
     path: '/user-settings',
@@ -39,15 +40,15 @@ const routes = [
   },
   {
     path: '/swipe',
-    element: <Swipes />
+    element: <PrivateRoute route={<Swipes />} />
   },
   {
     path: '/matches',
-    element: <Matches />
+    element: <PrivateRoute route={<Matches />} />
   },
   {
     path: '/user-options',
-    element: <PrivateRoute element={<UserOptions />} />
+    element: <PrivateRoute route={<UserOptions />} />
   },
   {
     path: '*',

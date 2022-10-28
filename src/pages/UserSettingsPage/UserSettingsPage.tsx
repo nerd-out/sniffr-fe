@@ -6,7 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
+  TextField
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 // import { SingleSelect } from "react-select-material-ui";
@@ -38,22 +38,22 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
   });
 
   const maxDistanceOptions = [
-    { value: 2,   label: '2 miles'},
-    { value: 5,   label: '5 miles'},
-    { value: 10,  label: '10 miles'},
-    { value: 20,  label: '20 miles'},
-    { value: 50,  label: '50 miles'},
-    { value: 100, label: '100 miles'},
+    { value: 2, label: '2 miles' },
+    { value: 5, label: '5 miles' },
+    { value: 10, label: '10 miles' },
+    { value: 20, label: '20 miles' },
+    { value: 50, label: '50 miles' },
+    { value: 100, label: '100 miles' }
   ];
 
   const genderOptions = [
-    { value: 'female', label: 'Female'},
-    { value: 'male', label: 'Male'},
-    { value: 'non-binary', label: 'Non-Binary'},
-    { value: 'trans', label: 'Transgender'},
-    { value: 'intersex', label: 'Intersex'},
-    { value: 'other', label: 'Other'},
-    { value: 'not-disclosed', label: 'Prefer not to say'}
+    { value: 'female', label: 'Female' },
+    { value: 'male', label: 'Male' },
+    { value: 'non-binary', label: 'Non-Binary' },
+    { value: 'trans', label: 'Transgender' },
+    { value: 'intersex', label: 'Intersex' },
+    { value: 'other', label: 'Other' },
+    { value: 'not-disclosed', label: 'Prefer not to say' }
   ];
 
   return (
@@ -77,7 +77,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           <Controller // FIXME: must send value
             name="gender"
             control={control}
-            render={(stuff) => {
+            render={stuff => {
               console.log(stuff);
               return (
                 <Autocomplete
@@ -85,7 +85,9 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
                   id="gender"
                   options={genderOptions}
                   sx={{ mb: 2, width: '100%' }}
-                  renderInput={(params: any) => <TextField {...params} label="Gender" />}
+                  renderInput={(params: any) => (
+                    <TextField {...params} label="Gender" />
+                  )}
                 />
               );
             }}
@@ -93,24 +95,26 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           <Controller
             name="max_distance"
             control={control}
-            render={
-              ( params: any
+            render={(
+              params: any
               // field: { ref, onChange, onBlur, value, name },
               // fieldState: { isTouched, isDirty, error },
               // formState
-              ) => {
-                console.log(params);
-                return (
+            ) => {
+              console.log(params);
+              return (
                 <Autocomplete
                   disablePortal
                   // labelId="max_distance"
                   id="max_distance"
                   options={maxDistanceOptions}
                   sx={{ mb: 2, width: '100%' }}
-                  renderInput={(params: any) => <TextField {...params} label="Max Distance (miles)" />}
+                  renderInput={(params: any) => (
+                    <TextField {...params} label="Max Distance (miles)" />
+                  )}
                 />
-              )}            
-            }
+              );
+            }}
           />
           <Controller
             control={control}

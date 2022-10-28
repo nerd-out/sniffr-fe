@@ -9,7 +9,8 @@ import { authApi } from './redux/auth/authApi';
 import { authReducer } from './redux/auth/reducer';
 import { dogApi } from './redux/dog/dogApi';
 import { dogReducer } from './redux/dog/reducer';
-import reportWebVitals from './reportWebVitals';
+import { matchesApi } from './redux/matches/matchesApi';
+import { swipesApi } from './redux/swipes/swipesApi';
 import theme from './theme';
 
 const store = configureStore({
@@ -17,12 +18,18 @@ const store = configureStore({
     dogReducer,
     authReducer,
     [dogApi.reducerPath]: dogApi.reducer,
-    [authApi.reducerPath]: authApi.reducer
+    [authApi.reducerPath]: authApi.reducer,
+    [swipesApi.reducerPath]: swipesApi.reducer,
+    [matchesApi.reducerPath]: matchesApi.reducer
   },
   devTools: true,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(dogApi.middleware, authApi.middleware)
-  // preloadedState: { },
+    getDefaultMiddleware().concat(
+      dogApi.middleware,
+      authApi.middleware,
+      swipesApi.middleware,
+      matchesApi.middleware
+    )
 });
 
 const root = ReactDOM.createRoot(
@@ -38,8 +45,3 @@ root.render(
     </ThemeProvider>
   </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

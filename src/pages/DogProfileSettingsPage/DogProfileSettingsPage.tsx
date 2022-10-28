@@ -1,9 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { LoadingButton } from '@mui/lab';
 import {
-  Avatar,
+  Alert,
   Box,
-  Button,
   FormControlLabel,
   FormLabel,
+  Grow,
   MenuItem,
   Radio,
   RadioGroup,
@@ -11,278 +14,334 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { deepPurple } from '@mui/material/colors';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
-const ages = [
-  {
-    value: 'PUPPY',
-    label: 'Puppy: 1-2'
-  },
-  {
-    value: 'ADULT',
-    label: 'Adult: 3-10'
-  },
-  {
-    value: 'SENIOR',
-    label: 'Senior: 10+'
-  }
-];
+import { useCreateDogMutation } from '../../redux/dog/dogApi';
+import { ErrorAlert, FullWidthCenteredWrapper } from '../ReusableComponents';
 
-const breeds = [
-  {
-    value: 'PITBULL',
-    label: 'Pitbull'
-  },
-  {
-    value: 'POODLE',
-    label: 'Poodle'
-  },
-  {
-    value: 'TERRIER',
-    label: 'Terrier'
-  }
-];
+const DogProfileSettingsPage: React.FC = (props: any): React.ReactElement => {
+  const { useQueryResult, breeds, sizes, temperaments } = props;
 
-interface IFormInput {
-  petSex: string;
-  petName: string;
-  petAge: string;
-  petBio: string;
-  petBreed: string;
-  petNeutered: boolean;
-  petVaccinations: boolean;
-  petSize: string;
-}
-
-const DogProfileSettingsPage: React.FC = (): React.ReactElement => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      petSex: '',
-      petName: '',
-      petAge: '',
-      petBreed: '',
-      petBio: '',
-      petVaccinations: false,
-      petNeutered: false,
-      petSize: ''
+      age: useQueryResult?.data?.age,
+      breed_id: useQueryResult?.data?.breed_id,
+      dog_bio: useQueryResult?.data?.dog_bio,
+      dog_id: useQueryResult?.data?.dog_id,
+      dog_name: useQueryResult?.data?.dog_name,
+      dog_pic: useQueryResult?.data?.dog_pic,
+      is_fixed: useQueryResult?.data?.is_fixed.toString(),
+      is_vaccinated: useQueryResult?.data?.is_vaccinated.toString(),
+      sex: useQueryResult?.data?.sex,
+      size_id: useQueryResult?.data?.size_id,
+      temperament_id: useQueryResult?.data?.temperament_id,
+      owner_id: useQueryResult?.data?.owner_id
     }
   });
-  const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
-  };
+
+  const [createOrEditDog, createOrEditDogStatus] = useCreateDogMutation();
 
   return (
-    <Box sx={{ width: 300 }}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={4}>
-          <Typography variant="h1" data-testid="dog-settings-header">
-            Create Dog
-          </Typography>
-          <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
-            OP
-          </Avatar>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Name"
-                required
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              />
+    <FullWidthCenteredWrapper>
+      <Box sx={{ width: 300, mb: 4 }}>
+        <Typography
+          variant="h1"
+          data-testid="dog-settings-header"
+          sx={{ mb: 4 }}
+        >
+          Create Dog
+        </Typography>
+        <form
+          onSubmit={handleSubmit(values => {
+            createOrEditDog({
+              dog_name: values.dog_name,
+              dog_id: values.dog_id,
+              breed_id: values.breed_id,
+              owner_id: values.owner_id,
+              age: Number(values.age),
+              sex: values.sex,
+              is_vaccinated: values.is_vaccinated === 'true' ? true : false,
+              is_fixed: values.is_fixed === 'true' ? true : false,
+              dog_bio: values.dog_bio,
+              dog_pic: '',
+              activities: [],
+              temperament_id: values.temperament_id,
+              size_id: values.size_id
+            });
+          })}
+        >
+          <Stack spacing={4}>
+            <Controller
+              name="dog_name"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error }
+              }) => (
+                <TextField
+                  label="Name"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                  inputRef={ref}
+                  name={name}
+                  onBlur={onBlur}
+                  error={!!error}
+                  istouched={isTouched.toString()}
+                  isdirty={isDirty.toString()}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
+                />
+              )}
+            />
+            <Controller
+              name="age"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error }
+              }) => (
+                <TextField
+                  label="Age"
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                  value={value}
+                  onChange={onChange}
+                  inputRef={ref}
+                  name={name}
+                  onBlur={onBlur}
+                  error={!!error}
+                  istouched={isTouched.toString()}
+                  isdirty={isDirty.toString()}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
+                />
+              )}
+            />
+            <Controller
+              name="temperament_id"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Temperament"
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {temperaments.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+            <Controller
+              name="breed_id"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Breed"
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {breeds.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+            <Controller
+              name="size_id"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Size"
+                  select
+                  variant="outlined"
+                  sx={{ mb: 2, width: '100%' }}
+                >
+                  {sizes.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+            <Controller
+              name="sex"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                <FormLabel id="pet-sex-label">
+                  Sex
+                  <RadioGroup
+                    aria-labelledby="pet-sex-label"
+                    inputRef={ref}
+                    onChange={onChange}
+                    name={name}
+                    value={value}
+                    onBlur={onBlur}
+                  >
+                    <FormControlLabel
+                      value="Female"
+                      control={<Radio size="small" />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="Male"
+                      control={<Radio size="small" />}
+                      label="Male"
+                    />
+                  </RadioGroup>
+                </FormLabel>
+              )}
+            />
+            <Controller
+              name="is_vaccinated"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                <FormLabel id="pet-vaccinations-label">
+                  Up to date on vaccinations?
+                  <RadioGroup
+                    aria-label="pet-vaccinations-label"
+                    inputRef={ref}
+                    onChange={onChange}
+                    name={name}
+                    value={value}
+                    onBlur={onBlur}
+                  >
+                    <FormControlLabel
+                      value={true}
+                      control={<Radio size="small" />}
+                      label="Yes"
+                    />
+                    <FormControlLabel
+                      value={false}
+                      control={<Radio size="small" />}
+                      label="No"
+                    />
+                  </RadioGroup>
+                </FormLabel>
+              )}
+            />
+            <Controller
+              name="is_fixed"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                <FormLabel id="pet-neutered-label">
+                  Is this dog neutered/spayed?
+                  <RadioGroup
+                    aria-label="pet-neutered-label"
+                    inputRef={ref}
+                    onChange={onChange}
+                    name={name}
+                    value={value}
+                    onBlur={onBlur}
+                  >
+                    <FormControlLabel
+                      value={true}
+                      control={<Radio size="small" />}
+                      label="Yes"
+                    />
+                    <FormControlLabel
+                      value={false}
+                      control={<Radio size="small" />}
+                      label="No"
+                    />
+                  </RadioGroup>
+                </FormLabel>
+              )}
+            />
+            <Controller
+              name="dog_bio"
+              control={control}
+              rules={{ required: true }}
+              render={({
+                field: { ref, onChange, onBlur, value, name },
+                fieldState: { isTouched, isDirty, error }
+              }) => (
+                <TextField
+                  label="Pet Bio"
+                  multiline
+                  rows={4}
+                  value={value}
+                  onChange={onChange}
+                  inputRef={ref}
+                  name={name}
+                  onBlur={onBlur}
+                  error={!!error}
+                  istouched={isTouched.toString()}
+                  isdirty={isDirty.toString()}
+                  helperText={
+                    !!error && (
+                      <Box sx={{ textTransform: 'capitalize' }}>
+                        {error.type}
+                      </Box>
+                    )
+                  }
+                />
+              )}
+            />
+            {useQueryResult.isError && !useQueryResult.isLoading && (
+              <ErrorAlert error={useQueryResult.data.error} />
             )}
-            name="petName"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Age"
-                required
-                select
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              >
-                {ages.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="petAge"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Breed"
-                required
-                select
-                variant="outlined"
-                sx={{ mb: 2, width: '100%' }}
-              >
-                {breeds.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="petBreed"
-            control={control}
-            defaultValue=""
-          />
-
-          <FormLabel
-            id="pet-sex-label"
-            sx={{ fontWeight: 600, fontSize: 20 }}
-            required
-          >
-            Sex
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-labelledby="pet-sex-label"
-                defaultValue="female"
-                {...field}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio required />}
-                  label="Female"
+            {createOrEditDogStatus.isError &&
+              !createOrEditDogStatus.isLoading && (
+                <ErrorAlert
+                  error={
+                    createOrEditDogStatus.error.error ||
+                    createOrEditDogStatus.error.data.error
+                  }
                 />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio required />}
-                  label="Male"
-                />
-              </RadioGroup>
-            )}
-            name="petSex"
-            control={control}
-          />
-          <FormLabel
-            id="pet-vaccinations-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Up to date on vaccinations?
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-label="pet-vaccinations-label"
-                defaultValue={false}
-                {...field}
-              >
-                <FormControlLabel
-                  value={true}
-                  control={<Radio required />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio required />}
-                  label="No"
-                />
-              </RadioGroup>
-            )}
-            name="petVaccinations"
-            control={control}
-          />
-          <FormLabel
-            id="pet-neutered-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Is this dog neutered/spayed?
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup
-                aria-label="pet-neutered-label"
-                defaultValue={false}
-                {...field}
-              >
-                <FormControlLabel
-                  value={true}
-                  control={<Radio required />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio required />}
-                  label="No"
-                />
-              </RadioGroup>
-            )}
-            name="petNeutered"
-            control={control}
-          />
-          <FormLabel
-            id="pet-size-label"
-            required
-            sx={{ mt: 2, fontWeight: 600, fontSize: 20 }}
-          >
-            Size
-          </FormLabel>
-          <Controller
-            render={({ field }) => (
-              <RadioGroup aria-labelledby="pet-size-label" {...field}>
-                <FormControlLabel
-                  value="small"
-                  control={<Radio required />}
-                  label="Small (up to 20 lbs)"
-                />
-                <FormControlLabel
-                  value="medium"
-                  control={<Radio required />}
-                  label="Medium (20 to 50 lbs)"
-                />
-                <FormControlLabel
-                  value="large"
-                  control={<Radio required />}
-                  label="Large (50+ lbs)"
-                />
-              </RadioGroup>
-            )}
-            name="petSize"
-            control={control}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                id="pet-bio-field"
-                label="Pet Bio"
-                multiline
-                rows={4}
-              />
-            )}
-            name="petBio"
-            control={control}
-            defaultValue=""
-          />
-          <Button
-            type="submit"
-            data-testid="submit-button"
-            variant="contained"
-            fullWidth
-            size="large"
-            sx={{ mb: 2 }}
-          >
-            Submit
-          </Button>
-        </Stack>
-      </form>
-    </Box>
+              )}
+            {createOrEditDogStatus.isSuccess &&
+              !createOrEditDogStatus.isLoading &&
+              !createOrEditDogStatus.isError && (
+                <Grow in={true}>
+                  <Alert severity="success" sx={{ mt: 0, mb: 0 }}>
+                    Success!
+                  </Alert>
+                </Grow>
+              )}
+            <LoadingButton
+              variant="contained"
+              fullWidth
+              size="large"
+              sx={{ mb: 2 }}
+              type="submit"
+              loading={createOrEditDogStatus.isLoading}
+            >
+              Submit
+            </LoadingButton>
+          </Stack>
+        </form>
+      </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

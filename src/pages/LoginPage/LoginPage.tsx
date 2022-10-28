@@ -1,10 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { LoadingButton } from '@mui/lab';
-import { Alert, Box, Link, TextField, Typography } from '@mui/material';
+import { Box, Link, TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
+import { FullWidthCenteredWrapper } from '../ReusableComponents';
+import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 
 interface LoginInputs {
   email: string;
@@ -24,16 +29,18 @@ const LoginPage: React.FC = (): React.ReactElement => {
 
   const [login, loginStatus] = useLoginMutation();
 
+  useEffect(() => {
+    if (loginStatus.isError === true) {
+      return;
+    }
+    if (loginStatus.isSuccess === true) {
+      localStorage.setItem('x-access-token', loginStatus.data.token || '');
+      navigate('/user-options');
+    }
+  }, [loginStatus, navigate]);
+
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
           component="img"
@@ -46,11 +53,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
             login({
               email: values.email,
               password: values.password
-            }).unwrap()
-            .then((response: AuthResponse) => {
-              localStorage.setItem('token', response.token || '');
-              navigate('/user-options');
-              })
+            });
           })}
         >
           <Controller
@@ -105,9 +108,9 @@ const LoginPage: React.FC = (): React.ReactElement => {
             rules={{ required: true }}
           />
           {loginStatus.isError && (
-            <Alert sx={{ mb: 2 }} severity="error">
-              Login failed. Please try again.
-            </Alert>
+            <ErrorAlert
+              error={`Error ${loginStatus.error?.status}: ${loginStatus.error?.data?.error}`}
+            />
           )}
           <LoadingButton
             variant="contained"
@@ -126,7 +129,7 @@ const LoginPage: React.FC = (): React.ReactElement => {
           </Typography>
         </Link>
       </Box>
-    </Box>
+    </FullWidthCenteredWrapper>
   );
 };
 

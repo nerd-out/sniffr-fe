@@ -16,9 +16,10 @@
     "import/no-duplicates": "warn",
     "react/jsx-uses-vars": "warn",
     "func-style": "off",
-    "no-unused-vars": ["warn", { "args": "none" }],
+    "no-unused-vars": ["off", { "args": "none" }],
     "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
-    "no-extra-boolean-cast": 0
+    "no-extra-boolean-cast": 0,
+    "@typescript-eslint/no-unused-vars": ["warn", { "args": "none" }]
   }
 }
