@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   FormControl,
@@ -6,7 +7,6 @@ import {
   MenuItem,
   Select,
   TextField,
-  Autocomplete,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 // import { SingleSelect } from "react-select-material-ui";
@@ -82,13 +82,35 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               return (
                 <Autocomplete
                   disablePortal
-                  id="combo-box-demo"
+                  id="gender"
                   options={genderOptions}
                   sx={{ mb: 2, width: '100%' }}
                   renderInput={(params: any) => <TextField {...params} label="Gender" />}
-              />
+                />
               );
             }}
+          />
+          <Controller
+            name="max_distance"
+            control={control}
+            render={
+              ( params: any
+              // field: { ref, onChange, onBlur, value, name },
+              // fieldState: { isTouched, isDirty, error },
+              // formState
+              ) => {
+                console.log(params);
+                return (
+                <Autocomplete
+                  disablePortal
+                  // labelId="max_distance"
+                  id="max_distance"
+                  options={maxDistanceOptions}
+                  sx={{ mb: 2, width: '100%' }}
+                  renderInput={(params: any) => <TextField {...params} label="Max Distance (miles)" />}
+                />
+              )}            
+            }
           />
           <Controller
             control={control}
@@ -171,33 +193,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
             )}
             rules={{ required: true, min: 18 }}
           />
-          {/* <Controller fullWidth sx={{ mb: 2 }}
-            control={control}
-            name="gender"
-            render={
-              ({
-                field: { ref, onChange, onBlur, value, name },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-            }) => (
-            <InputLabel id="gender">Gender</InputLabel>
-            <Select labelId="gender" id="gender" label="Gender">
-              <MenuItem value={'female'}>Female</MenuItem>
-              <MenuItem value={'male'}>Male</MenuItem>
-              <MenuItem value={'non-binary'}>Non-binary</MenuItem>
-              <MenuItem value={'trans'}>Transgender</MenuItem>
-              <MenuItem value={'intersex'}>Intersex</MenuItem>
-              <MenuItem value={'other'}>Other</MenuItem>
-              <MenuItem value={'not-disclosed'}>Prefer not to say</MenuItem>
-            </Select>)}
-              error={!!error && isTouched}
-              onChange={onChange}
-              onBlur={onBlur}
-              placeholder="https://example.com/picture.jpg"
-              value={value}
-              name={name}
-            }
-          </Controller> */}
+          {/* TODO: Move Gender here */}
           {/* <Controller
               render={SingleSelect}
               options={[{value: "yes", label: "no"},{value: "no", label: "yes"}]}
@@ -295,34 +291,7 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
               pattern: /^\d{5}(?:[-\s]\d{4})?$/
             }}
           />
-          <Controller
-            control={control}
-            name="max_distance"
-            render={({
-              field: { ref, onChange, onBlur, value, name },
-              fieldState: { isTouched, isDirty, error },
-              formState
-            }) => (
-              <Select
-                labelId="max_distance"
-                id="max_distance"
-                // options={maxDistanceOptions}
-                label="Max Distance (miles)"
-                sx={{ mb: 2, width: '100%' }}
-                helperText={
-                  !!error &&
-                  isTouched && <>How far are you willing to go?</>
-                }
-              >
-                <MenuItem value={2}>2 miles</MenuItem>
-                <MenuItem value={5}>5 miles</MenuItem>
-                <MenuItem value={10}>10 miles</MenuItem>
-                <MenuItem value={20}>20 miles</MenuItem>
-                <MenuItem value={50}>50 miles</MenuItem>
-                <MenuItem value={100}>100 miles</MenuItem>
-              </Select>
-            )}
-          />
+          {/* TODO: Move Max-distance here */}
           <Button
             variant="contained"
             fullWidth
