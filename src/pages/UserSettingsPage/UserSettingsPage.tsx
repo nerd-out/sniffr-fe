@@ -1,7 +1,30 @@
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import {
+  Alert,
+  Box,
+  Grow,
+  MenuItem,
+  TextField,
+  Typography
+} from '@mui/material';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useUpdateUserMutation } from '../../redux/user/userApi';
+import {
+  useGetCurrentUserQuery,
+  useUpdateUserMutation
+} from '../../redux/user/userApi';
+
+// TODO:
+// Add "get current user" (GET /user) endpoint to backend
+// Add useEffect if it isn't fetched automatically
+// Add CenteredLoader component from /ReusableComponents
+// Replace "age" field with "birthday"
+// Ensure "x-authorization" header is set
+// Add "ErrorAlert" from /ReusableComponents above "Save" button
+// Add unit tests
+// Fix "uncrontrolled to controlled" errors
+// Fix default value warnings for select boxes
 
 interface UserInputs {
   email: string;
@@ -15,7 +38,10 @@ interface UserInputs {
 }
 
 const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
-  const { useQueryResult } = props;
+  const [reloadQuery, setReloadQuery] = useState(true);
+  const useQueryResult = useGetCurrentUserQuery(reloadQuery, {
+    refetchOnMountOrArgChange: true
+  });
   const { control, handleSubmit } = useForm<UserInputs>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -166,7 +192,7 @@ const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
           <Controller
             name="gender"
             control={control}
-            render={({ field }) => {
+            render={({ field, fieldState }) => {
               return (
                 <TextField
                   {...field}
@@ -174,6 +200,11 @@ const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
                   select
                   sx={{ mb: 2, width: '100%' }}
                   variant="outlined"
+                  helperText={
+                    !!fieldState.error &&
+                    fieldState.isTouched && <>This field is required.</>
+                  }
+                  error={!!fieldState.error && fieldState.isTouched}
                 >
                   {genderOptions.map(option => (
                     <MenuItem key={option.value} value={option.value}>
@@ -183,6 +214,7 @@ const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
                 </TextField>
               );
             }}
+            rules={{ required: true }}
           />
           <Controller
             control={control}
@@ -273,13 +305,18 @@ const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
           <Controller
             name="max_distance"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <TextField
                 {...field}
                 label="Max Distance (miles)"
                 select
                 sx={{ mb: 2, width: '100%' }}
                 variant="outlined"
+                helperText={
+                  !!fieldState.error &&
+                  fieldState.isTouched && <>This field is required.</>
+                }
+                error={!!fieldState.error && fieldState.isTouched}
                 // inputProps={params.inputProps}
                 // inputRef={params.ref}
               >
@@ -290,16 +327,27 @@ const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
                 ))}
               </TextField>
             )}
+            rules={{ required: true }}
           />
-          <Button
+          {updateUserStatus.isSuccess &&
+            !updateUserStatus.isLoading &&
+            !updateUserStatus.isError && (
+              <Grow in={true}>
+                <Alert severity="success" sx={{ mt: 0, mb: 0 }}>
+                  Success!
+                </Alert>
+              </Grow>
+            )}
+          <LoadingButton
             variant="contained"
             fullWidth
             size="large"
             sx={{ mb: 2 }}
             type="submit"
+            loading={updateUserStatus.isLoading}
           >
             Save
-          </Button>
+          </LoadingButton>
         </form>
       </Box>
     </Box>
