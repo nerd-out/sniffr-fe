@@ -66,7 +66,11 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
         alignItems: 'center'
       }}
     >
-      <Typography variant="h1" data-testid="dog-settings-header" sx={{ mb: 4 }}>
+      <Typography
+        variant="h1"
+        data-testid="user-settings-header"
+        sx={{ mb: 4 }}
+      >
         User Settings
       </Typography>
       <Box
