@@ -1,15 +1,8 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography
-} from '@mui/material';
+import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-// import { SingleSelect } from "react-select-material-ui";
+
+import { useUpdateUserMutation } from '../../redux/user/userApi';
+
 interface UserInputs {
   email: string;
   name: string;
@@ -17,25 +10,28 @@ interface UserInputs {
   gender: string;
   user_pic: string;
   user_bio: string;
-  max_distance: number;
   zipcode: number;
+  max_distance: number;
 }
 
-const UserSettingsPage: React.FC = (): React.ReactElement => {
+const UserSettingsPage: React.FC = (props: any): React.ReactElement => {
+  const { useQueryResult } = props;
   const { control, handleSubmit } = useForm<UserInputs>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     defaultValues: {
-      email: '',
-      name: '',
-      age: 0,
-      gender: '',
-      user_pic: '',
-      user_bio: '',
-      max_distance: 10,
-      zipcode: 20036
+      email: useQueryResult?.data?.email,
+      name: useQueryResult?.data?.name,
+      age: useQueryResult?.data?.age,
+      gender: useQueryResult?.data?.gender,
+      user_pic: useQueryResult?.data?.user_pic,
+      user_bio: useQueryResult?.data?.user_bio,
+      zipcode: useQueryResult?.data?.zipcode,
+      max_distance: useQueryResult?.data?.max_distance
     }
   });
+
+  const [updateUser, updateUserStatus] = useUpdateUserMutation();
 
   const maxDistanceOptions = [
     { value: 2, label: '2 miles' },
@@ -80,7 +76,12 @@ const UserSettingsPage: React.FC = (): React.ReactElement => {
           minWidth: '250px'
         }}
       >
-        <form onSubmit={handleSubmit(values => console.log(values))}>
+        <form
+          onSubmit={handleSubmit(values => {
+            console.log(values);
+            updateUser(values);
+          })}
+        >
           <Controller
             control={control}
             name="email"

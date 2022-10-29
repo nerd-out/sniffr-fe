@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const userApi = createApi({
@@ -13,20 +10,34 @@ export const userApi = createApi({
     }
   }),
   endpoints: builder => ({
-    createUser: builder.mutation<UserState, Partial<UserState>>({
+    updateUser: builder.mutation<UserState, Partial<UserState>>({
       query(body) {
         return {
-          url: 'user',
+          url: 'user/edit',
           method: 'POST',
           body
         };
       }
+    }),
+
+    // Untested. Unimplemented on backend.
+    getCurrentUser: builder.query({
+      query: () => `user`
+    }),
+
+    // Untested. Unimplemented on backend.
+    getUserById: builder.query<UserState, number>({
+      query: (id: number) => `user/${id}`
+    }),
+
+    // Untested. No access to this feature on frontend.
+    deleteUser: builder.mutation<UserState, number>({
+      query: (id: number) => ({
+        url: `user/${id}`,
+        method: 'DELETE'
+      })
     })
-  }),
-  // FIXME: Type mismatch:
-  getUserById: builder.query<UserState, number>({
-    query: (id: number) => `user/${id}`
   })
 });
 
-export const { useGetUserByIdQuery, useUpdateUserMutation } = userApi;
+export const { useUpdateUserMutation, useDeleteUserMutation } = userApi;

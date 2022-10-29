@@ -11,13 +11,17 @@ import { dogApi } from './redux/dog/dogApi';
 import { dogReducer } from './redux/dog/reducer';
 import { matchesApi } from './redux/matches/matchesApi';
 import { swipesApi } from './redux/swipes/swipesApi';
+import { userReducer } from './redux/user/reducer';
+import { userApi } from './redux/user/userApi';
 import theme from './theme';
 
 const store = configureStore({
   reducer: {
     dogReducer,
+    userReducer,
     authReducer,
     [dogApi.reducerPath]: dogApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [swipesApi.reducerPath]: swipesApi.reducer,
     [matchesApi.reducerPath]: matchesApi.reducer
