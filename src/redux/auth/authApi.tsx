@@ -4,6 +4,7 @@ export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://sniffr-be.herokuapp.com'
+    // baseUrl: "http://localhost:8080"
   }),
   endpoints: builder => ({
     login: builder.mutation<AuthResponse, any>({
