@@ -1,6 +1,6 @@
 # sniffr
 
-The place where good dogs go to find a playmate.
+sniffr is changing! It was once a tinder-style app to help dogs find playmates, but now it will connect therapy dogs to sick people who want to be visited. We are changing sniffr's purpose in honor of a beautiful person who trained therapy dogs who recently passed away.
 
 ### Run this app:
 
@@ -13,4 +13,4 @@ The place where good dogs go to find a playmate.
 
 ### Want to join in? 
 
-sniffr has had multiple contributors in the past and someday might accept contributions again! However, the owners of this project have decided to close this project to outside contributions for now. Feel free to check back in later if you'd like to contribute.
+This project is currently closed to outside contributions. Check back in later if you want to contribute!
