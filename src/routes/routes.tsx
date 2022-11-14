@@ -1,6 +1,5 @@
 import {
   AboutPage,
-  DogSettingsPage,
   HomePage,
   LoginPage,
   Matches,
