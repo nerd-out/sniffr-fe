@@ -11,6 +11,6 @@ sniffr is changing! It was once a tinder-style app to help dogs find playmates, 
 
 [![Run w/ Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/12180328/2s83tGnWnR)
 
-### Want to join in? 
+### Want to join in?
 
 This project is currently closed to outside contributions. Check back later if you want to contribute!

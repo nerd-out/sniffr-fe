@@ -21,42 +21,6 @@ interface BadassDevs {
 
 const badassDevs: BadassDevs[] = [
   {
-    name: 'Dan Johnson',
-    github: 'https://github.com/danimal-johnson',
-    linkedin: 'https://www.linkedin.com/in/danimal-johnson/',
-    title: 'TypeScript Advocate',
-    adjective: 'meticulous',
-    line1: 'mostly reasonable...',
-    line2: 'mostly'
-  },
-  {
-    name: 'Joshua Gray',
-    github: 'https://github.com/squashgray',
-    linkedin: 'https://www.linkedin.com/in/joshuagraydev/',
-    title: 'Idea Generator',
-    adjective: 'big brain',
-    line1: 'asks good questions',
-    line2: '10/10 would code for cash'
-  },
-  {
-    name: 'Benedict Schurwanz',
-    github: 'https://github.com/benedictSchurwanz',
-    linkedin: 'https://www.linkedin.com/in/benedictschurwanz/',
-    title: 'Code Tinkerer',
-    adjective: 'permanently curious',
-    line1: 'already down the rabbit hole',
-    line2: 'will come back with shiny object'
-  },
-  {
-    name: 'Mashima Button',
-    github: 'https://github.com/zimashima',
-    linkedin: 'https://www.linkedin.com/in/mashimabutton/',
-    title: 'Tiny PR Pusher',
-    adjective: 'cute as a ^',
-    line1: 'code hygienist',
-    line2: 'tech debt tackler'
-  },
-  {
     name: 'Jonathan Finger',
     github: 'https://github.com/jae-finger',
     linkedin: 'https://www.linkedin.com/in/jaefinger/',
