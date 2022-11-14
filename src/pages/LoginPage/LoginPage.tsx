@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
-import logo from '../../assets/logo/logo.svg';
 import { useLoginMutation } from '../../redux/auth/authApi';
+import theme from '../../theme';
 import { FullWidthCenteredWrapper } from '../ReusableComponents';
 import { ErrorAlert } from '../ReusableComponents/ErrorAlert';
 
@@ -43,11 +43,19 @@ const LoginPage: React.FC = (): React.ReactElement => {
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
-          component="img"
-          src={logo}
           alt="logo"
-          sx={{ height: '100%', width: '100%' }}
-        />
+          sx={{
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.primary.contrastText,
+            fontFamily: theme.typography.h1,
+            fontSize: '3rem',
+            marginBottom: 2,
+            padding: 2,
+            borderRadius: '5px'
+          }}
+        >
+          sniffr
+        </Box>
         <form
           onSubmit={handleSubmit((values: LoginInputs) => {
             login({
