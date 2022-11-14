@@ -13,4 +13,4 @@ sniffr is changing! It was once a tinder-style app to help dogs find playmates, 
 
 ### Want to join in? 
 
-This project is currently closed to outside contributions. Check back in later if you want to contribute!
+This project is currently closed to outside contributions. Check back later if you want to contribute!
