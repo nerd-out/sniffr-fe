@@ -2,12 +2,11 @@
 // @ts-nocheck
 import { LoadingButton } from '@mui/lab';
 import { Alert, Box, Link, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
-import logo from '../../assets/logo/logo.svg';
 import { useRegistrationMutation } from '../../redux/auth/authApi';
+import theme from '../../theme';
 import { ErrorAlert, FullWidthCenteredWrapper } from '../ReusableComponents';
 
 const RegisterPage: React.FC = (): React.ReactElement => {
@@ -27,11 +26,19 @@ const RegisterPage: React.FC = (): React.ReactElement => {
     <FullWidthCenteredWrapper>
       <Box sx={{ width: '25%', maxWidth: '350px', minWidth: '250px' }}>
         <Box
-          component="img"
-          src={logo}
           alt="logo"
-          sx={{ height: '100%', width: '100%' }}
-        />
+          sx={{
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.primary.contrastText,
+            fontFamily: theme.typography.h1,
+            fontSize: '3rem',
+            marginBottom: 2,
+            padding: 2,
+            borderRadius: '5px'
+          }}
+        >
+          sniffr
+        </Box>
         <form
           onSubmit={handleSubmit(({ email, password }) => {
             registration({
