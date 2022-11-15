@@ -11,6 +11,6 @@ Where good dogs go to find a playmate
 
 [![Run w/ Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/12180328/2s83tGnWnR)
 
-### Status
+### Status:
 
 This project is not currently being maintained.
