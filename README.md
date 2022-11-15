@@ -13,7 +13,7 @@ sniffr is changing! It was once a tinder-style app to help dogs find playmates, 
 
 ### Notion documentation:
 
-<a href="https://www.notion.so/allierae/Therapy-Dog-App-8950ff47cc874c5c83abbfd1d1bdeb83">Therapy Dog App Documentation</a>
+<a href="https://www.notion.so/allierae/Therapy-Dog-App-8950ff47cc874c5c83abbfd1d1bdeb83">Therapy dog app</a>
 
 ### Want to join in?
 
