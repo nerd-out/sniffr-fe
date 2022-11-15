@@ -31,7 +31,7 @@ const RegisterPage: React.FC = (): React.ReactElement => {
             backgroundColor: theme.palette.primary.light,
             color: theme.palette.primary.contrastText,
             fontFamily: theme.typography.h1,
-            fontSize: '3rem',
+            fontSize: '2rem',
             marginBottom: 2,
             padding: 2,
             borderRadius: '5px'
