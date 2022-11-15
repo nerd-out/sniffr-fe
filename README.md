@@ -15,6 +15,6 @@ sniffr is changing! It was once a tinder-style app to help dogs find playmates, 
 
 <a href="https://www.notion.so/allierae/Therapy-Dog-App-8950ff47cc874c5c83abbfd1d1bdeb83">Therapy dog app</a>
 
-### Want to join in?
+### Wanna join in?
 
 This project is currently closed to outside contributions. Check back later if you want to contribute!
