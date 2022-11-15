@@ -1,4 +1,4 @@
-# sniffr
+## sniffr
 
 sniffr is changing! It was once a tinder-style app to help dogs find playmates, but now it will connect therapy dogs to sick people who want to be visited. We are changing sniffr's purpose in honor of a beautiful person who trained therapy dogs who recently passed away.
 
