@@ -41,9 +41,9 @@ const Layout = (props: any) => {
     { label: 'Register', func: () => navigate('/register') }
   ];
 
-  const navItems = !!localStorage.getItem('x-access-token')
-    ? loggedInNavItems
-    : loggedOutNavItems;
+  const isLoggedIn = !!localStorage.getItem('x-access-token');
+  const navItems = isLoggedIn ? loggedInNavItems : loggedOutNavItems;
+  const sniffrLogoRoute = isLoggedIn ? '/user-options' : '/';
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -54,7 +54,7 @@ const Layout = (props: any) => {
       <Typography
         variant="h6"
         sx={{ my: 2, cursor: 'pointer' }}
-        onClick={() => navigate('/')}
+        onClick={() => navigate(sniffrLogoRoute)}
       >
         sniffr
       </Typography>
@@ -101,7 +101,7 @@ const Layout = (props: any) => {
                 display: { xs: 'none', sm: 'block' },
                 cursor: 'pointer'
               }}
-              onClick={() => navigate('/')}
+              onClick={() => navigate(sniffrLogoRoute)}
             >
               sniffr
             </Typography>
